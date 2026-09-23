@@ -1,0 +1,4163 @@
+{
+  "asyncapi": "3.0.0",
+  "info": {
+    "title": "메리츠증권 Open API 실시간",
+    "version": "2026-09-22",
+    "description": "접속점은 하나이며, 구독 요청 body 의 tr_cd 로 채널을 가릅니다. tr_key 에 종목코드 등 구독 대상을 넣습니다. 종목·서비스마다 접속을 새로 열지 마십시오 — 하나의 접속에서 tr_cd 를 바꿔 가며 여러 번 구독하십시오. 접속을 반복해서 열고 바로 닫으면 서버 쪽 세션 정리가 접속 종료를 못 따라가 계정의 웹소켓 세션이 쌓이고, 이후 구독이 EGW00002(서버 에러)로 거절되는 상태에 빠질 수 있습니다."
+  },
+  "servers": {
+    "prod": {
+      "host": "openapi.imeritz.com:29443/websocket",
+      "protocol": "wss"
+    }
+  },
+  "channels": {
+    "ohhts_stck_cntg": {
+      "address": "/",
+      "title": "(실시간) 국내주식 현재가 (KRX)",
+      "messages": {
+        "ohhts_stck_cntg": {
+          "$ref": "#/components/messages/ohhts_stck_cntg"
+        }
+      },
+      "x-tr-cd": "ohhts_stck_cntg",
+      "x-subscribe": {
+        "tr_cd": "ohhts_stck_cntg",
+        "tr_key": "단축종목코드",
+        "example": {
+          "header": {
+            "token": "Bearer {Token값}",
+            "tr_type": "1"
+          },
+          "body": {
+            "tr_cd": "ohhts_stck_cntg",
+            "tr_key": "005930"
+          }
+        }
+      }
+    },
+    "ohhts_nxt_cntg": {
+      "address": "/",
+      "title": "(실시간) 국내주식 현재가 (NXT)",
+      "messages": {
+        "ohhts_nxt_cntg": {
+          "$ref": "#/components/messages/ohhts_nxt_cntg"
+        }
+      },
+      "x-tr-cd": "ohhts_nxt_cntg",
+      "x-subscribe": {
+        "tr_cd": "ohhts_nxt_cntg",
+        "tr_key": "단축종목코드",
+        "example": {
+          "header": {
+            "token": "Bearer {Token값}",
+            "tr_type": "1"
+          },
+          "body": {
+            "tr_cd": "ohhts_nxt_cntg",
+            "tr_key": "005930"
+          }
+        }
+      }
+    },
+    "ohhts_unt_cntg": {
+      "address": "/",
+      "title": "(실시간) 국내주식 현재가 (SOR 통합)",
+      "messages": {
+        "ohhts_unt_cntg": {
+          "$ref": "#/components/messages/ohhts_unt_cntg"
+        }
+      },
+      "x-tr-cd": "ohhts_unt_cntg",
+      "x-subscribe": {
+        "tr_cd": "ohhts_unt_cntg",
+        "tr_key": "단축종목코드",
+        "example": {
+          "header": {
+            "token": "Bearer {Token값}",
+            "tr_type": "1"
+          },
+          "body": {
+            "tr_cd": "ohhts_unt_cntg",
+            "tr_key": "005930"
+          }
+        }
+      }
+    },
+    "ohhts_ovtp_cntg": {
+      "address": "/",
+      "title": "(실시간) 국내주식 현재가 (시간외단일가)",
+      "messages": {
+        "ohhts_ovtp_cntg": {
+          "$ref": "#/components/messages/ohhts_ovtp_cntg"
+        }
+      },
+      "x-tr-cd": "ohhts_ovtp_cntg",
+      "x-subscribe": {
+        "tr_cd": "ohhts_ovtp_cntg",
+        "tr_key": "단축종목코드",
+        "example": {
+          "header": {
+            "token": "Bearer {Token값}",
+            "tr_type": "1"
+          },
+          "body": {
+            "tr_cd": "ohhts_ovtp_cntg",
+            "tr_key": "005930"
+          }
+        }
+      }
+    },
+    "ohhts_ovan_cntg": {
+      "address": "/",
+      "title": "(실시간) 국내주식 시간외예상체결가",
+      "messages": {
+        "ohhts_ovan_cntg": {
+          "$ref": "#/components/messages/ohhts_ovan_cntg"
+        }
+      },
+      "x-tr-cd": "ohhts_ovan_cntg",
+      "x-subscribe": {
+        "tr_cd": "ohhts_ovan_cntg",
+        "tr_key": "단축종목코드",
+        "example": {
+          "header": {
+            "token": "Bearer {Token값}",
+            "tr_type": "1"
+          },
+          "body": {
+            "tr_cd": "ohhts_ovan_cntg",
+            "tr_key": "005930"
+          }
+        }
+      }
+    },
+    "ohhts_stck_aspr": {
+      "address": "/",
+      "title": "(실시간) 국내주식 호가",
+      "messages": {
+        "ohhts_stck_aspr": {
+          "$ref": "#/components/messages/ohhts_stck_aspr"
+        }
+      },
+      "x-tr-cd": "ohhts_stck_aspr",
+      "x-subscribe": {
+        "tr_cd": "ohhts_stck_aspr",
+        "tr_key": "단축종목코드",
+        "example": {
+          "header": {
+            "token": "Bearer {Token값}",
+            "tr_type": "1"
+          },
+          "body": {
+            "tr_cd": "ohhts_stck_aspr",
+            "tr_key": "005930"
+          }
+        }
+      }
+    },
+    "ohhts_ovtp_aspr": {
+      "address": "/",
+      "title": "(실시간) 국내주식 호가 (시간외단일가)",
+      "messages": {
+        "ohhts_ovtp_aspr": {
+          "$ref": "#/components/messages/ohhts_ovtp_aspr"
+        }
+      },
+      "x-tr-cd": "ohhts_ovtp_aspr",
+      "x-subscribe": {
+        "tr_cd": "ohhts_ovtp_aspr",
+        "tr_key": "단축종목코드",
+        "example": {
+          "header": {
+            "token": "Bearer {Token값}",
+            "tr_type": "1"
+          },
+          "body": {
+            "tr_cd": "ohhts_ovtp_aspr",
+            "tr_key": "005930"
+          }
+        }
+      }
+    },
+    "ohhts_cntg_infr": {
+      "address": "/",
+      "title": "(실시간) 주문 접수 통보",
+      "messages": {
+        "ohhts_cntg_infr": {
+          "$ref": "#/components/messages/ohhts_cntg_infr"
+        }
+      },
+      "x-tr-cd": "ohhts_cntg_infr",
+      "x-subscribe": {
+        "tr_cd": "ohhts_cntg_infr",
+        "tr_key": null,
+        "example": {
+          "header": {
+            "token": "Bearer {Token값}",
+            "tr_type": "1"
+          },
+          "body": {
+            "tr_cd": "ohhts_cntg_infr"
+          }
+        }
+      }
+    },
+    "ohhts_cntg_rslt": {
+      "address": "/",
+      "title": "(실시간) 주문 체결 통보",
+      "messages": {
+        "ohhts_cntg_rslt": {
+          "$ref": "#/components/messages/ohhts_cntg_rslt"
+        }
+      },
+      "x-tr-cd": "ohhts_cntg_rslt",
+      "x-subscribe": {
+        "tr_cd": "ohhts_cntg_rslt",
+        "tr_key": null,
+        "example": {
+          "header": {
+            "token": "Bearer {Token값}",
+            "tr_type": "1"
+          },
+          "body": {
+            "tr_cd": "ohhts_cntg_rslt"
+          }
+        }
+      }
+    },
+    "ohhts_exst_aspr": {
+      "address": "/",
+      "title": "(실시간) 해외주식 호가",
+      "messages": {
+        "ohhts_exst_aspr": {
+          "$ref": "#/components/messages/ohhts_exst_aspr"
+        }
+      },
+      "x-tr-cd": "ohhts_exst_aspr",
+      "x-subscribe": {
+        "tr_cd": "ohhts_exst_aspr",
+        "tr_key": "종목코드",
+        "example": {
+          "header": {
+            "token": "Bearer {Token값}",
+            "tr_type": "1"
+          },
+          "body": {
+            "tr_cd": "ohhts_exst_aspr",
+            "tr_key": "OQ@NVDA"
+          }
+        }
+      }
+    },
+    "ohhts_exst_cntd": {
+      "address": "/",
+      "title": "(실시간) 해외주식 현재가 (주간거래)",
+      "messages": {
+        "ohhts_exst_cntd": {
+          "$ref": "#/components/messages/ohhts_exst_cntd"
+        }
+      },
+      "x-tr-cd": "ohhts_exst_cntd",
+      "x-subscribe": {
+        "tr_cd": "ohhts_exst_cntd",
+        "tr_key": "종목코드",
+        "example": {
+          "header": {
+            "token": "Bearer {Token값}",
+            "tr_type": "1"
+          },
+          "body": {
+            "tr_cd": "ohhts_exst_cntd",
+            "tr_key": "OQ@NVDA"
+          }
+        }
+      }
+    },
+    "ohhts_exst_cntg": {
+      "address": "/",
+      "title": "(실시간) 해외주식 현재가 (정규장)",
+      "messages": {
+        "ohhts_exst_cntg": {
+          "$ref": "#/components/messages/ohhts_exst_cntg"
+        }
+      },
+      "x-tr-cd": "ohhts_exst_cntg",
+      "x-subscribe": {
+        "tr_cd": "ohhts_exst_cntg",
+        "tr_key": "종목코드",
+        "example": {
+          "header": {
+            "token": "Bearer {Token값}",
+            "tr_type": "1"
+          },
+          "body": {
+            "tr_cd": "ohhts_exst_cntg",
+            "tr_key": "OQ@NVDA"
+          }
+        }
+      }
+    },
+    "ohhts_exst_cnta": {
+      "address": "/",
+      "title": "(실시간) 해외주식 현재가 (After)",
+      "messages": {
+        "ohhts_exst_cnta": {
+          "$ref": "#/components/messages/ohhts_exst_cnta"
+        }
+      },
+      "x-tr-cd": "ohhts_exst_cnta",
+      "x-subscribe": {
+        "tr_cd": "ohhts_exst_cnta",
+        "tr_key": "종목코드",
+        "example": {
+          "header": {
+            "token": "Bearer {Token값}",
+            "tr_type": "1"
+          },
+          "body": {
+            "tr_cd": "ohhts_exst_cnta",
+            "tr_key": "OQ@NVDA"
+          }
+        }
+      }
+    }
+  },
+  "operations": {
+    "receive_ohhts_stck_cntg": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/ohhts_stck_cntg"
+      },
+      "summary": "(실시간) 국내주식 현재가 (KRX)"
+    },
+    "receive_ohhts_nxt_cntg": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/ohhts_nxt_cntg"
+      },
+      "summary": "(실시간) 국내주식 현재가 (NXT)"
+    },
+    "receive_ohhts_unt_cntg": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/ohhts_unt_cntg"
+      },
+      "summary": "(실시간) 국내주식 현재가 (SOR 통합)"
+    },
+    "receive_ohhts_ovtp_cntg": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/ohhts_ovtp_cntg"
+      },
+      "summary": "(실시간) 국내주식 현재가 (시간외단일가)"
+    },
+    "receive_ohhts_ovan_cntg": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/ohhts_ovan_cntg"
+      },
+      "summary": "(실시간) 국내주식 시간외예상체결가"
+    },
+    "receive_ohhts_stck_aspr": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/ohhts_stck_aspr"
+      },
+      "summary": "(실시간) 국내주식 호가"
+    },
+    "receive_ohhts_ovtp_aspr": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/ohhts_ovtp_aspr"
+      },
+      "summary": "(실시간) 국내주식 호가 (시간외단일가)"
+    },
+    "receive_ohhts_cntg_infr": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/ohhts_cntg_infr"
+      },
+      "summary": "(실시간) 주문 접수 통보"
+    },
+    "receive_ohhts_cntg_rslt": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/ohhts_cntg_rslt"
+      },
+      "summary": "(실시간) 주문 체결 통보"
+    },
+    "receive_ohhts_exst_aspr": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/ohhts_exst_aspr"
+      },
+      "summary": "(실시간) 해외주식 호가"
+    },
+    "receive_ohhts_exst_cntd": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/ohhts_exst_cntd"
+      },
+      "summary": "(실시간) 해외주식 현재가 (주간거래)"
+    },
+    "receive_ohhts_exst_cntg": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/ohhts_exst_cntg"
+      },
+      "summary": "(실시간) 해외주식 현재가 (정규장)"
+    },
+    "receive_ohhts_exst_cnta": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/ohhts_exst_cnta"
+      },
+      "summary": "(실시간) 해외주식 현재가 (After)"
+    }
+  },
+  "components": {
+    "messages": {
+      "ohhts_stck_cntg": {
+        "name": "ohhts_stck_cntg",
+        "title": "(실시간) 국내주식 현재가 (KRX)",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "tr_cd": {
+                  "type": "string",
+                  "title": "거래코드",
+                  "description": "구독 요청에 넣은 tr_cd 가 그대로 옵니다.",
+                  "maxLength": 20
+                },
+                "tr_key": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독 요청에 넣은 tr_key 가 그대로 옵니다.",
+                  "maxLength": 9
+                }
+              },
+              "title": "헤더부"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "shrn_iscd": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독한 종목의 단축코드입니다.",
+                  "maxLength": 9
+                },
+                "bsop_hour": {
+                  "type": "string",
+                  "title": "영업시간",
+                  "description": "체결이 일어난 시각입니다. HHMMSS 6자리이며 한국시간 기준입니다.",
+                  "maxLength": 6
+                },
+                "hour_cls_code": {
+                  "type": "string",
+                  "title": "시간구분코드",
+                  "description": "장 구분입니다.\n\"0\": 장중\n\"B\": 장 개시 전 예상\n\"C\": 09시 이후 예상\n\"A\": 장 종료 후 예상\n\"D\": 시간외 단일가 예상\n\n\"0\" 이 아닌 값은 모두 예상치 구간입니다. 확정된 값만 쓰셔야 하면 \"0\" 인 메시지만 반영하십시오.\n\n다만 \"0\" 은 정규장 시간대에만 오는 값이 아닙니다. KRX 채널은 정규장이 끝난 뒤의 체결 통보도 \"0\" 으로 내려보냈습니다. 정규장과 그 밖의 시간대를 가르실 때는 이 값이 아니라 같은 통보의 영업시간(bsop_hour)을 보십시오.",
+                  "maxLength": 1
+                },
+                "antc_nmix_cls_code": {
+                  "type": "string",
+                  "title": "예상지수구분코드",
+                  "description": "예상체결 여부를 나타내는 구분값입니다. KRX 채널의 체결 통보가 정규장 시간대와 정규장이 끝난 뒤 모두 \"1\" 로만 내려옵니다.\n\n이 항목만으로 예상체결과 확정체결을 가르지 마십시오. \"1\" 이 아닌 메시지만 골라 쓰시면 반영할 메시지가 남지 않습니다. 지금 받으신 통보가 어느 시간대의 것인지 아셔야 하면 같은 통보의 영업시간(bsop_hour)과 시간구분코드(hour_cls_code)를 함께 보십시오. 값에 대응하는 이름은 통보에 함께 오지 않으므로, 목록에 없는 값이 오더라도 오류로 다루지 마시고 문자열 그대로 보관하십시오.",
+                  "maxLength": 1
+                },
+                "prpr": {
+                  "type": "string",
+                  "title": "현재가",
+                  "description": "가장 최근 체결된 가격입니다. 이 메시지가 알리는 체결의 가격입니다.",
+                  "maxLength": 11
+                },
+                "prdy_vrss_sign": {
+                  "type": "string",
+                  "title": "전일대비부호",
+                  "description": "전일 종가 대비 방향입니다. 부호는 이 필드로 판단하십시오 ― prdy_vrss 값 자체에는 부호가 붙지 않습니다.\n\"2\": 상승 · \"5\": 하락이며, 그 밖의 값도 내려올 수 있으니 목록에 없는 값을 오류로 처리하지 마시고 그대로 보관하십시오.",
+                  "maxLength": 1
+                },
+                "prdy_vrss": {
+                  "type": "string",
+                  "title": "전일대비",
+                  "description": "전일 종가와의 차이입니다. 절대값이며 방향은 prdy_vrss_sign 으로 확인합니다.",
+                  "maxLength": 11
+                },
+                "prdy_ctrt": {
+                  "type": "string",
+                  "title": "전일대비율",
+                  "description": "전일 종가 대비 등락률(%)입니다.",
+                  "maxLength": 9
+                },
+                "oprc": {
+                  "type": "string",
+                  "title": "시가",
+                  "description": "당일 첫 체결 가격입니다.",
+                  "maxLength": 11
+                },
+                "hprc": {
+                  "type": "string",
+                  "title": "고가",
+                  "description": "당일 체결 중 가장 높았던 가격입니다.",
+                  "maxLength": 11
+                },
+                "lprc": {
+                  "type": "string",
+                  "title": "저가",
+                  "description": "당일 체결 중 가장 낮았던 가격입니다.",
+                  "maxLength": 11
+                },
+                "cntg_cls_code": {
+                  "type": "string",
+                  "title": "체결구분코드",
+                  "description": "체결 유형입니다. \"1\": 매수 체결 \"2\": 매도 체결 정규장 체결 통보에 이 두 값만 내려왔습니다. 값에 대응하는 이름은 통보에 함께 오지 않으며, 목록에 없는 값이 오더라도 오류로 다루지 마십시오. 체결 방향을 화면에 쓰실 때는 이 값과 같은 통보의 전일대비 방향(prdy_vrss_sign)을 함께 보십시오.",
+                  "maxLength": 1
+                },
+                "cntg_vol": {
+                  "type": "string",
+                  "title": "체결거래량",
+                  "description": "이번 체결의 수량입니다. 누적이 아니라 건별 수량입니다.",
+                  "maxLength": 11
+                },
+                "acml_vol": {
+                  "type": "string",
+                  "title": "누적거래량",
+                  "description": "장 시작부터 지금까지의 누적 체결 수량입니다. 정규시장(KRX)에서 체결된 수량을 더한 값입니다.",
+                  "maxLength": 13
+                },
+                "acml_tr_pbmn": {
+                  "type": "string",
+                  "title": "누적거래대금",
+                  "description": "장 시작부터 지금까지의 누적 체결 금액입니다.",
+                  "maxLength": 13
+                },
+                "wghn_avrg_stck_prc": {
+                  "type": "string",
+                  "title": "가중평균주식가격",
+                  "description": "누적거래대금을 누적거래량으로 나눈 평균 단가입니다.",
+                  "maxLength": 11
+                },
+                "askp1": {
+                  "type": "string",
+                  "title": "매도호가1",
+                  "description": "체결 시점의 최우선 매도호가입니다. 정규장 시간대에는 값이 채워져 내려오지만, 정규장이 끝난 뒤의 체결 통보에서는 \"0\" 으로 내려옵니다.\n\n같은 통보의 매도호가잔량1(askp_rsqn1)은 그 시간대에도 값이 채워지므로, 이 항목이 \"0\" 이라고 해서 잔량까지 비어 있다고 보지 마십시오. 정규장 밖에서도 호가가 필요하시면 국내주식 호가 구독(/websocket/ohhts-stck-aspr)을 함께 쓰십시오.",
+                  "maxLength": 11
+                },
+                "bidp1": {
+                  "type": "string",
+                  "title": "매수호가1",
+                  "description": "체결 시점의 최우선 매수호가입니다. 정규장 시간대에는 값이 채워져 내려오지만, 정규장이 끝난 뒤의 체결 통보에서는 \"0\" 으로 내려옵니다.\n\n같은 통보의 매수호가잔량1(bidp_rsqn1)은 그 시간대에도 값이 채워지므로, 이 항목이 \"0\" 이라고 해서 잔량까지 비어 있다고 보지 마십시오. 정규장 밖에서도 호가가 필요하시면 국내주식 호가 구독(/websocket/ohhts-stck-aspr)을 함께 쓰십시오.",
+                  "maxLength": 11
+                },
+                "askp_rsqn1": {
+                  "type": "string",
+                  "title": "매도호가잔량1",
+                  "description": "최우선 매도호가에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn1": {
+                  "type": "string",
+                  "title": "매수호가잔량1",
+                  "description": "최우선 매수호가에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "total_askp_rsqn": {
+                  "type": "string",
+                  "title": "총매도호가잔량",
+                  "description": "호가창 전체의 매도 잔량 합입니다. 정규장 시간대에는 값이 채워지지만, 정규장이 끝난 뒤의 체결 통보에서는 \"0\" 으로 내려옵니다.\n\n이 값이 \"0\" 인 구간에도 최우선 호가의 잔량(askp_rsqn1)에는 값이 들어옵니다. 잔량 합계를 정규장 밖에서도 보셔야 하면 국내주식 호가 구독(/websocket/ohhts-stck-aspr)의 총매도호가잔량을 쓰십시오.",
+                  "maxLength": 13
+                },
+                "total_bidp_rsqn": {
+                  "type": "string",
+                  "title": "총매수호가잔량",
+                  "description": "호가창 전체의 매수 잔량 합입니다. 정규장 시간대에는 값이 채워지지만, 정규장이 끝난 뒤의 체결 통보에서는 \"0\" 으로 내려옵니다.\n\n이 값이 \"0\" 인 구간에도 최우선 호가의 잔량(bidp_rsqn1)에는 값이 들어옵니다. 잔량 합계를 정규장 밖에서도 보셔야 하면 국내주식 호가 구독(/websocket/ohhts-stck-aspr)의 총매수호가잔량을 쓰십시오.",
+                  "maxLength": 13
+                },
+                "rltv": {
+                  "type": "string",
+                  "title": "체결강도",
+                  "description": "매수 체결량을 매도 체결량으로 나눈 비율(%)입니다. 100 보다 크면 매수 우위입니다.",
+                  "maxLength": 9
+                },
+                "shnu_rate": {
+                  "type": "string",
+                  "title": "매수비율",
+                  "description": "전체 체결 중 매수 체결이 차지하는 비율(%)입니다. KRX 채널의 체결 통보가 시간대를 달리해도 전 건 \"0.00\" 으로 내려오고, 같은 통보의 체결강도(rltv)만 값이 움직입니다.\n\n매수 우위를 판단하실 때는 이 항목이 아니라 체결강도(rltv)를 쓰십시오. 건별 매수·매도 방향이 필요하시면 같은 통보의 체결구분코드(cntg_cls_code)를 세어 직접 계산하십시오.",
+                  "maxLength": 9
+                },
+                "trht_yn": {
+                  "type": "string",
+                  "title": "거래정지여부",
+                  "description": "거래정지 여부입니다.\n\"Y\": 거래정지\n\"N\": 정상 거래\n\n정규장에서 거래되고 있는 종목에서는 \"N\" 이 옵니다.",
+                  "maxLength": 1
+                },
+                "prdy_vrss_vol_rate": {
+                  "type": "string",
+                  "title": "전일대비거래량비율",
+                  "description": "전일 같은 시점의 누적거래량 대비 오늘 누적거래량의 비율(%)입니다.",
+                  "maxLength": 9
+                },
+                "prdy_smns_hour_vol_rate": {
+                  "type": "string",
+                  "title": "전일동일시간거래량비율",
+                  "description": "전일 같은 시간대의 거래량 대비 비율(%)입니다.",
+                  "maxLength": 9
+                },
+                "mkop_clcd": {
+                  "type": "string",
+                  "title": "신장운영구분코드",
+                  "description": "장 운영 상태를 나타내는 코드입니다. KRX 채널의 체결 통보가 정규장 시간대와 정규장이 끝난 뒤 모두 \"20\" 으로 내려옵니다.\n\n\"20\" 이 곧 정규장이라는 뜻은 아닙니다. 이 값으로 정규장과 그 밖의 시간대를 가르지 마시고, 시간대를 판정하셔야 하면 같은 통보의 영업시간(bsop_hour)을 보십시오. 값에 대응하는 이름은 통보에 함께 오지 않으므로, 목록에 없는 값이 오더라도 오류로 다루지 마십시오.",
+                  "maxLength": 2
+                }
+              },
+              "title": "바디부"
+            }
+          }
+        },
+        "examples": [
+          {
+            "name": "sample",
+            "summary": "수신 예시",
+            "payload": {
+              "header": {
+                "tr_cd": "ohhts_stck_cntg",
+                "tr_key": "sample"
+              },
+              "body": {
+                "shrn_iscd": "1000",
+                "bsop_hour": "100000",
+                "hour_cls_code": "0",
+                "antc_nmix_cls_code": "1",
+                "prpr": "100000",
+                "prdy_vrss_sign": "2",
+                "prdy_vrss": "3750",
+                "prdy_ctrt": "1.00",
+                "oprc": "100000",
+                "hprc": "100000",
+                "lprc": "100000",
+                "cntg_cls_code": "1",
+                "cntg_vol": "10",
+                "acml_vol": "1000000",
+                "acml_tr_pbmn": "1000000000000",
+                "wghn_avrg_stck_prc": "100000",
+                "askp1": "100000",
+                "bidp1": "100000",
+                "askp_rsqn1": "5819",
+                "bidp_rsqn1": "10000",
+                "total_askp_rsqn": "100000",
+                "total_bidp_rsqn": "100000",
+                "rltv": "10.00",
+                "shnu_rate": "0.00",
+                "trht_yn": "N",
+                "prdy_vrss_vol_rate": "10.00",
+                "prdy_smns_hour_vol_rate": "100.00",
+                "mkop_clcd": "20"
+              }
+            }
+          }
+        ]
+      },
+      "ohhts_nxt_cntg": {
+        "name": "ohhts_nxt_cntg",
+        "title": "(실시간) 국내주식 현재가 (NXT)",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "tr_cd": {
+                  "type": "string",
+                  "title": "거래코드",
+                  "description": "구독 요청에 넣은 tr_cd 가 그대로 옵니다.",
+                  "maxLength": 20
+                },
+                "tr_key": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독 요청에 넣은 tr_key 가 그대로 옵니다.",
+                  "maxLength": 9
+                }
+              },
+              "title": "헤더부"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "shrn_iscd": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독한 종목의 단축코드입니다.",
+                  "maxLength": 9
+                },
+                "bsop_hour": {
+                  "type": "string",
+                  "title": "영업시간",
+                  "description": "체결이 일어난 시각입니다. HHMMSS 6자리이며 한국시간 기준입니다.",
+                  "maxLength": 6
+                },
+                "hour_cls_code": {
+                  "type": "string",
+                  "title": "시간구분코드",
+                  "description": "장 구분입니다.\n\"0\": 장중\n\"B\": 장 개시 전 예상\n\"C\": 09시 이후 예상\n\"A\": 장 종료 후 예상\n\"D\": 시간외 단일가 예상\n\n\"0\" 이 아닌 값은 모두 예상치 구간입니다. 확정된 값만 쓰셔야 하면 \"0\" 인 메시지만 반영하십시오.\n\n다만 \"0\" 은 정규장 시간대에만 오는 값이 아닙니다. 대체거래소(NXT) 채널은 정규장이 끝난 뒤의 거래 시간대에도 \"0\" 으로 내려보냈습니다. 정규장과 대체거래소 시간대를 가르실 때는 이 값이 아니라 같은 통보의 영업시간(bsop_hour)을 보십시오.",
+                  "maxLength": 1
+                },
+                "antc_nmix_cls_code": {
+                  "type": "string",
+                  "title": "예상지수구분코드",
+                  "description": "예상체결 여부를 나타내는 구분값입니다. 대체거래소(NXT) 채널의 체결 통보가 정규장 시간대와 그 뒤 대체거래소 거래 시간대 모두 \"1\" 로만 내려옵니다.\n\n이 항목만으로 예상체결과 확정체결을 가르지 마십시오. \"1\" 이 아닌 메시지만 골라 쓰시면 반영할 메시지가 남지 않습니다. 지금 받으신 통보가 어느 시간대의 것인지 아셔야 하면 같은 통보의 영업시간(bsop_hour)과 시간구분코드(hour_cls_code)를 함께 보십시오. 값에 대응하는 이름은 통보에 함께 오지 않으므로, 목록에 없는 값이 오더라도 오류로 다루지 마시고 문자열 그대로 보관하십시오.",
+                  "maxLength": 1
+                },
+                "prpr": {
+                  "type": "string",
+                  "title": "현재가",
+                  "description": "가장 최근 체결된 가격입니다. 이 메시지가 알리는 체결의 가격입니다.",
+                  "maxLength": 11
+                },
+                "prdy_vrss_sign": {
+                  "type": "string",
+                  "title": "전일대비부호",
+                  "description": "전일 종가 대비 방향입니다. \"1\": 상한 \"2\": 상승 \"3\": 보합 \"4\": 하한 \"5\": 하락 부호는 이 항목으로 판단하십시오. 전일대비(prdy_vrss) 값 자체에는 부호가 붙지 않습니다. 값에 대응하는 이름은 통보에 함께 오지 않습니다.",
+                  "maxLength": 1
+                },
+                "prdy_vrss": {
+                  "type": "string",
+                  "title": "전일대비",
+                  "description": "전일 종가와의 차이입니다. 절대값이며 방향은 prdy_vrss_sign 으로 확인합니다.",
+                  "maxLength": 11
+                },
+                "prdy_ctrt": {
+                  "type": "string",
+                  "title": "전일대비율",
+                  "description": "전일 종가 대비 등락률(%)입니다.",
+                  "maxLength": 9
+                },
+                "oprc": {
+                  "type": "string",
+                  "title": "시가",
+                  "description": "당일 첫 체결 가격입니다.",
+                  "maxLength": 11
+                },
+                "hprc": {
+                  "type": "string",
+                  "title": "고가",
+                  "description": "당일 체결 중 가장 높았던 가격입니다.",
+                  "maxLength": 11
+                },
+                "lprc": {
+                  "type": "string",
+                  "title": "저가",
+                  "description": "당일 체결 중 가장 낮았던 가격입니다.",
+                  "maxLength": 11
+                },
+                "cntg_cls_code": {
+                  "type": "string",
+                  "title": "체결구분코드",
+                  "description": "체결 유형입니다. \"1\": 매수 체결 \"2\": 매도 체결 정규장 체결 통보에 이 두 값만 내려왔습니다. 값에 대응하는 이름은 통보에 함께 오지 않으며, 목록에 없는 값이 오더라도 오류로 다루지 마십시오. 체결 방향을 화면에 쓰실 때는 이 값과 같은 통보의 전일대비 방향(prdy_vrss_sign)을 함께 보십시오.",
+                  "maxLength": 1
+                },
+                "cntg_vol": {
+                  "type": "string",
+                  "title": "체결거래량",
+                  "description": "이번 체결의 수량입니다. 누적이 아니라 건별 수량입니다.",
+                  "maxLength": 11
+                },
+                "acml_vol": {
+                  "type": "string",
+                  "title": "누적거래량",
+                  "description": "장 시작부터 지금까지의 누적 체결 수량입니다. NXT 시장에서 체결된 수량을 더한 값입니다. 정규시장 수량은 포함하지 않습니다.",
+                  "maxLength": 13
+                },
+                "acml_tr_pbmn": {
+                  "type": "string",
+                  "title": "누적거래대금",
+                  "description": "장 시작부터 지금까지의 누적 체결 금액입니다.",
+                  "maxLength": 13
+                },
+                "wghn_avrg_stck_prc": {
+                  "type": "string",
+                  "title": "가중평균주식가격",
+                  "description": "누적거래대금을 누적거래량으로 나눈 평균 단가입니다.",
+                  "maxLength": 11
+                },
+                "askp1": {
+                  "type": "string",
+                  "title": "매도호가1",
+                  "description": "체결 시점의 최우선 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp1": {
+                  "type": "string",
+                  "title": "매수호가1",
+                  "description": "체결 시점의 최우선 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "askp_rsqn1": {
+                  "type": "string",
+                  "title": "매도호가잔량1",
+                  "description": "최우선 매도호가에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn1": {
+                  "type": "string",
+                  "title": "매수호가잔량1",
+                  "description": "최우선 매수호가에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "total_askp_rsqn": {
+                  "type": "string",
+                  "title": "총매도호가잔량",
+                  "description": "호가창 전체의 매도 잔량 합입니다.",
+                  "maxLength": 13
+                },
+                "total_bidp_rsqn": {
+                  "type": "string",
+                  "title": "총매수호가잔량",
+                  "description": "호가창 전체의 매수 잔량 합입니다.",
+                  "maxLength": 13
+                },
+                "rltv": {
+                  "type": "string",
+                  "title": "체결강도",
+                  "description": "매수 체결량을 매도 체결량으로 나눈 비율(%)입니다. 100 보다 크면 매수 우위입니다.",
+                  "maxLength": 9
+                },
+                "shnu_rate": {
+                  "type": "string",
+                  "title": "매수비율",
+                  "description": "전체 체결 중 매수 체결이 차지하는 비율(%)입니다. NXT 채널의 체결 통보가 시간대를 달리해도 전 건 \"0.00\" 으로 내려오고, 같은 통보의 체결강도(rltv)만 값이 움직입니다.\n\n매수 우위를 판단하실 때는 이 항목이 아니라 체결강도(rltv)를 쓰십시오. 건별 매수·매도 방향이 필요하시면 같은 통보의 체결구분코드(cntg_cls_code)를 세어 직접 계산하십시오.",
+                  "maxLength": 9
+                },
+                "trht_yn": {
+                  "type": "string",
+                  "title": "거래정지여부",
+                  "description": "거래정지 여부입니다.\n\"Y\": 거래정지\n\"N\": 정상 거래\n\n정규장에서 거래되고 있는 종목에서는 \"N\" 이 옵니다.",
+                  "maxLength": 1
+                },
+                "prdy_vrss_vol_rate": {
+                  "type": "string",
+                  "title": "전일대비거래량비율",
+                  "description": "전일 같은 시점의 누적거래량 대비 오늘 누적거래량의 비율(%)입니다.",
+                  "maxLength": 9
+                },
+                "prdy_smns_hour_vol_rate": {
+                  "type": "string",
+                  "title": "전일동일시간거래량비율",
+                  "description": "전일 같은 시간대의 거래량 대비 비율(%)입니다.",
+                  "maxLength": 9
+                },
+                "mkop_clcd": {
+                  "type": "string",
+                  "title": "신장운영구분코드",
+                  "description": "장 운영 상태를 나타내는 코드입니다. 대체거래소(NXT) 채널의 체결 통보가 정규장 시간대와 정규장이 끝난 뒤 모두 \"20\" 으로 내려옵니다.\n\n\"20\" 이 곧 정규장이라는 뜻은 아닙니다. 이 값으로 정규장과 그 밖의 시간대를 가르지 마시고, 시간대를 판정하셔야 하면 같은 통보의 영업시간(bsop_hour)을 보십시오. 값에 대응하는 이름은 통보에 함께 오지 않으므로, 목록에 없는 값이 오더라도 오류로 다루지 마십시오.",
+                  "maxLength": 2
+                }
+              },
+              "title": "바디부"
+            }
+          }
+        },
+        "examples": [
+          {
+            "name": "sample",
+            "summary": "수신 예시",
+            "payload": {
+              "header": {
+                "tr_cd": "ohhts_nxt_cntg",
+                "tr_key": "sample"
+              },
+              "body": {
+                "shrn_iscd": "1000",
+                "bsop_hour": "100000",
+                "hour_cls_code": "0",
+                "antc_nmix_cls_code": "1",
+                "prpr": "100000",
+                "prdy_vrss_sign": "2",
+                "prdy_vrss": "4000",
+                "prdy_ctrt": "1.00",
+                "oprc": "100000",
+                "hprc": "100000",
+                "lprc": "100000",
+                "cntg_cls_code": "1",
+                "cntg_vol": "10",
+                "acml_vol": "1000000",
+                "acml_tr_pbmn": "1000000000000",
+                "wghn_avrg_stck_prc": "100000",
+                "askp1": "100000",
+                "bidp1": "100000",
+                "askp_rsqn1": "5876",
+                "bidp_rsqn1": "10000",
+                "total_askp_rsqn": "100000",
+                "total_bidp_rsqn": "100000",
+                "rltv": "10.00",
+                "shnu_rate": "0.00",
+                "trht_yn": "N",
+                "prdy_vrss_vol_rate": "10.00",
+                "prdy_smns_hour_vol_rate": "100.00",
+                "mkop_clcd": "20"
+              }
+            }
+          }
+        ]
+      },
+      "ohhts_unt_cntg": {
+        "name": "ohhts_unt_cntg",
+        "title": "(실시간) 국내주식 현재가 (SOR 통합)",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "tr_cd": {
+                  "type": "string",
+                  "title": "거래코드",
+                  "description": "구독 요청에 넣은 tr_cd 가 그대로 옵니다.",
+                  "maxLength": 20
+                },
+                "tr_key": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독 요청에 넣은 tr_key 가 그대로 옵니다.",
+                  "maxLength": 9
+                }
+              },
+              "title": "헤더부"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "shrn_iscd": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독한 종목의 단축코드입니다.",
+                  "maxLength": 9
+                },
+                "bsop_hour": {
+                  "type": "string",
+                  "title": "영업시간",
+                  "description": "체결이 일어난 시각입니다. HHMMSS 6자리이며 한국시간 기준입니다.",
+                  "maxLength": 6
+                },
+                "hour_cls_code": {
+                  "type": "string",
+                  "title": "시간구분코드",
+                  "description": "장 구분입니다.\n\"0\": 장중\n\"B\": 장 개시 전 예상\n\"C\": 09시 이후 예상\n\"A\": 장 종료 후 예상\n\"D\": 시간외 단일가 예상\n\n\"0\" 이 아닌 값은 모두 예상치 구간입니다. 확정된 값만 쓰셔야 하면 \"0\" 인 메시지만 반영하십시오.\n\n다만 \"0\" 은 정규장 시간대에만 오는 값이 아닙니다. 통합(SOR) 채널은 정규장이 끝난 뒤 대체거래소 체결만 흐르는 구간에서도 \"0\" 으로 내려보냈습니다. 정규장과 그 밖의 시간대를 가르실 때는 이 값이 아니라 같은 통보의 영업시간(bsop_hour)과 거래소코드(exch_code)를 함께 보십시오.",
+                  "maxLength": 1
+                },
+                "antc_nmix_cls_code": {
+                  "type": "string",
+                  "title": "예상지수구분코드",
+                  "description": "예상체결 여부를 나타내는 구분값입니다. 통합(SOR) 채널의 체결 통보가 KRX 체결분과 대체거래소 체결분 어느 쪽에서도 \"1\" 밖의 값으로 내려오지 않습니다.\n\n이 항목만으로 예상체결과 확정체결을 가르지 마십시오. \"1\" 이 아닌 메시지만 골라 쓰시면 반영할 메시지가 남지 않습니다. 지금 받으신 통보가 어느 거래소·어느 시간대의 것인지 아셔야 하면 같은 통보의 거래소코드(exch_code)와 영업시간(bsop_hour)을 함께 보십시오. 값에 대응하는 이름은 통보에 함께 오지 않으므로, 목록에 없는 값이 오더라도 오류로 다루지 마시고 문자열 그대로 보관하십시오.",
+                  "maxLength": 1
+                },
+                "prpr": {
+                  "type": "string",
+                  "title": "현재가",
+                  "description": "가장 최근 체결된 가격입니다. 이 메시지가 알리는 체결의 가격입니다.",
+                  "maxLength": 11
+                },
+                "prdy_vrss_sign": {
+                  "type": "string",
+                  "title": "전일대비부호",
+                  "description": "전일 종가 대비 방향입니다. \"1\": 상한 \"2\": 상승 \"3\": 보합 \"4\": 하한 \"5\": 하락 부호는 이 항목으로 판단하십시오. 전일대비(prdy_vrss) 값 자체에는 부호가 붙지 않습니다. 값에 대응하는 이름은 통보에 함께 오지 않습니다.",
+                  "maxLength": 1
+                },
+                "prdy_vrss": {
+                  "type": "string",
+                  "title": "전일대비",
+                  "description": "전일 종가와의 차이입니다. 절대값이며 방향은 prdy_vrss_sign 으로 확인합니다.",
+                  "maxLength": 11
+                },
+                "prdy_ctrt": {
+                  "type": "string",
+                  "title": "전일대비율",
+                  "description": "전일 종가 대비 등락률(%)입니다.",
+                  "maxLength": 9
+                },
+                "oprc": {
+                  "type": "string",
+                  "title": "시가",
+                  "description": "당일 첫 체결 가격입니다.",
+                  "maxLength": 11
+                },
+                "hprc": {
+                  "type": "string",
+                  "title": "고가",
+                  "description": "당일 체결 중 가장 높았던 가격입니다.",
+                  "maxLength": 11
+                },
+                "lprc": {
+                  "type": "string",
+                  "title": "저가",
+                  "description": "당일 체결 중 가장 낮았던 가격입니다.",
+                  "maxLength": 11
+                },
+                "cntg_cls_code": {
+                  "type": "string",
+                  "title": "체결구분코드",
+                  "description": "체결 유형입니다. \"1\": 매수 체결 \"2\": 매도 체결 정규장 체결 통보에 이 두 값만 내려왔습니다. 값에 대응하는 이름은 통보에 함께 오지 않으며, 목록에 없는 값이 오더라도 오류로 다루지 마십시오. 체결 방향을 화면에 쓰실 때는 이 값과 같은 통보의 전일대비 방향(prdy_vrss_sign)을 함께 보십시오.",
+                  "maxLength": 1
+                },
+                "cntg_vol": {
+                  "type": "string",
+                  "title": "체결거래량",
+                  "description": "이번 체결의 수량입니다. 누적이 아니라 건별 수량입니다.",
+                  "maxLength": 11
+                },
+                "acml_vol": {
+                  "type": "string",
+                  "title": "누적거래량",
+                  "description": "장 시작부터 지금까지의 누적 체결 수량입니다. 정규시장과 NXT 를 합산한 값입니다.",
+                  "maxLength": 13
+                },
+                "acml_tr_pbmn": {
+                  "type": "string",
+                  "title": "누적거래대금",
+                  "description": "장 시작부터 지금까지의 누적 체결 금액입니다.",
+                  "maxLength": 13
+                },
+                "wghn_avrg_stck_prc": {
+                  "type": "string",
+                  "title": "가중평균주식가격",
+                  "description": "누적거래대금을 누적거래량으로 나눈 평균 단가입니다.",
+                  "maxLength": 11
+                },
+                "askp1": {
+                  "type": "string",
+                  "title": "매도호가1",
+                  "description": "체결 시점의 최우선 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp1": {
+                  "type": "string",
+                  "title": "매수호가1",
+                  "description": "체결 시점의 최우선 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "askp_rsqn1": {
+                  "type": "string",
+                  "title": "매도호가잔량1",
+                  "description": "최우선 매도호가에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn1": {
+                  "type": "string",
+                  "title": "매수호가잔량1",
+                  "description": "최우선 매수호가에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "total_askp_rsqn": {
+                  "type": "string",
+                  "title": "총매도호가잔량",
+                  "description": "호가창 전체의 매도 잔량 합입니다.",
+                  "maxLength": 13
+                },
+                "total_bidp_rsqn": {
+                  "type": "string",
+                  "title": "총매수호가잔량",
+                  "description": "호가창 전체의 매수 잔량 합입니다.",
+                  "maxLength": 13
+                },
+                "rltv": {
+                  "type": "string",
+                  "title": "체결강도",
+                  "description": "매수 체결량을 매도 체결량으로 나눈 비율(%)입니다. 100 보다 크면 매수 우위입니다.",
+                  "maxLength": 9
+                },
+                "shnu_rate": {
+                  "type": "string",
+                  "title": "매수비율",
+                  "description": "전체 체결 중 매수 체결이 차지하는 비율(%)입니다. 통합(SOR) 채널의 체결 통보가 시간대를 달리해도 전 건 \"0.00\" 으로 내려오고, 같은 통보의 체결강도(rltv)만 값이 움직입니다.\n\n매수 우위를 판단하실 때는 이 항목이 아니라 체결강도(rltv)를 쓰십시오. 건별 매수·매도 방향이 필요하시면 같은 통보의 체결구분코드(cntg_cls_code)를 세어 직접 계산하십시오.",
+                  "maxLength": 9
+                },
+                "trht_yn": {
+                  "type": "string",
+                  "title": "거래정지여부",
+                  "description": "거래정지 여부입니다.\n\"Y\": 거래정지\n\"N\": 정상 거래\n\n정규장에서 거래되고 있는 종목에서는 \"N\" 이 옵니다.",
+                  "maxLength": 1
+                },
+                "prdy_vrss_vol_rate": {
+                  "type": "string",
+                  "title": "전일대비거래량비율",
+                  "description": "전일 같은 시점의 누적거래량 대비 오늘 누적거래량의 비율(%)입니다.",
+                  "maxLength": 9
+                },
+                "prdy_smns_hour_vol_rate": {
+                  "type": "string",
+                  "title": "전일동일시간거래량비율",
+                  "description": "전일 같은 시간대의 거래량 대비 비율(%)입니다.",
+                  "maxLength": 9
+                },
+                "mkop_clcd": {
+                  "type": "string",
+                  "title": "신장운영구분코드",
+                  "description": "장 운영 상태를 나타내는 코드입니다. 통합(SOR) 채널의 체결 통보가 정규장 시간대와 정규장이 끝난 뒤 모두 \"20\" 으로 내려옵니다.\n\n\"20\" 이 곧 정규장이라는 뜻은 아닙니다. 이 값으로 정규장과 그 밖의 시간대를 가르지 마시고, 시간대를 판정하셔야 하면 같은 통보의 영업시간(bsop_hour)을 보십시오. 값에 대응하는 이름은 통보에 함께 오지 않으므로, 목록에 없는 값이 오더라도 오류로 다루지 마십시오.",
+                  "maxLength": 2
+                },
+                "exch_code": {
+                  "type": "string",
+                  "title": "거래소코드",
+                  "description": "이번 체결이 이루어진 거래소입니다. \"1\": KRX \"2\": 대체거래소(NXT) 통합(SOR) 구독에서만 내려옵니다. 같은 종목의 체결이 두 거래소에 섞여 내려왔습니다. 거래소별로 나눠 집계하실 때 이 값을 쓰십시오. 값에 대응하는 이름은 통보에 함께 오지 않습니다.",
+                  "maxLength": 2
+                }
+              },
+              "title": "바디부"
+            }
+          }
+        },
+        "examples": [
+          {
+            "name": "sample",
+            "summary": "수신 예시",
+            "payload": {
+              "header": {
+                "tr_cd": "ohhts_unt_cntg",
+                "tr_key": "sample"
+              },
+              "body": {
+                "shrn_iscd": "1000",
+                "bsop_hour": "100000",
+                "hour_cls_code": "0",
+                "antc_nmix_cls_code": "1",
+                "prpr": "100000",
+                "prdy_vrss_sign": "2",
+                "prdy_vrss": "3500",
+                "prdy_ctrt": "1.00",
+                "oprc": "100000",
+                "hprc": "100000",
+                "lprc": "100000",
+                "cntg_cls_code": "1",
+                "cntg_vol": "10",
+                "acml_vol": "10000000",
+                "acml_tr_pbmn": "1000000000000",
+                "wghn_avrg_stck_prc": "100000",
+                "askp1": "100000",
+                "bidp1": "100000",
+                "askp_rsqn1": "10000",
+                "bidp_rsqn1": "10000",
+                "total_askp_rsqn": "1000000",
+                "total_bidp_rsqn": "100000",
+                "rltv": "10.00",
+                "shnu_rate": "0.00",
+                "trht_yn": "N",
+                "prdy_vrss_vol_rate": "10.00",
+                "prdy_smns_hour_vol_rate": "100.00",
+                "mkop_clcd": "20",
+                "exch_code": "2"
+              }
+            }
+          }
+        ]
+      },
+      "ohhts_ovtp_cntg": {
+        "name": "ohhts_ovtp_cntg",
+        "title": "(실시간) 국내주식 현재가 (시간외단일가)",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "tr_cd": {
+                  "type": "string",
+                  "title": "거래코드",
+                  "description": "구독 요청에 넣은 tr_cd 가 그대로 옵니다.",
+                  "maxLength": 20
+                },
+                "tr_key": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독 요청에 넣은 tr_key 가 그대로 옵니다.",
+                  "maxLength": 9
+                }
+              },
+              "title": "헤더부"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "shrn_iscd": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독한 종목의 단축코드입니다.",
+                  "maxLength": 9
+                },
+                "bsop_hour": {
+                  "type": "string",
+                  "title": "영업시간",
+                  "description": "체결이 일어난 시각입니다. HHMMSS 6자리이며 한국시간 기준입니다.",
+                  "maxLength": 6
+                },
+                "hour_cls_code": {
+                  "type": "string",
+                  "title": "시간구분코드",
+                  "description": "장 구분입니다.\n\"0\": 장중\n\"B\": 장 개시 전 예상\n\"C\": 09시 이후 예상\n\"A\": 장 종료 후 예상\n\"D\": 시간외 단일가 예상\n\n\"0\" 이 아닌 값은 모두 예상치 구간입니다. 확정된 값만 쓰셔야 하면 \"0\" 인 메시지만 반영하십시오.",
+                  "maxLength": 1
+                },
+                "antc_nmix_cls_code": {
+                  "type": "string",
+                  "title": "예상지수구분코드",
+                  "description": "예상체결 여부 구분입니다.\n\"1\": 예상 구간\n그 밖의 값: 일반(실제 체결)\n\n\"1\" 이면 아직 체결되지 않은 예상치입니다. 동시호가 구간에 내려오며, 이때의 가격과 거래량은 실제 체결이 아닙니다. 확정된 체결만 쓰셔야 하면 \"1\" 이 아닌 메시지만 반영하십시오.",
+                  "maxLength": 1
+                },
+                "prpr": {
+                  "type": "string",
+                  "title": "현재가",
+                  "description": "가장 최근 체결된 가격입니다. 이 메시지가 알리는 체결의 가격입니다.",
+                  "maxLength": 11
+                },
+                "prdy_vrss_sign": {
+                  "type": "string",
+                  "title": "전일대비부호",
+                  "description": "전일 종가 대비 방향입니다. 부호는 이 필드로 판단하십시오 ― prdy_vrss 값 자체에는 부호가 붙지 않습니다.",
+                  "maxLength": 1
+                },
+                "prdy_vrss": {
+                  "type": "string",
+                  "title": "전일대비",
+                  "description": "전일 종가와의 차이입니다. 절대값이며 방향은 prdy_vrss_sign 으로 확인합니다.",
+                  "maxLength": 11
+                },
+                "prdy_ctrt": {
+                  "type": "string",
+                  "title": "전일대비율",
+                  "description": "전일 종가 대비 등락률(%)입니다.",
+                  "maxLength": 9
+                },
+                "oprc": {
+                  "type": "string",
+                  "title": "시가",
+                  "description": "당일 첫 체결 가격입니다.",
+                  "maxLength": 11
+                },
+                "hprc": {
+                  "type": "string",
+                  "title": "고가",
+                  "description": "당일 체결 중 가장 높았던 가격입니다.",
+                  "maxLength": 11
+                },
+                "lprc": {
+                  "type": "string",
+                  "title": "저가",
+                  "description": "당일 체결 중 가장 낮았던 가격입니다.",
+                  "maxLength": 11
+                },
+                "cntg_cls_code": {
+                  "type": "string",
+                  "title": "체결구분코드",
+                  "description": "체결 유형입니다.",
+                  "maxLength": 1
+                },
+                "cntg_vol": {
+                  "type": "string",
+                  "title": "체결거래량",
+                  "description": "이번 체결의 수량입니다. 누적이 아니라 건별 수량입니다.",
+                  "maxLength": 11
+                },
+                "acml_vol": {
+                  "type": "string",
+                  "title": "누적거래량",
+                  "description": "장 시작부터 지금까지의 누적 체결 수량입니다. 정규시장(KRX)에서 체결된 수량을 더한 값입니다.",
+                  "maxLength": 13
+                },
+                "acml_tr_pbmn": {
+                  "type": "string",
+                  "title": "누적거래대금",
+                  "description": "장 시작부터 지금까지의 누적 체결 금액입니다.",
+                  "maxLength": 13
+                },
+                "wghn_avrg_stck_prc": {
+                  "type": "string",
+                  "title": "가중평균주식가격",
+                  "description": "누적거래대금을 누적거래량으로 나눈 평균 단가입니다.",
+                  "maxLength": 11
+                },
+                "askp1": {
+                  "type": "string",
+                  "title": "매도호가1",
+                  "description": "체결 시점의 최우선 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp1": {
+                  "type": "string",
+                  "title": "매수호가1",
+                  "description": "체결 시점의 최우선 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "askp_rsqn1": {
+                  "type": "string",
+                  "title": "매도호가잔량1",
+                  "description": "최우선 매도호가에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn1": {
+                  "type": "string",
+                  "title": "매수호가잔량1",
+                  "description": "최우선 매수호가에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "total_askp_rsqn": {
+                  "type": "string",
+                  "title": "총매도호가잔량",
+                  "description": "호가창 전체의 매도 잔량 합입니다.",
+                  "maxLength": 13
+                },
+                "total_bidp_rsqn": {
+                  "type": "string",
+                  "title": "총매수호가잔량",
+                  "description": "호가창 전체의 매수 잔량 합입니다.",
+                  "maxLength": 13
+                },
+                "rltv": {
+                  "type": "string",
+                  "title": "체결강도",
+                  "description": "매수 체결량을 매도 체결량으로 나눈 비율(%)입니다. 100 보다 크면 매수 우위입니다.",
+                  "maxLength": 9
+                },
+                "shnu_rate": {
+                  "type": "string",
+                  "title": "매수비율",
+                  "description": "전체 체결 중 매수 체결이 차지하는 비율(%)입니다.",
+                  "maxLength": 9
+                },
+                "trht_yn": {
+                  "type": "string",
+                  "title": "거래정지여부",
+                  "description": "거래정지 여부입니다.\n\"Y\": 거래정지\n\"N\": 정상 거래\n\n정규장에서 거래되고 있는 종목에서는 \"N\" 이 옵니다.",
+                  "maxLength": 1
+                },
+                "prdy_vrss_vol_rate": {
+                  "type": "string",
+                  "title": "전일대비거래량비율",
+                  "description": "전일 같은 시점의 누적거래량 대비 오늘 누적거래량의 비율(%)입니다.",
+                  "maxLength": 9
+                },
+                "prdy_smns_hour_vol_rate": {
+                  "type": "string",
+                  "title": "전일동일시간거래량비율",
+                  "description": "전일 같은 시간대의 거래량 대비 비율(%)입니다.",
+                  "maxLength": 9
+                }
+              },
+              "title": "바디부"
+            }
+          }
+        },
+        "examples": [
+          {
+            "name": "sample",
+            "summary": "수신 예시",
+            "payload": {
+              "header": {
+                "tr_cd": "ohhts_ovtp_cntg",
+                "tr_key": "sample"
+              },
+              "body": {
+                "shrn_iscd": "1000",
+                "bsop_hour": "100000",
+                "hour_cls_code": "0",
+                "antc_nmix_cls_code": "1",
+                "prpr": "100000",
+                "prdy_vrss_sign": "2",
+                "prdy_vrss": "5500",
+                "prdy_ctrt": "1.00",
+                "oprc": "100000",
+                "hprc": "100000",
+                "lprc": "100000",
+                "cntg_cls_code": "1",
+                "cntg_vol": "37",
+                "acml_vol": "1000000",
+                "acml_tr_pbmn": "1000000000000",
+                "wghn_avrg_stck_prc": "100000",
+                "askp1": "100000",
+                "bidp1": "100000",
+                "askp_rsqn1": "10000",
+                "bidp_rsqn1": "7800",
+                "total_askp_rsqn": "1000000",
+                "total_bidp_rsqn": "100000",
+                "rltv": "10.00",
+                "shnu_rate": "0.00",
+                "trht_yn": "N",
+                "prdy_vrss_vol_rate": "10.00",
+                "prdy_smns_hour_vol_rate": "100.00"
+              }
+            }
+          }
+        ]
+      },
+      "ohhts_ovan_cntg": {
+        "name": "ohhts_ovan_cntg",
+        "title": "(실시간) 국내주식 시간외예상체결가",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "tr_cd": {
+                  "type": "string",
+                  "title": "거래코드",
+                  "description": "구독 요청에 넣은 tr_cd 가 그대로 옵니다.",
+                  "maxLength": 20
+                },
+                "tr_key": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독 요청에 넣은 tr_key 가 그대로 옵니다.",
+                  "maxLength": 9
+                }
+              },
+              "title": "헤더부"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "shrn_iscd": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독한 종목의 단축코드입니다.",
+                  "maxLength": 9
+                },
+                "bsop_hour": {
+                  "type": "string",
+                  "title": "영업시간",
+                  "description": "체결이 일어난 시각입니다. HHMMSS 6자리이며 한국시간 기준입니다.",
+                  "maxLength": 6
+                },
+                "hour_cls_code": {
+                  "type": "string",
+                  "title": "시간구분코드",
+                  "description": "장 구분입니다.\n\"0\": 장중\n\"B\": 장 개시 전 예상\n\"C\": 09시 이후 예상\n\"A\": 장 종료 후 예상\n\"D\": 시간외 단일가 예상\n\n\"0\" 이 아닌 값은 모두 예상치 구간입니다. 확정된 값만 쓰셔야 하면 \"0\" 인 메시지만 반영하십시오.",
+                  "maxLength": 1
+                },
+                "antc_nmix_cls_code": {
+                  "type": "string",
+                  "title": "예상지수구분코드",
+                  "description": "예상체결 여부 구분입니다.\n\"1\": 예상 구간\n그 밖의 값: 일반(실제 체결)\n\n\"1\" 이면 아직 체결되지 않은 예상치입니다. 동시호가 구간에 내려오며, 이때의 가격과 거래량은 실제 체결이 아닙니다. 확정된 체결만 쓰셔야 하면 \"1\" 이 아닌 메시지만 반영하십시오.",
+                  "maxLength": 1
+                },
+                "prpr": {
+                  "type": "string",
+                  "title": "현재가",
+                  "description": "가장 최근 체결된 가격입니다. 이 메시지가 알리는 체결의 가격입니다.",
+                  "maxLength": 11
+                },
+                "prdy_vrss_sign": {
+                  "type": "string",
+                  "title": "전일대비부호",
+                  "description": "전일 종가 대비 방향입니다. 부호는 이 필드로 판단하십시오 ― prdy_vrss 값 자체에는 부호가 붙지 않습니다.",
+                  "maxLength": 1
+                },
+                "prdy_vrss": {
+                  "type": "string",
+                  "title": "전일대비",
+                  "description": "전일 종가와의 차이입니다. 절대값이며 방향은 prdy_vrss_sign 으로 확인합니다.",
+                  "maxLength": 11
+                },
+                "prdy_ctrt": {
+                  "type": "string",
+                  "title": "전일대비율",
+                  "description": "전일 종가 대비 등락률(%)입니다.",
+                  "maxLength": 9
+                },
+                "oprc": {
+                  "type": "string",
+                  "title": "시가",
+                  "description": "당일 첫 체결 가격입니다.",
+                  "maxLength": 11
+                },
+                "hprc": {
+                  "type": "string",
+                  "title": "고가",
+                  "description": "당일 체결 중 가장 높았던 가격입니다.",
+                  "maxLength": 11
+                },
+                "lprc": {
+                  "type": "string",
+                  "title": "저가",
+                  "description": "당일 체결 중 가장 낮았던 가격입니다.",
+                  "maxLength": 11
+                },
+                "cntg_cls_code": {
+                  "type": "string",
+                  "title": "체결구분코드",
+                  "description": "체결 유형입니다.",
+                  "maxLength": 1
+                },
+                "cntg_vol": {
+                  "type": "string",
+                  "title": "체결거래량",
+                  "description": "이번 체결의 수량입니다. 누적이 아니라 건별 수량입니다.",
+                  "maxLength": 11
+                },
+                "acml_vol": {
+                  "type": "string",
+                  "title": "누적거래량",
+                  "description": "장 시작부터 지금까지의 누적 체결 수량입니다. 정규시장(KRX)에서 체결된 수량을 더한 값입니다.",
+                  "maxLength": 13
+                },
+                "acml_tr_pbmn": {
+                  "type": "string",
+                  "title": "누적거래대금",
+                  "description": "장 시작부터 지금까지의 누적 체결 금액입니다.",
+                  "maxLength": 13
+                },
+                "wghn_avrg_stck_prc": {
+                  "type": "string",
+                  "title": "가중평균주식가격",
+                  "description": "누적거래대금을 누적거래량으로 나눈 평균 단가입니다.",
+                  "maxLength": 11
+                },
+                "askp1": {
+                  "type": "string",
+                  "title": "매도호가1",
+                  "description": "체결 시점의 최우선 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp1": {
+                  "type": "string",
+                  "title": "매수호가1",
+                  "description": "체결 시점의 최우선 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "askp_rsqn1": {
+                  "type": "string",
+                  "title": "매도호가잔량1",
+                  "description": "최우선 매도호가에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn1": {
+                  "type": "string",
+                  "title": "매수호가잔량1",
+                  "description": "최우선 매수호가에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "total_askp_rsqn": {
+                  "type": "string",
+                  "title": "총매도호가잔량",
+                  "description": "호가창 전체의 매도 잔량 합입니다.",
+                  "maxLength": 13
+                },
+                "total_bidp_rsqn": {
+                  "type": "string",
+                  "title": "총매수호가잔량",
+                  "description": "호가창 전체의 매수 잔량 합입니다.",
+                  "maxLength": 13
+                },
+                "rltv": {
+                  "type": "string",
+                  "title": "체결강도",
+                  "description": "매수 체결량을 매도 체결량으로 나눈 비율(%)입니다. 100 보다 크면 매수 우위입니다.",
+                  "maxLength": 9
+                },
+                "shnu_rate": {
+                  "type": "string",
+                  "title": "매수비율",
+                  "description": "전체 체결 중 매수 체결이 차지하는 비율(%)입니다.",
+                  "maxLength": 9
+                },
+                "trht_yn": {
+                  "type": "string",
+                  "title": "거래정지여부",
+                  "description": "거래정지 여부입니다.\n\"Y\": 거래정지\n\"N\": 정상 거래\n\n정규장에서 거래되고 있는 종목에서는 \"N\" 이 옵니다.",
+                  "maxLength": 1
+                },
+                "prdy_vrss_vol_rate": {
+                  "type": "string",
+                  "title": "전일대비거래량비율",
+                  "description": "전일 같은 시점의 누적거래량 대비 오늘 누적거래량의 비율(%)입니다.",
+                  "maxLength": 9
+                },
+                "prdy_smns_hour_vol_rate": {
+                  "type": "string",
+                  "title": "전일동일시간거래량비율",
+                  "description": "전일 같은 시간대의 거래량 대비 비율(%)입니다.",
+                  "maxLength": 9
+                }
+              },
+              "title": "바디부"
+            }
+          }
+        },
+        "examples": [
+          {
+            "name": "sample",
+            "summary": "수신 예시",
+            "payload": {
+              "header": {
+                "tr_cd": "ohhts_ovan_cntg",
+                "tr_key": "sample"
+              },
+              "body": {
+                "shrn_iscd": "1000",
+                "bsop_hour": "100000",
+                "hour_cls_code": "0",
+                "antc_nmix_cls_code": "1",
+                "prpr": "100000",
+                "prdy_vrss_sign": "2",
+                "prdy_vrss": "5500",
+                "prdy_ctrt": "1.00",
+                "oprc": "100000",
+                "hprc": "100000",
+                "lprc": "100000",
+                "cntg_cls_code": "1",
+                "cntg_vol": "37",
+                "acml_vol": "1000000",
+                "acml_tr_pbmn": "1000000000000",
+                "wghn_avrg_stck_prc": "100000",
+                "askp1": "100000",
+                "bidp1": "100000",
+                "askp_rsqn1": "10000",
+                "bidp_rsqn1": "7800",
+                "total_askp_rsqn": "1000000",
+                "total_bidp_rsqn": "100000",
+                "rltv": "10.00",
+                "shnu_rate": "0.00",
+                "trht_yn": "N",
+                "prdy_vrss_vol_rate": "10.00",
+                "prdy_smns_hour_vol_rate": "100.00"
+              }
+            }
+          }
+        ]
+      },
+      "ohhts_stck_aspr": {
+        "name": "ohhts_stck_aspr",
+        "title": "(실시간) 국내주식 호가",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "tr_cd": {
+                  "type": "string",
+                  "title": "거래코드",
+                  "description": "구독 요청에 넣은 tr_cd 가 그대로 옵니다.",
+                  "maxLength": 20
+                },
+                "tr_key": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독 요청에 넣은 tr_key 가 그대로 옵니다.",
+                  "maxLength": 9
+                }
+              },
+              "title": "헤더부"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "shrn_iscd": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독한 종목의 단축코드입니다.",
+                  "maxLength": 9
+                },
+                "bsop_hour": {
+                  "type": "string",
+                  "title": "영업시간",
+                  "description": "호가가 갱신된 시각입니다. HHMMSS 6자리, 한국시간입니다.",
+                  "maxLength": 6
+                },
+                "hour_cls_code": {
+                  "type": "string",
+                  "title": "시간구분코드",
+                  "description": "장 구분입니다.\n\"0\": 장중\n\"B\": 장 개시 전 예상\n\"C\": 09시 이후 예상\n\"A\": 장 종료 후 예상\n\"D\": 시간외 단일가 예상\n\n\"0\" 이 아닌 값은 모두 예상치 구간입니다. 확정된 값만 쓰셔야 하면 \"0\" 인 메시지만 반영하십시오.\n\n다만 \"0\" 은 정규장 시간대에만 오는 값이 아닙니다. 호가 통보는 정규장이 끝난 뒤에도 \"0\" 으로 내려왔고 10단계 호가와 잔량이 계속 갱신되었습니다. 예상체결 구간인지는 이 값이 아니라 같은 통보의 예상체결가(antc_cnpr)·예상거래량(antc_vol)이 0 이 아닌지로 판정하십시오.",
+                  "maxLength": 1
+                },
+                "askp1": {
+                  "type": "string",
+                  "title": "매도호가1",
+                  "description": "1번째 매도호가입니다. askp1 이 최우선(가장 낮은) 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp2": {
+                  "type": "string",
+                  "title": "매도호가2",
+                  "description": "2번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp3": {
+                  "type": "string",
+                  "title": "매도호가3",
+                  "description": "3번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp4": {
+                  "type": "string",
+                  "title": "매도호가4",
+                  "description": "4번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp5": {
+                  "type": "string",
+                  "title": "매도호가5",
+                  "description": "5번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp6": {
+                  "type": "string",
+                  "title": "매도호가6",
+                  "description": "6번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp7": {
+                  "type": "string",
+                  "title": "매도호가7",
+                  "description": "7번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp8": {
+                  "type": "string",
+                  "title": "매도호가8",
+                  "description": "8번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp9": {
+                  "type": "string",
+                  "title": "매도호가9",
+                  "description": "9번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp10": {
+                  "type": "string",
+                  "title": "매도호가10",
+                  "description": "10번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp1": {
+                  "type": "string",
+                  "title": "매수호가1",
+                  "description": "1번째 매수호가입니다. bidp1 이 최우선(가장 높은) 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp2": {
+                  "type": "string",
+                  "title": "매수호가2",
+                  "description": "2번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp3": {
+                  "type": "string",
+                  "title": "매수호가3",
+                  "description": "3번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp4": {
+                  "type": "string",
+                  "title": "매수호가4",
+                  "description": "4번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp5": {
+                  "type": "string",
+                  "title": "매수호가5",
+                  "description": "5번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp6": {
+                  "type": "string",
+                  "title": "매수호가6",
+                  "description": "6번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp7": {
+                  "type": "string",
+                  "title": "매수호가7",
+                  "description": "7번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp8": {
+                  "type": "string",
+                  "title": "매수호가8",
+                  "description": "8번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp9": {
+                  "type": "string",
+                  "title": "매수호가9",
+                  "description": "9번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp10": {
+                  "type": "string",
+                  "title": "매수호가10",
+                  "description": "10번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "askp_rsqn1": {
+                  "type": "string",
+                  "title": "매도호가잔량1",
+                  "description": "askp1 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn2": {
+                  "type": "string",
+                  "title": "매도호가잔량2",
+                  "description": "askp2 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn3": {
+                  "type": "string",
+                  "title": "매도호가잔량3",
+                  "description": "askp3 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn4": {
+                  "type": "string",
+                  "title": "매도호가잔량4",
+                  "description": "askp4 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn5": {
+                  "type": "string",
+                  "title": "매도호가잔량5",
+                  "description": "askp5 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn6": {
+                  "type": "string",
+                  "title": "매도호가잔량6",
+                  "description": "askp6 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn7": {
+                  "type": "string",
+                  "title": "매도호가잔량7",
+                  "description": "askp7 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn8": {
+                  "type": "string",
+                  "title": "매도호가잔량8",
+                  "description": "askp8 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn9": {
+                  "type": "string",
+                  "title": "매도호가잔량9",
+                  "description": "askp9 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn10": {
+                  "type": "string",
+                  "title": "매도호가잔량10",
+                  "description": "askp10 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn1": {
+                  "type": "string",
+                  "title": "매수호가잔량1",
+                  "description": "bidp1 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn2": {
+                  "type": "string",
+                  "title": "매수호가잔량2",
+                  "description": "bidp2 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn3": {
+                  "type": "string",
+                  "title": "매수호가잔량3",
+                  "description": "bidp3 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn4": {
+                  "type": "string",
+                  "title": "매수호가잔량4",
+                  "description": "bidp4 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn5": {
+                  "type": "string",
+                  "title": "매수호가잔량5",
+                  "description": "bidp5 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn6": {
+                  "type": "string",
+                  "title": "매수호가잔량6",
+                  "description": "bidp6 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn7": {
+                  "type": "string",
+                  "title": "매수호가잔량7",
+                  "description": "bidp7 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn8": {
+                  "type": "string",
+                  "title": "매수호가잔량8",
+                  "description": "bidp8 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn9": {
+                  "type": "string",
+                  "title": "매수호가잔량9",
+                  "description": "bidp9 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn10": {
+                  "type": "string",
+                  "title": "매수호가잔량10",
+                  "description": "bidp10 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "total_askp_rsqn": {
+                  "type": "string",
+                  "title": "총매도호가잔량",
+                  "description": "10단계 매도 잔량의 합입니다.",
+                  "maxLength": 13
+                },
+                "total_bidp_rsqn": {
+                  "type": "string",
+                  "title": "총매수호가잔량",
+                  "description": "10단계 매수 잔량의 합입니다.",
+                  "maxLength": 13
+                },
+                "total_askp_rsqn_icdc": {
+                  "type": "string",
+                  "title": "총매도호가잔량증감",
+                  "description": "직전 호가 대비 총매도잔량의 증감입니다.",
+                  "maxLength": 13
+                },
+                "total_bidp_rsqn_icdc": {
+                  "type": "string",
+                  "title": "총매수호가잔량증감",
+                  "description": "직전 호가 대비 총매수잔량의 증감입니다.",
+                  "maxLength": 13
+                },
+                "ovtm_total_askp_rsqn": {
+                  "type": "string",
+                  "title": "시간외총매도호가잔량",
+                  "description": "시간외 매도 잔량의 합입니다.",
+                  "maxLength": 13
+                },
+                "ovtm_total_bidp_rsqn": {
+                  "type": "string",
+                  "title": "시간외총매수호가잔량",
+                  "description": "시간외 매수 잔량의 합입니다.",
+                  "maxLength": 13
+                },
+                "ovtm_total_askp_rsqn_icdc": {
+                  "type": "string",
+                  "title": "시간외총매도호가잔량증감",
+                  "description": "직전 대비 시간외 매도잔량 증감입니다.",
+                  "maxLength": 13
+                },
+                "ovtm_total_bidp_rsqn_icdc": {
+                  "type": "string",
+                  "title": "시간외총매수호가잔량증감",
+                  "description": "직전 대비 시간외 매수잔량 증감입니다.",
+                  "maxLength": 13
+                },
+                "antc_cnpr": {
+                  "type": "string",
+                  "title": "예상체결가",
+                  "description": "지금 체결된다면 형성될 가격입니다. 실제 체결가가 아닙니다.",
+                  "maxLength": 11
+                },
+                "antc_cntg_vrss_sign": {
+                  "type": "string",
+                  "title": "예상체결대비부호",
+                  "description": "예상체결가의 전일 종가 대비 방향입니다. \"1\": 상한 \"2\": 상승 \"3\": 보합 \"4\": 하한 \"5\": 하락 예상체결 구간이 아니면 빈 값으로 내려옵니다. 정규장 호가 통보는 전 건이 빈 값이었습니다. 빈 값을 오류로 다루지 마시고, 예상체결 여부는 같은 통보의 예상체결가·예상거래량이 0 이 아닌지로 판정하십시오.",
+                  "maxLength": 1
+                },
+                "antc_cntg_vrss": {
+                  "type": "string",
+                  "title": "예상체결대비",
+                  "description": "예상체결가와 전일 종가의 차이입니다. 방향은 부호 필드로 확인합니다.",
+                  "maxLength": 11
+                },
+                "antc_cntg_prdy_ctrt": {
+                  "type": "string",
+                  "title": "예상체결전일대비율",
+                  "description": "예상체결가 기준 등락률(%)입니다.",
+                  "maxLength": 9
+                },
+                "antc_cnqn": {
+                  "type": "string",
+                  "title": "예상체결수량",
+                  "description": "예상 체결 수량입니다. 직전 대비 감소하면 음수로 옵니다.",
+                  "maxLength": 12
+                },
+                "antc_vol": {
+                  "type": "string",
+                  "title": "예상거래량",
+                  "description": "예상 체결 기준 누적 거래량입니다.",
+                  "maxLength": 13
+                },
+                "acml_vol": {
+                  "type": "string",
+                  "title": "누적거래량",
+                  "description": "장 시작부터 지금까지의 누적 체결 수량입니다.",
+                  "maxLength": 13
+                },
+                "stck_deal_cls_code": {
+                  "type": "string",
+                  "title": "매매구분코드",
+                  "description": "매매 구분입니다. 정규장 호가 통보에서는 빈 값으로 내려옵니다. 빈 값을 오류로 다루지 마시고 문자열 그대로 보관하십시오.",
+                  "maxLength": 1
+                },
+                "wghn_avrg_stck_prc": {
+                  "type": "string",
+                  "title": "가중평균주식가격",
+                  "description": "누적거래대금을 누적거래량으로 나눈 평균 단가입니다.",
+                  "maxLength": 11
+                }
+              },
+              "title": "바디부"
+            }
+          }
+        },
+        "examples": [
+          {
+            "name": "sample",
+            "summary": "수신 예시",
+            "payload": {
+              "header": {
+                "tr_cd": "ohhts_stck_aspr",
+                "tr_key": "sample"
+              },
+              "body": {
+                "shrn_iscd": "1000",
+                "bsop_hour": "100000",
+                "hour_cls_code": "0",
+                "askp1": "100000",
+                "askp2": "100000",
+                "askp3": "100000",
+                "askp4": "100000",
+                "askp5": "100000",
+                "askp6": "100000",
+                "askp7": "100000",
+                "askp8": "100000",
+                "askp9": "100000",
+                "askp10": "100000",
+                "bidp1": "100000",
+                "bidp2": "10000",
+                "bidp3": "10000",
+                "bidp4": "10000",
+                "bidp5": "10000",
+                "bidp6": "10000",
+                "bidp7": "10000",
+                "bidp8": "10000",
+                "bidp9": "10000",
+                "bidp10": "10000",
+                "askp_rsqn1": "1037",
+                "askp_rsqn2": "1074",
+                "askp_rsqn3": "1111",
+                "askp_rsqn4": "1148",
+                "askp_rsqn5": "1185",
+                "askp_rsqn6": "1222",
+                "askp_rsqn7": "1259",
+                "askp_rsqn8": "1296",
+                "askp_rsqn9": "1333",
+                "askp_rsqn10": "1370",
+                "bidp_rsqn1": "941",
+                "bidp_rsqn2": "982",
+                "bidp_rsqn3": "1023",
+                "bidp_rsqn4": "1064",
+                "bidp_rsqn5": "1105",
+                "bidp_rsqn6": "1146",
+                "bidp_rsqn7": "1187",
+                "bidp_rsqn8": "1228",
+                "bidp_rsqn9": "1269",
+                "bidp_rsqn10": "1310",
+                "total_askp_rsqn": "1000000",
+                "total_bidp_rsqn": "100000",
+                "total_askp_rsqn_icdc": "0",
+                "total_bidp_rsqn_icdc": "0",
+                "ovtm_total_askp_rsqn": "0",
+                "ovtm_total_bidp_rsqn": "100000",
+                "ovtm_total_askp_rsqn_icdc": "0",
+                "ovtm_total_bidp_rsqn_icdc": "0",
+                "antc_cnpr": "100000",
+                "antc_cntg_vrss_sign": "2",
+                "antc_cntg_vrss": "8500",
+                "antc_cntg_prdy_ctrt": "1.00",
+                "antc_cnqn": "-50",
+                "antc_vol": "100000",
+                "acml_vol": "1000000",
+                "stck_deal_cls_code": "",
+                "wghn_avrg_stck_prc": "100000"
+              }
+            }
+          }
+        ]
+      },
+      "ohhts_ovtp_aspr": {
+        "name": "ohhts_ovtp_aspr",
+        "title": "(실시간) 국내주식 호가 (시간외단일가)",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "tr_cd": {
+                  "type": "string",
+                  "title": "거래코드",
+                  "description": "구독 요청에 넣은 tr_cd 가 그대로 옵니다.",
+                  "maxLength": 20
+                },
+                "tr_key": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독 요청에 넣은 tr_key 가 그대로 옵니다.",
+                  "maxLength": 9
+                }
+              },
+              "title": "헤더부"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "shrn_iscd": {
+                  "type": "string",
+                  "title": "단축종목코드",
+                  "description": "구독한 종목의 단축코드입니다.",
+                  "maxLength": 9
+                },
+                "bsop_hour": {
+                  "type": "string",
+                  "title": "영업시간",
+                  "description": "호가가 갱신된 시각입니다. HHMMSS 6자리, 한국시간입니다.",
+                  "maxLength": 6
+                },
+                "hour_cls_code": {
+                  "type": "string",
+                  "title": "시간구분코드",
+                  "description": "장 구분입니다.\n\"0\": 장중\n\"B\": 장 개시 전 예상\n\"C\": 09시 이후 예상\n\"A\": 장 종료 후 예상\n\"D\": 시간외 단일가 예상\n\n\"0\" 이 아닌 값은 모두 예상치 구간입니다. 확정된 값만 쓰셔야 하면 \"0\" 인 메시지만 반영하십시오.",
+                  "maxLength": 1
+                },
+                "askp1": {
+                  "type": "string",
+                  "title": "매도호가1",
+                  "description": "1번째 매도호가입니다. askp1 이 최우선(가장 낮은) 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp2": {
+                  "type": "string",
+                  "title": "매도호가2",
+                  "description": "2번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp3": {
+                  "type": "string",
+                  "title": "매도호가3",
+                  "description": "3번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp4": {
+                  "type": "string",
+                  "title": "매도호가4",
+                  "description": "4번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp5": {
+                  "type": "string",
+                  "title": "매도호가5",
+                  "description": "5번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp6": {
+                  "type": "string",
+                  "title": "매도호가6",
+                  "description": "6번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp7": {
+                  "type": "string",
+                  "title": "매도호가7",
+                  "description": "7번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp8": {
+                  "type": "string",
+                  "title": "매도호가8",
+                  "description": "8번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp9": {
+                  "type": "string",
+                  "title": "매도호가9",
+                  "description": "9번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "askp10": {
+                  "type": "string",
+                  "title": "매도호가10",
+                  "description": "10번째 매도호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp1": {
+                  "type": "string",
+                  "title": "매수호가1",
+                  "description": "1번째 매수호가입니다. bidp1 이 최우선(가장 높은) 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp2": {
+                  "type": "string",
+                  "title": "매수호가2",
+                  "description": "2번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp3": {
+                  "type": "string",
+                  "title": "매수호가3",
+                  "description": "3번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp4": {
+                  "type": "string",
+                  "title": "매수호가4",
+                  "description": "4번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp5": {
+                  "type": "string",
+                  "title": "매수호가5",
+                  "description": "5번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp6": {
+                  "type": "string",
+                  "title": "매수호가6",
+                  "description": "6번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp7": {
+                  "type": "string",
+                  "title": "매수호가7",
+                  "description": "7번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp8": {
+                  "type": "string",
+                  "title": "매수호가8",
+                  "description": "8번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp9": {
+                  "type": "string",
+                  "title": "매수호가9",
+                  "description": "9번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "bidp10": {
+                  "type": "string",
+                  "title": "매수호가10",
+                  "description": "10번째 매수호가입니다.",
+                  "maxLength": 11
+                },
+                "askp_rsqn1": {
+                  "type": "string",
+                  "title": "매도호가잔량1",
+                  "description": "askp1 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn2": {
+                  "type": "string",
+                  "title": "매도호가잔량2",
+                  "description": "askp2 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn3": {
+                  "type": "string",
+                  "title": "매도호가잔량3",
+                  "description": "askp3 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn4": {
+                  "type": "string",
+                  "title": "매도호가잔량4",
+                  "description": "askp4 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn5": {
+                  "type": "string",
+                  "title": "매도호가잔량5",
+                  "description": "askp5 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn6": {
+                  "type": "string",
+                  "title": "매도호가잔량6",
+                  "description": "askp6 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn7": {
+                  "type": "string",
+                  "title": "매도호가잔량7",
+                  "description": "askp7 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn8": {
+                  "type": "string",
+                  "title": "매도호가잔량8",
+                  "description": "askp8 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn9": {
+                  "type": "string",
+                  "title": "매도호가잔량9",
+                  "description": "askp9 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "askp_rsqn10": {
+                  "type": "string",
+                  "title": "매도호가잔량10",
+                  "description": "askp10 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn1": {
+                  "type": "string",
+                  "title": "매수호가잔량1",
+                  "description": "bidp1 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn2": {
+                  "type": "string",
+                  "title": "매수호가잔량2",
+                  "description": "bidp2 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn3": {
+                  "type": "string",
+                  "title": "매수호가잔량3",
+                  "description": "bidp3 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn4": {
+                  "type": "string",
+                  "title": "매수호가잔량4",
+                  "description": "bidp4 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn5": {
+                  "type": "string",
+                  "title": "매수호가잔량5",
+                  "description": "bidp5 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn6": {
+                  "type": "string",
+                  "title": "매수호가잔량6",
+                  "description": "bidp6 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn7": {
+                  "type": "string",
+                  "title": "매수호가잔량7",
+                  "description": "bidp7 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn8": {
+                  "type": "string",
+                  "title": "매수호가잔량8",
+                  "description": "bidp8 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn9": {
+                  "type": "string",
+                  "title": "매수호가잔량9",
+                  "description": "bidp9 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "bidp_rsqn10": {
+                  "type": "string",
+                  "title": "매수호가잔량10",
+                  "description": "bidp10 에 남아 있는 수량입니다.",
+                  "maxLength": 13
+                },
+                "total_askp_rsqn": {
+                  "type": "string",
+                  "title": "총매도호가잔량",
+                  "description": "10단계 매도 잔량의 합입니다.",
+                  "maxLength": 13
+                },
+                "total_bidp_rsqn": {
+                  "type": "string",
+                  "title": "총매수호가잔량",
+                  "description": "10단계 매수 잔량의 합입니다.",
+                  "maxLength": 13
+                },
+                "total_askp_rsqn_icdc": {
+                  "type": "string",
+                  "title": "총매도호가잔량증감",
+                  "description": "직전 호가 대비 총매도잔량의 증감입니다.",
+                  "maxLength": 13
+                },
+                "total_bidp_rsqn_icdc": {
+                  "type": "string",
+                  "title": "총매수호가잔량증감",
+                  "description": "직전 호가 대비 총매수잔량의 증감입니다.",
+                  "maxLength": 13
+                },
+                "ovtm_total_askp_rsqn": {
+                  "type": "string",
+                  "title": "시간외총매도호가잔량",
+                  "description": "시간외 매도 잔량의 합입니다.",
+                  "maxLength": 13
+                },
+                "ovtm_total_bidp_rsqn": {
+                  "type": "string",
+                  "title": "시간외총매수호가잔량",
+                  "description": "시간외 매수 잔량의 합입니다.",
+                  "maxLength": 13
+                },
+                "ovtm_total_askp_rsqn_icdc": {
+                  "type": "string",
+                  "title": "시간외총매도호가잔량증감",
+                  "description": "직전 대비 시간외 매도잔량 증감입니다.",
+                  "maxLength": 13
+                },
+                "ovtm_total_bidp_rsqn_icdc": {
+                  "type": "string",
+                  "title": "시간외총매수호가잔량증감",
+                  "description": "직전 대비 시간외 매수잔량 증감입니다.",
+                  "maxLength": 13
+                },
+                "antc_cnpr": {
+                  "type": "string",
+                  "title": "예상체결가",
+                  "description": "지금 체결된다면 형성될 가격입니다. 실제 체결가가 아닙니다.",
+                  "maxLength": 11
+                },
+                "antc_cntg_vrss_sign": {
+                  "type": "string",
+                  "title": "예상체결대비부호",
+                  "description": "예상체결가의 전일 종가 대비 방향입니다. \"1\": 상한 \"2\": 상승 \"3\": 보합 \"4\": 하한 \"5\": 하락 예상체결 구간이 아니면 빈 값으로 내려옵니다. 정규장 호가 통보는 전 건이 빈 값이었습니다. 빈 값을 오류로 다루지 마시고, 예상체결 여부는 같은 통보의 예상체결가·예상거래량이 0 이 아닌지로 판정하십시오.",
+                  "maxLength": 1
+                },
+                "antc_cntg_vrss": {
+                  "type": "string",
+                  "title": "예상체결대비",
+                  "description": "예상체결가와 전일 종가의 차이입니다. 방향은 부호 필드로 확인합니다.",
+                  "maxLength": 11
+                },
+                "antc_cntg_prdy_ctrt": {
+                  "type": "string",
+                  "title": "예상체결전일대비율",
+                  "description": "예상체결가 기준 등락률(%)입니다.",
+                  "maxLength": 9
+                },
+                "antc_cnqn": {
+                  "type": "string",
+                  "title": "예상체결수량",
+                  "description": "예상 체결 수량입니다. 직전 대비 감소하면 음수로 옵니다.",
+                  "maxLength": 12
+                },
+                "antc_vol": {
+                  "type": "string",
+                  "title": "예상거래량",
+                  "description": "예상 체결 기준 누적 거래량입니다.",
+                  "maxLength": 13
+                },
+                "acml_vol": {
+                  "type": "string",
+                  "title": "누적거래량",
+                  "description": "장 시작부터 지금까지의 누적 체결 수량입니다.",
+                  "maxLength": 13
+                },
+                "stck_deal_cls_code": {
+                  "type": "string",
+                  "title": "매매구분코드",
+                  "description": "매매 구분입니다. 정규장 호가 통보에서는 빈 값으로 내려옵니다. 빈 값을 오류로 다루지 마시고 문자열 그대로 보관하십시오.",
+                  "maxLength": 1
+                },
+                "wghn_avrg_stck_prc": {
+                  "type": "string",
+                  "title": "가중평균주식가격",
+                  "description": "누적거래대금을 누적거래량으로 나눈 평균 단가입니다.",
+                  "maxLength": 11
+                }
+              },
+              "title": "바디부"
+            }
+          }
+        },
+        "examples": [
+          {
+            "name": "sample",
+            "summary": "수신 예시",
+            "payload": {
+              "header": {
+                "tr_cd": "ohhts_ovtp_aspr",
+                "tr_key": "sample"
+              },
+              "body": {
+                "shrn_iscd": "1000",
+                "bsop_hour": "100000",
+                "hour_cls_code": "0",
+                "askp1": "100000",
+                "askp2": "100000",
+                "askp3": "100000",
+                "askp4": "100000",
+                "askp5": "100000",
+                "askp6": "100000",
+                "askp7": "100000",
+                "askp8": "100000",
+                "askp9": "100000",
+                "askp10": "100000",
+                "bidp1": "100000",
+                "bidp2": "100000",
+                "bidp3": "100000",
+                "bidp4": "100000",
+                "bidp5": "100000",
+                "bidp6": "100000",
+                "bidp7": "100000",
+                "bidp8": "100000",
+                "bidp9": "100000",
+                "bidp10": "100000",
+                "askp_rsqn1": "10000",
+                "askp_rsqn2": "10000",
+                "askp_rsqn3": "10000",
+                "askp_rsqn4": "10000",
+                "askp_rsqn5": "10000",
+                "askp_rsqn6": "10000",
+                "askp_rsqn7": "10000",
+                "askp_rsqn8": "100000",
+                "askp_rsqn9": "100000",
+                "askp_rsqn10": "100000",
+                "bidp_rsqn1": "10000",
+                "bidp_rsqn2": "10000",
+                "bidp_rsqn3": "10000",
+                "bidp_rsqn4": "10000",
+                "bidp_rsqn5": "10000",
+                "bidp_rsqn6": "10000",
+                "bidp_rsqn7": "10000",
+                "bidp_rsqn8": "10000",
+                "bidp_rsqn9": "10000",
+                "bidp_rsqn10": "10000",
+                "total_askp_rsqn": "100000",
+                "total_bidp_rsqn": "100000",
+                "total_askp_rsqn_icdc": "0",
+                "total_bidp_rsqn_icdc": "5",
+                "ovtm_total_askp_rsqn": "0",
+                "ovtm_total_bidp_rsqn": "100000",
+                "ovtm_total_askp_rsqn_icdc": "0",
+                "ovtm_total_bidp_rsqn_icdc": "0",
+                "antc_cnpr": "100000",
+                "antc_cntg_vrss_sign": "2",
+                "antc_cntg_vrss": "8500",
+                "antc_cntg_prdy_ctrt": "1.00",
+                "antc_cnqn": "-50",
+                "antc_vol": "100000",
+                "acml_vol": "10000000",
+                "stck_deal_cls_code": "",
+                "wghn_avrg_stck_prc": "100000"
+              }
+            }
+          }
+        ]
+      },
+      "ohhts_cntg_infr": {
+        "name": "ohhts_cntg_infr",
+        "title": "(실시간) 주문 접수 통보",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "tr_cd": {
+                  "type": "string",
+                  "title": "거래코드",
+                  "description": "구독 요청에 넣은 tr_cd 가 그대로 옵니다.",
+                  "maxLength": 20
+                },
+                "tr_key": {
+                  "type": "string",
+                  "title": "사용자ID",
+                  "description": "주문 접수 통보의 대상 사용자 ID 가 담기는 자리입니다. 이 API 는 종목을 지정하지 않으므로 구독 요청에 이 항목을 넣지 않으셔도 됩니다.\n\n구독 승인 응답의 헤더에는 이 항목이 들어 있지 않고 거래타입(tr_type)·거래코드(tr_cd)·응답코드(rsp_cd)·응답메시지(rsp_msg)만 내려옵니다. 구독이 받아들여졌는지는 응답코드가 \"00000\" 인지로 확인하시고, 접수 통보와 체결 통보는 헤더의 거래코드로 가르십시오.",
+                  "maxLength": 20
+                }
+              },
+              "title": "헤더부"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "type": "string",
+                  "title": "사용자ID",
+                  "description": "통보 대상 사용자 ID 입니다. 구독한 tr_key 와 같습니다.",
+                  "maxLength": 20
+                },
+                "aspr_cond_clcd": {
+                  "type": "string",
+                  "title": "호가조건구분코드",
+                  "description": "호가 조건입니다.",
+                  "maxLength": 1
+                },
+                "aspr_rfus_reas_code": {
+                  "type": "string",
+                  "title": "호가거부사유코드",
+                  "description": "주문이 거부된 사유 코드입니다. 정상 접수는 \"0000\" 입니다. 접수·거부 판단은 이 필드로 하십시오.",
+                  "maxLength": 4
+                },
+                "aspr_type_code": {
+                  "type": "string",
+                  "title": "호가유형코드",
+                  "description": "호가 유형입니다. \"1\": 시장가 \"2\": 지정가 조건부지정가·최유리·최우선 같은 그 밖의 유형에는 위 둘 밖의 값이 내려옵니다. 값에 대응하는 이름은 통보에 함께 오지 않으므로, 목록에 없는 값을 오류로 처리하지 마시고 그대로 보관하십시오.",
+                  "maxLength": 1
+                },
+                "deal_cls_code": {
+                  "type": "string",
+                  "title": "매매구분코드",
+                  "description": "매도·매수 구분입니다.\n\"1\": 매도\n\"2\": 매수\n\n주문내역 조회(/trading/v1/orders/history)의 deal_cls_code 와 같은 값 체계입니다.",
+                  "maxLength": 1
+                },
+                "crdt_cls_code": {
+                  "type": "string",
+                  "title": "신용구분코드",
+                  "description": "신용 구분 코드입니다. 신용 주문에만 채워지고 현금 주문은 빈 값입니다. 값에 대응하는 이름은 통보에 함께 오지 않습니다.\n\n신용 여부만 판정하시려면 이 필드가 비어 있는지로 보시고, 결제 재원을 구체적으로 구분하셔야 하면 같은 주문번호로 주문내역 조회(/trading/v1/orders/history)의 crdt_oder_cls_code 를 확인하십시오.",
+                  "maxLength": 2
+                },
+                "frml_ovtm_cls_code": {
+                  "type": "string",
+                  "title": "정규시간외구분코드",
+                  "description": "정규장·시간외 구분입니다. \"0\": 해당 없음 \"1\": 정규장 \"2\": 장 개시 전 시간외 종가 장 종료 후 시간외와 시간외 단일가 구간에는 위 셋 밖의 값이 내려옵니다. 값에 대응하는 이름은 통보에 함께 오지 않으므로, 목록에 없는 값을 오류로 처리하지 마시고 그대로 보관하십시오.",
+                  "maxLength": 1
+                },
+                "acno": {
+                  "type": "string",
+                  "title": "계좌번호",
+                  "description": "주문이 접수된 계좌번호입니다. 토큰에 매핑된 계좌입니다.",
+                  "maxLength": 8
+                },
+                "asno": {
+                  "type": "string",
+                  "title": "계좌일련번호",
+                  "description": "계좌일련번호입니다.",
+                  "maxLength": 2
+                },
+                "acnm": {
+                  "type": "string",
+                  "title": "계좌명",
+                  "description": "계좌 예금주명입니다.",
+                  "maxLength": 40
+                },
+                "aspr_prc": {
+                  "type": "string",
+                  "title": "호가가격",
+                  "description": "주문 단가입니다. 0 으로 채운 11자리입니다.",
+                  "maxLength": 11
+                },
+                "tlms_aspr_qty": {
+                  "type": "string",
+                  "title": "전문호가수량",
+                  "description": "주문 수량입니다. 0 으로 채운 12자리입니다.",
+                  "maxLength": 12
+                },
+                "loan_date": {
+                  "type": "string",
+                  "title": "대출일자",
+                  "description": "신용·대출 거래일 때 채워집니다. 현금 주문은 빈 값입니다.",
+                  "maxLength": 8
+                },
+                "loan_dtl_type_code": {
+                  "type": "string",
+                  "title": "대출상세유형코드",
+                  "description": "대출 상세 유형입니다.\n\"0000\": 보통\n\"0101\": 자기융자\n\"0102\": 유통융자\n\"0103\": 자기대주\n\"0104\": 유통대주\n\"0201\": 예탁주식\n\"0202\": 예탁채권\n\"0203\": 예탁집합투자\n\"0204\": 예탁장외파생\n\"0211\": 예탁유통주식\n\"0212\": 예탁유통채권\n\"0213\": 예탁유통집합투자\n\"0214\": 예탁유통장외파생\n\"0301\": 매도증권담보대출\n\"0302\": 수익증권환매\n\"0303\": ELS환매자금대출\n\"0401\": 소액주식\n\"0402\": 소액채권\n\"0403\": 소액수익증권\n\"0404\": 소액 ELS\n\"0501\": 공모주청약\n\"0502\": ELS청약\n\"0503\": 주식매입\n\"0601\": 매입자금대출\n\"0701\": 초단기대출\n\"0801\": CMA담보대출\n\"6201\": 슈퍼365(재활용)\n\"7201\": 담보대여\n\"8201\": 양도담보\n\"9201\": 대출(대여)\n\n대출이 걸리지 않은 보통 잔고는 \"0000\" 입니다.",
+                  "maxLength": 4
+                },
+                "mbcr_oder_time": {
+                  "type": "string",
+                  "title": "회원사주문시각",
+                  "description": "증권사가 주문을 접수한 시각입니다. HHMMSSmmm 9자리입니다.",
+                  "maxLength": 9
+                },
+                "oder_date": {
+                  "type": "string",
+                  "title": "주문일자",
+                  "description": "주문 일자입니다. YYYYMMDD 8자리입니다.",
+                  "maxLength": 8
+                },
+                "oder_no": {
+                  "type": "string",
+                  "title": "주문번호",
+                  "description": "주문번호입니다. 0 으로 채운 10자리이며, 접수·체결 통보를 잇는 키입니다.",
+                  "maxLength": 10
+                },
+                "orgl_oder_no": {
+                  "type": "string",
+                  "title": "원주문번호",
+                  "description": "정정·취소 주문이면 원주문의 번호입니다. 신규 주문은 빈 값입니다.",
+                  "maxLength": 10
+                },
+                "rctf_cncl_cls_code": {
+                  "type": "string",
+                  "title": "정정취소구분코드",
+                  "description": "이 통보가 어떤 주문에 대한 것인지 나타냅니다.\n\"1\": 신규(원주문)\n\"2\": 정정\n\"3\": 취소\norgl_oder_no 가 0인 건은 항상 \"1\" 입니다.",
+                  "maxLength": 1
+                },
+                "stnd_iscd": {
+                  "type": "string",
+                  "title": "표준종목코드",
+                  "description": "표준 종목코드(ISIN)입니다. 예) 삼성전자 \"KR7005930003\". 주문 API 가 쓰는 단축코드(\"A005930\")와 다릅니다.",
+                  "maxLength": 12
+                },
+                "iscd_name": {
+                  "type": "string",
+                  "title": "종목명",
+                  "description": "종목의 한글 이름입니다.",
+                  "maxLength": 40
+                },
+                "svc_id": {
+                  "type": "string",
+                  "title": "서비스ID",
+                  "description": "메리츠 내부 처리용 식별자입니다. 값의 의미는 보장되지 않으므로 분기 조건으로 쓰지 마십시오.",
+                  "maxLength": 11
+                },
+                "pros_srno": {
+                  "type": "string",
+                  "title": "처리일련번호",
+                  "description": "처리 일련번호입니다.",
+                  "maxLength": 10
+                },
+                "deal_mgri_indc_no": {
+                  "type": "string",
+                  "title": "매매운용지시번호",
+                  "description": "기관 운용 지시 건에만 채워집니다. 개인 주문은 빈 값입니다.",
+                  "maxLength": 12
+                },
+                "sbsn_clcd": {
+                  "type": "string",
+                  "title": "대용구분코드",
+                  "description": "대용 여부입니다.",
+                  "maxLength": 1
+                },
+                "trst_dcsh_id": {
+                  "type": "string",
+                  "title": "자사주신고서ID",
+                  "description": "자사주 매매 신고서 식별자입니다. 일반 주문은 \"0\" 입니다.",
+                  "maxLength": 5
+                },
+                "loan_srno": {
+                  "type": "string",
+                  "title": "대출일련번호",
+                  "description": "대출 일련번호입니다. 해당 없으면 \"0\" 입니다.",
+                  "maxLength": 2
+                }
+              },
+              "title": "바디부"
+            }
+          }
+        },
+        "examples": [
+          {
+            "name": "sample",
+            "summary": "수신 예시",
+            "payload": {
+              "header": {
+                "tr_cd": "ohhts_cntg_infr",
+                "tr_key": "sample"
+              },
+              "body": {
+                "user_id": "sample",
+                "aspr_cond_clcd": "0",
+                "aspr_rfus_reas_code": "0000",
+                "aspr_type_code": "2",
+                "deal_cls_code": "2",
+                "crdt_cls_code": "",
+                "frml_ovtm_cls_code": "1",
+                "acno": "00000000",
+                "asno": "01",
+                "acnm": "홍길동",
+                "aspr_prc": "100000",
+                "tlms_aspr_qty": "1",
+                "loan_date": "",
+                "loan_dtl_type_code": "0000",
+                "mbcr_oder_time": "100000000",
+                "oder_date": "20260102",
+                "oder_no": "100",
+                "orgl_oder_no": "",
+                "rctf_cncl_cls_code": "1",
+                "stnd_iscd": "KR7005930003",
+                "iscd_name": "삼성전자",
+                "svc_id": "XXXXXXXXXXX",
+                "pros_srno": "0",
+                "deal_mgri_indc_no": "",
+                "sbsn_clcd": "0",
+                "trst_dcsh_id": "0",
+                "loan_srno": "0"
+              }
+            }
+          }
+        ]
+      },
+      "ohhts_cntg_rslt": {
+        "name": "ohhts_cntg_rslt",
+        "title": "(실시간) 주문 체결 통보",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "tr_cd": {
+                  "type": "string",
+                  "title": "거래코드",
+                  "description": "구독 요청에 넣은 tr_cd 가 그대로 옵니다.",
+                  "maxLength": 20
+                },
+                "tr_key": {
+                  "type": "string",
+                  "title": "사용자ID",
+                  "description": "주문 체결 통보의 대상 사용자 ID 가 담기는 자리입니다. 이 API 는 종목을 지정하지 않으므로 구독 요청에 이 항목을 넣지 않으셔도 됩니다.\n\n구독 승인 응답의 헤더에는 이 항목이 들어 있지 않고 거래타입(tr_type)·거래코드(tr_cd)·응답코드(rsp_cd)·응답메시지(rsp_msg)만 내려옵니다. 구독이 받아들여졌는지는 응답코드가 \"00000\" 인지로 확인하시고, 접수 통보와 체결 통보는 헤더의 거래코드로 가르십시오.",
+                  "maxLength": 20
+                }
+              },
+              "title": "헤더부"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "type": "string",
+                  "title": "사용자ID",
+                  "description": "통보 대상 사용자 ID 입니다. 구독한 tr_key 와 같습니다.",
+                  "maxLength": 20
+                },
+                "cntg_date": {
+                  "type": "string",
+                  "title": "체결일자",
+                  "description": "체결 일자입니다. YYYYMMDD 8자리입니다.",
+                  "maxLength": 8
+                },
+                "cntg_pros_time": {
+                  "type": "string",
+                  "title": "체결처리시각",
+                  "description": "체결 처리 시각입니다. HHMMSSmmm 9자리입니다.",
+                  "maxLength": 9
+                },
+                "cntg_type_code": {
+                  "type": "string",
+                  "title": "체결유형코드",
+                  "description": "체결 유형 코드입니다. 일반 체결에서는 빈 값이 옵니다. 값에 대응하는 이름은 통보에 함께 오지 않습니다.\n\n체결 여부는 이 필드가 아니라 cntg_qty 가 0보다 큰지로 판정하십시오. 분할 체결이면 체결이 일어날 때마다 이 통보가 한 건씩 오므로, 주문번호(oder_no)별로 cntg_qty 를 더해 누적 체결수량을 계산하십시오.",
+                  "maxLength": 2
+                },
+                "deal_cls_code": {
+                  "type": "string",
+                  "title": "매매구분코드",
+                  "description": "매도·매수 구분입니다.\n\"1\": 매도\n\"2\": 매수\n\n주문내역 조회(/trading/v1/orders/history)의 deal_cls_code 와 같은 값 체계입니다.",
+                  "maxLength": 1
+                },
+                "crdt_cls_code": {
+                  "type": "string",
+                  "title": "신용구분코드",
+                  "description": "신용 구분 코드입니다. 신용 주문에만 채워지고 현금 주문은 빈 값입니다. 값에 대응하는 이름은 통보에 함께 오지 않습니다.\n\n신용 여부만 판정하시려면 이 필드가 비어 있는지로 보시고, 결제 재원을 구체적으로 구분하셔야 하면 같은 주문번호로 주문내역 조회(/trading/v1/orders/history)의 crdt_oder_cls_code 를 확인하십시오.",
+                  "maxLength": 2
+                },
+                "frml_ovtm_cls_code": {
+                  "type": "string",
+                  "title": "정규시간외구분코드",
+                  "description": "정규장·시간외 구분입니다. \"0\": 해당 없음 \"1\": 정규장 \"2\": 장 개시 전 시간외 종가 장 종료 후 시간외와 시간외 단일가 구간에는 위 셋 밖의 값이 내려옵니다. 값에 대응하는 이름은 통보에 함께 오지 않으므로, 목록에 없는 값을 오류로 처리하지 마시고 그대로 보관하십시오.",
+                  "maxLength": 1
+                },
+                "acno": {
+                  "type": "string",
+                  "title": "계좌번호",
+                  "description": "주문이 접수된 계좌번호입니다. 토큰에 매핑된 계좌입니다.",
+                  "maxLength": 8
+                },
+                "asno": {
+                  "type": "string",
+                  "title": "계좌일련번호",
+                  "description": "계좌일련번호입니다.",
+                  "maxLength": 2
+                },
+                "acnm": {
+                  "type": "string",
+                  "title": "계좌명",
+                  "description": "계좌 예금주명입니다.",
+                  "maxLength": 40
+                },
+                "cntg_prc": {
+                  "type": "string",
+                  "title": "체결가격",
+                  "description": "체결된 가격입니다. 0 으로 채운 11자리입니다.",
+                  "maxLength": 11
+                },
+                "cntg_qty": {
+                  "type": "string",
+                  "title": "체결수량",
+                  "description": "이번에 체결된 수량입니다. 분할 체결이면 건마다 따로 옵니다.",
+                  "maxLength": 12
+                },
+                "fmsc_cntg_prc": {
+                  "type": "string",
+                  "title": "원월물체결가격",
+                  "description": "파생 스프레드 거래의 원월물 체결가격입니다. 주식 체결 통보에서는 0 으로 옵니다.",
+                  "maxLength": 11
+                },
+                "nmsc_cntg_prc": {
+                  "type": "string",
+                  "title": "근월물체결가격",
+                  "description": "파생 스프레드 거래의 근월물 체결가격입니다. 주식 체결 통보에서는 0 으로 옵니다.",
+                  "maxLength": 11
+                },
+                "loan_date": {
+                  "type": "string",
+                  "title": "대출일자",
+                  "description": "신용·대출 거래일 때 채워집니다. 현금 주문은 빈 값입니다.",
+                  "maxLength": 8
+                },
+                "loan_dtl_type_code": {
+                  "type": "string",
+                  "title": "대출상세유형코드",
+                  "description": "대출 상세 유형입니다.\n\"0000\": 보통\n\"0101\": 자기융자\n\"0102\": 유통융자\n\"0103\": 자기대주\n\"0104\": 유통대주\n\"0201\": 예탁주식\n\"0202\": 예탁채권\n\"0203\": 예탁집합투자\n\"0204\": 예탁장외파생\n\"0211\": 예탁유통주식\n\"0212\": 예탁유통채권\n\"0213\": 예탁유통집합투자\n\"0214\": 예탁유통장외파생\n\"0301\": 매도증권담보대출\n\"0302\": 수익증권환매\n\"0303\": ELS환매자금대출\n\"0401\": 소액주식\n\"0402\": 소액채권\n\"0403\": 소액수익증권\n\"0404\": 소액 ELS\n\"0501\": 공모주청약\n\"0502\": ELS청약\n\"0503\": 주식매입\n\"0601\": 매입자금대출\n\"0701\": 초단기대출\n\"0801\": CMA담보대출\n\"6201\": 슈퍼365(재활용)\n\"7201\": 담보대여\n\"8201\": 양도담보\n\"9201\": 대출(대여)\n\n대출이 걸리지 않은 보통 잔고는 \"0000\" 입니다.",
+                  "maxLength": 4
+                },
+                "oder_no": {
+                  "type": "string",
+                  "title": "주문번호",
+                  "description": "주문번호입니다. 0 으로 채운 10자리이며, 접수·체결 통보를 잇는 키입니다.",
+                  "maxLength": 10
+                },
+                "orgl_oder_no": {
+                  "type": "string",
+                  "title": "원주문번호",
+                  "description": "정정·취소 주문이면 원주문의 번호입니다. 신규 주문은 빈 값입니다.",
+                  "maxLength": 10
+                },
+                "stnd_iscd": {
+                  "type": "string",
+                  "title": "표준종목코드",
+                  "description": "표준 종목코드(ISIN)입니다. 예) 삼성전자 \"KR7005930003\". 주문 API 가 쓰는 단축코드(\"A005930\")와 다릅니다.",
+                  "maxLength": 12
+                },
+                "iscd_name": {
+                  "type": "string",
+                  "title": "종목명",
+                  "description": "종목의 한글 이름입니다.",
+                  "maxLength": 40
+                },
+                "svc_id": {
+                  "type": "string",
+                  "title": "서비스ID",
+                  "description": "메리츠 내부 처리용 식별자입니다. 값의 의미는 보장되지 않으므로 분기 조건으로 쓰지 마십시오.",
+                  "maxLength": 11
+                },
+                "pros_srno": {
+                  "type": "string",
+                  "title": "처리일련번호",
+                  "description": "처리 일련번호입니다.",
+                  "maxLength": 10
+                },
+                "deal_mgri_indc_no": {
+                  "type": "string",
+                  "title": "매매운용지시번호",
+                  "description": "기관 운용 지시 건에만 채워집니다. 개인 주문은 빈 값입니다.",
+                  "maxLength": 12
+                },
+                "sbsn_clcd": {
+                  "type": "string",
+                  "title": "대용구분코드",
+                  "description": "대용 여부입니다.",
+                  "maxLength": 1
+                },
+                "loan_srno": {
+                  "type": "string",
+                  "title": "대출일련번호",
+                  "description": "대출 일련번호입니다. 해당 없으면 \"0\" 입니다.",
+                  "maxLength": 2
+                },
+                "sbtr_byng_acbk_amt": {
+                  "type": "string",
+                  "title": "차감매입장부금액",
+                  "description": "차감된 매입 장부금액입니다.",
+                  "maxLength": 11
+                },
+                "fllr": {
+                  "type": "string",
+                  "title": "예비항목",
+                  "description": "예비 영역입니다. 빈 값으로 옵니다.",
+                  "maxLength": 15
+                }
+              },
+              "title": "바디부"
+            }
+          }
+        },
+        "examples": [
+          {
+            "name": "sample",
+            "summary": "수신 예시",
+            "payload": {
+              "header": {
+                "tr_cd": "ohhts_cntg_rslt",
+                "tr_key": "sample"
+              },
+              "body": {
+                "user_id": "sample",
+                "cntg_date": "20260102",
+                "cntg_pros_time": "100000000",
+                "cntg_type_code": "",
+                "deal_cls_code": "2",
+                "crdt_cls_code": "",
+                "frml_ovtm_cls_code": "1",
+                "acno": "00000000",
+                "asno": "01",
+                "acnm": "홍길동",
+                "cntg_prc": "100000",
+                "cntg_qty": "1",
+                "fmsc_cntg_prc": "0",
+                "nmsc_cntg_prc": "0",
+                "loan_date": "",
+                "loan_dtl_type_code": "0000",
+                "oder_no": "100",
+                "orgl_oder_no": "",
+                "stnd_iscd": "KR7005930003",
+                "iscd_name": "삼성전자",
+                "svc_id": "XXXXXXXXXXX",
+                "pros_srno": "0",
+                "deal_mgri_indc_no": "",
+                "sbsn_clcd": "0",
+                "loan_srno": "0",
+                "sbtr_byng_acbk_amt": "0",
+                "fllr": ""
+              }
+            }
+          }
+        ]
+      },
+      "ohhts_exst_aspr": {
+        "name": "ohhts_exst_aspr",
+        "title": "(실시간) 해외주식 호가",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "tr_cd": {
+                  "type": "string",
+                  "title": "거래코드",
+                  "description": "구독 요청에 넣은 tr_cd 가 그대로 옵니다.",
+                  "maxLength": 20
+                },
+                "tr_key": {
+                  "type": "string",
+                  "title": "종목코드",
+                  "description": "구독 요청에 넣은 tr_key 가 그대로 옵니다.",
+                  "maxLength": 19
+                }
+              },
+              "title": "헤더부"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "iscd": {
+                  "type": "string",
+                  "title": "종목코드",
+                  "description": "구독한 종목입니다. 요청한 tr_key 와 같은 <거래소>@<종목> 형태로 옵니다.",
+                  "maxLength": 19
+                },
+                "dely_yn": {
+                  "type": "string",
+                  "title": "지연여부",
+                  "description": "\"1\" 지연 시세 · \"0\" 실시간 시세입니다.",
+                  "maxLength": 1
+                },
+                "acpl_date": {
+                  "type": "string",
+                  "title": "현지일자",
+                  "description": "체결이 일어난 현지 일자입니다.",
+                  "maxLength": 8
+                },
+                "acpl_hour": {
+                  "type": "string",
+                  "title": "현지시간",
+                  "description": "체결이 일어난 현지 시각입니다. HHMMSS 6자리입니다.",
+                  "maxLength": 6
+                },
+                "korea_date": {
+                  "type": "string",
+                  "title": "한국일자",
+                  "description": "이 호가가 갱신된 한국 기준 일자입니다. 현지 기준 일자는 같은 메시지의 acpl_date 를 쓰십시오.",
+                  "maxLength": 8
+                },
+                "korea_hour": {
+                  "type": "string",
+                  "title": "한국시간",
+                  "description": "같은 체결의 한국 기준 시각입니다.",
+                  "maxLength": 6
+                },
+                "shnu_aspr_total_rsqn": {
+                  "type": "string",
+                  "title": "매수호가총잔량",
+                  "description": "10단계 매수 잔량의 합입니다.",
+                  "maxLength": 12
+                },
+                "seln_aspr_total_rsqn": {
+                  "type": "string",
+                  "title": "매도호가총잔량",
+                  "description": "10단계 매도 잔량의 합입니다.",
+                  "maxLength": 12
+                },
+                "bidp1": {
+                  "type": "string",
+                  "title": "매수호가1",
+                  "description": "1번째 매수호가입니다. bidp1 이 최우선입니다.",
+                  "maxLength": 18
+                },
+                "askp1": {
+                  "type": "string",
+                  "title": "매도호가1",
+                  "description": "1번째 매도호가입니다. askp1 이 최우선입니다.",
+                  "maxLength": 18
+                },
+                "shnu_aspr_rsqn1": {
+                  "type": "string",
+                  "title": "매수호가잔량1",
+                  "description": "bidp1 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "seln_aspr_rsqn1": {
+                  "type": "string",
+                  "title": "매도호가잔량1",
+                  "description": "askp1 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "bidp2": {
+                  "type": "string",
+                  "title": "매수호가2",
+                  "description": "2번째 매수호가입니다.",
+                  "maxLength": 18
+                },
+                "askp2": {
+                  "type": "string",
+                  "title": "매도호가2",
+                  "description": "2번째 매도호가입니다.",
+                  "maxLength": 18
+                },
+                "shnu_aspr_rsqn2": {
+                  "type": "string",
+                  "title": "매수호가잔량2",
+                  "description": "bidp2 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "seln_aspr_rsqn2": {
+                  "type": "string",
+                  "title": "매도호가잔량2",
+                  "description": "askp2 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "bidp3": {
+                  "type": "string",
+                  "title": "매수호가3",
+                  "description": "3번째 매수호가입니다.",
+                  "maxLength": 18
+                },
+                "askp3": {
+                  "type": "string",
+                  "title": "매도호가3",
+                  "description": "3번째 매도호가입니다.",
+                  "maxLength": 18
+                },
+                "shnu_aspr_rsqn3": {
+                  "type": "string",
+                  "title": "매수호가잔량3",
+                  "description": "bidp3 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "seln_aspr_rsqn3": {
+                  "type": "string",
+                  "title": "매도호가잔량3",
+                  "description": "askp3 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "bidp4": {
+                  "type": "string",
+                  "title": "매수호가4",
+                  "description": "4번째 매수호가입니다.",
+                  "maxLength": 18
+                },
+                "askp4": {
+                  "type": "string",
+                  "title": "매도호가4",
+                  "description": "4번째 매도호가입니다.",
+                  "maxLength": 18
+                },
+                "shnu_aspr_rsqn4": {
+                  "type": "string",
+                  "title": "매수호가잔량4",
+                  "description": "bidp4 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "seln_aspr_rsqn4": {
+                  "type": "string",
+                  "title": "매도호가잔량4",
+                  "description": "askp4 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "bidp5": {
+                  "type": "string",
+                  "title": "매수호가5",
+                  "description": "5번째 매수호가입니다.",
+                  "maxLength": 18
+                },
+                "askp5": {
+                  "type": "string",
+                  "title": "매도호가5",
+                  "description": "5번째 매도호가입니다.",
+                  "maxLength": 18
+                },
+                "shnu_aspr_rsqn5": {
+                  "type": "string",
+                  "title": "매수호가잔량5",
+                  "description": "bidp5 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "seln_aspr_rsqn5": {
+                  "type": "string",
+                  "title": "매도호가잔량5",
+                  "description": "askp5 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "bidp6": {
+                  "type": "string",
+                  "title": "매수호가6",
+                  "description": "6번째 매수호가입니다.",
+                  "maxLength": 18
+                },
+                "askp6": {
+                  "type": "string",
+                  "title": "매도호가6",
+                  "description": "6번째 매도호가입니다.",
+                  "maxLength": 18
+                },
+                "shnu_aspr_rsqn6": {
+                  "type": "string",
+                  "title": "매수호가잔량6",
+                  "description": "bidp6 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "seln_aspr_rsqn6": {
+                  "type": "string",
+                  "title": "매도호가잔량6",
+                  "description": "askp6 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "bidp7": {
+                  "type": "string",
+                  "title": "매수호가7",
+                  "description": "7번째 매수호가입니다.",
+                  "maxLength": 18
+                },
+                "askp7": {
+                  "type": "string",
+                  "title": "매도호가7",
+                  "description": "7번째 매도호가입니다.",
+                  "maxLength": 18
+                },
+                "shnu_aspr_rsqn7": {
+                  "type": "string",
+                  "title": "매수호가잔량7",
+                  "description": "bidp7 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "seln_aspr_rsqn7": {
+                  "type": "string",
+                  "title": "매도호가잔량7",
+                  "description": "askp7 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "bidp8": {
+                  "type": "string",
+                  "title": "매수호가8",
+                  "description": "8번째 매수호가입니다.",
+                  "maxLength": 18
+                },
+                "askp8": {
+                  "type": "string",
+                  "title": "매도호가8",
+                  "description": "8번째 매도호가입니다.",
+                  "maxLength": 18
+                },
+                "shnu_aspr_rsqn8": {
+                  "type": "string",
+                  "title": "매수호가잔량8",
+                  "description": "bidp8 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "seln_aspr_rsqn8": {
+                  "type": "string",
+                  "title": "매도호가잔량8",
+                  "description": "askp8 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "bidp9": {
+                  "type": "string",
+                  "title": "매수호가9",
+                  "description": "9번째 매수호가입니다.",
+                  "maxLength": 18
+                },
+                "askp9": {
+                  "type": "string",
+                  "title": "매도호가9",
+                  "description": "9번째 매도호가입니다.",
+                  "maxLength": 18
+                },
+                "shnu_aspr_rsqn9": {
+                  "type": "string",
+                  "title": "매수호가잔량9",
+                  "description": "bidp9 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "seln_aspr_rsqn9": {
+                  "type": "string",
+                  "title": "매도호가잔량9",
+                  "description": "askp9 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "bidp10": {
+                  "type": "string",
+                  "title": "매수호가10",
+                  "description": "10번째 매수호가입니다.",
+                  "maxLength": 18
+                },
+                "askp10": {
+                  "type": "string",
+                  "title": "매도호가10",
+                  "description": "10번째 매도호가입니다.",
+                  "maxLength": 18
+                },
+                "shnu_aspr_rsqn10": {
+                  "type": "string",
+                  "title": "매수호가잔량10",
+                  "description": "bidp10 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "seln_aspr_rsqn10": {
+                  "type": "string",
+                  "title": "매도호가잔량10",
+                  "description": "askp10 의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "bidp_total_rsqn_icdc": {
+                  "type": "string",
+                  "title": "매수총잔량증감",
+                  "description": "직전 호가 대비 매수 총잔량의 증감입니다.",
+                  "maxLength": 12
+                },
+                "askp_total_rsqn_icdc": {
+                  "type": "string",
+                  "title": "매도총잔량증감",
+                  "description": "직전 호가 대비 매도 총잔량의 증감입니다.",
+                  "maxLength": 12
+                }
+              },
+              "title": "바디부"
+            }
+          }
+        },
+        "examples": [
+          {
+            "name": "sample",
+            "summary": "수신 예시",
+            "payload": {
+              "header": {
+                "tr_cd": "ohhts_exst_aspr",
+                "tr_key": "sample"
+              },
+              "body": {
+                "iscd": "OQ@NVDA",
+                "dely_yn": "1",
+                "acpl_date": "20260102",
+                "acpl_hour": "1000",
+                "korea_date": "20260102",
+                "korea_hour": "100000",
+                "shnu_aspr_total_rsqn": "2074",
+                "seln_aspr_total_rsqn": "908",
+                "bidp1": "100.0000",
+                "askp1": "100.0000",
+                "shnu_aspr_rsqn1": "88",
+                "seln_aspr_rsqn1": "100",
+                "bidp2": "100.0000",
+                "askp2": "100.0000",
+                "shnu_aspr_rsqn2": "424",
+                "seln_aspr_rsqn2": "25",
+                "bidp3": "100.0000",
+                "askp3": "100.0000",
+                "shnu_aspr_rsqn3": "23",
+                "seln_aspr_rsqn3": "5",
+                "bidp4": "100.0000",
+                "askp4": "100.0000",
+                "shnu_aspr_rsqn4": "849",
+                "seln_aspr_rsqn4": "55",
+                "bidp5": "100.0000",
+                "askp5": "100.0000",
+                "shnu_aspr_rsqn5": "28",
+                "seln_aspr_rsqn5": "57",
+                "bidp6": "100.0000",
+                "askp6": "100.0000",
+                "shnu_aspr_rsqn6": "434",
+                "seln_aspr_rsqn6": "70",
+                "bidp7": "100.0000",
+                "askp7": "100.0000",
+                "shnu_aspr_rsqn7": "156",
+                "seln_aspr_rsqn7": "100",
+                "bidp8": "100.0000",
+                "askp8": "100.0000",
+                "shnu_aspr_rsqn8": "22",
+                "seln_aspr_rsqn8": "409",
+                "bidp9": "100.0000",
+                "askp9": "100.0000",
+                "shnu_aspr_rsqn9": "1",
+                "seln_aspr_rsqn9": "67",
+                "bidp10": "100.0000",
+                "askp10": "100.0000",
+                "shnu_aspr_rsqn10": "49",
+                "seln_aspr_rsqn10": "20",
+                "bidp_total_rsqn_icdc": "-56",
+                "askp_total_rsqn_icdc": "0"
+              }
+            }
+          }
+        ]
+      },
+      "ohhts_exst_cntd": {
+        "name": "ohhts_exst_cntd",
+        "title": "(실시간) 해외주식 현재가 (주간거래)",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "tr_cd": {
+                  "type": "string",
+                  "title": "거래코드",
+                  "description": "구독 요청에 넣은 tr_cd 가 그대로 옵니다.",
+                  "maxLength": 20
+                },
+                "tr_key": {
+                  "type": "string",
+                  "title": "종목코드",
+                  "description": "구독 요청에 넣은 tr_key 가 그대로 옵니다.",
+                  "maxLength": 19
+                }
+              },
+              "title": "헤더부"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "iscd": {
+                  "type": "string",
+                  "title": "종목코드",
+                  "description": "구독한 종목입니다. 요청한 tr_key 와 같은 <거래소>@<종목> 형태로 옵니다.",
+                  "maxLength": 19
+                },
+                "dely_yn": {
+                  "type": "string",
+                  "title": "지연여부",
+                  "description": "\"1\" 지연 시세 · \"0\" 실시간 시세입니다.",
+                  "maxLength": 1
+                },
+                "acpl_bsop_date": {
+                  "type": "string",
+                  "title": "현지영업일자",
+                  "description": "현지 영업일입니다. YYYYMMDD 8자리입니다.",
+                  "maxLength": 8
+                },
+                "acpl_date": {
+                  "type": "string",
+                  "title": "현지일자",
+                  "description": "체결이 일어난 현지 일자입니다.",
+                  "maxLength": 8
+                },
+                "acpl_hour": {
+                  "type": "string",
+                  "title": "현지시간",
+                  "description": "체결이 일어난 현지 시각입니다. HHMMSS 6자리입니다.",
+                  "maxLength": 6
+                },
+                "korea_date": {
+                  "type": "string",
+                  "title": "한국일자",
+                  "description": "같은 체결의 한국 기준 일자입니다.",
+                  "maxLength": 8
+                },
+                "korea_hour": {
+                  "type": "string",
+                  "title": "한국시간",
+                  "description": "같은 체결의 한국 기준 시각입니다.",
+                  "maxLength": 6
+                },
+                "oprc": {
+                  "type": "string",
+                  "title": "시가",
+                  "description": "해당 세션의 첫 체결 가격입니다.",
+                  "maxLength": 18
+                },
+                "hprc": {
+                  "type": "string",
+                  "title": "고가",
+                  "description": "해당 세션 중 가장 높았던 체결 가격입니다.",
+                  "maxLength": 18
+                },
+                "lprc": {
+                  "type": "string",
+                  "title": "저가",
+                  "description": "해당 세션 중 가장 낮았던 체결 가격입니다.",
+                  "maxLength": 18
+                },
+                "prpr": {
+                  "type": "string",
+                  "title": "현재가",
+                  "description": "가장 최근 체결된 가격입니다.",
+                  "maxLength": 18
+                },
+                "vrss_sign": {
+                  "type": "string",
+                  "title": "전일대비부호",
+                  "description": "전일 종가 대비 방향입니다.",
+                  "maxLength": 1
+                },
+                "prdy_vrss": {
+                  "type": "string",
+                  "title": "전일대비",
+                  "description": "전일 종가와의 차이입니다. 방향은 vrss_sign 으로 확인합니다.",
+                  "maxLength": 18
+                },
+                "rsfl_rt": {
+                  "type": "string",
+                  "title": "등락률",
+                  "description": "전일 종가 대비 등락률(%)입니다.",
+                  "maxLength": 12
+                },
+                "bidp": {
+                  "type": "string",
+                  "title": "매수호가",
+                  "description": "체결 시점의 최우선 매수호가입니다.",
+                  "maxLength": 18
+                },
+                "shnu_aspr_rsqn": {
+                  "type": "string",
+                  "title": "매수호가잔량",
+                  "description": "최우선 매수호가의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "askp": {
+                  "type": "string",
+                  "title": "매도호가",
+                  "description": "체결 시점의 최우선 매도호가입니다.",
+                  "maxLength": 18
+                },
+                "seln_aspr_rsqn": {
+                  "type": "string",
+                  "title": "매도호가잔량",
+                  "description": "최우선 매도호가의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "cnqn": {
+                  "type": "string",
+                  "title": "체결량",
+                  "description": "이번 체결의 수량입니다.",
+                  "maxLength": 12
+                },
+                "acml_vol": {
+                  "type": "string",
+                  "title": "누적거래량",
+                  "description": "해당 세션의 누적 체결 수량입니다.",
+                  "maxLength": 12
+                },
+                "acml_tr_pbmn": {
+                  "type": "string",
+                  "title": "누적거래대금",
+                  "description": "해당 세션의 누적 체결 금액입니다.",
+                  "maxLength": 18
+                },
+                "mkt_cls": {
+                  "type": "string",
+                  "title": "장구분",
+                  "description": "장 구분입니다.",
+                  "maxLength": 1
+                },
+                "shnu_acml_cnqn": {
+                  "type": "string",
+                  "title": "매수누적체결량",
+                  "description": "누적 매수 체결 수량입니다.",
+                  "maxLength": 12
+                },
+                "seln_acml_cnqn": {
+                  "type": "string",
+                  "title": "매도누적체결량",
+                  "description": "누적 매도 체결 수량입니다.",
+                  "maxLength": 12
+                },
+                "rltv": {
+                  "type": "string",
+                  "title": "체결강도",
+                  "description": "매수 체결량을 매도 체결량으로 나눈 비율(%)입니다.",
+                  "maxLength": 12
+                },
+                "prdy_vrss_oprc_rate": {
+                  "type": "string",
+                  "title": "시가대비율",
+                  "description": "시가 대비 현재가의 등락률(%)입니다.",
+                  "maxLength": 12
+                },
+                "prdy_vrss_hprc_rate": {
+                  "type": "string",
+                  "title": "고가대비율",
+                  "description": "고가 대비 현재가의 등락률(%)입니다.",
+                  "maxLength": 12
+                },
+                "prdy_vrss_lprc_rate": {
+                  "type": "string",
+                  "title": "저가대비율",
+                  "description": "저가 대비 현재가의 등락률(%)입니다.",
+                  "maxLength": 12
+                }
+              },
+              "title": "바디부"
+            }
+          }
+        },
+        "examples": [
+          {
+            "name": "sample",
+            "summary": "수신 예시",
+            "payload": {
+              "header": {
+                "tr_cd": "ohhts_exst_cntd",
+                "tr_key": "sample"
+              },
+              "body": {
+                "iscd": "OQ@NVDA",
+                "dely_yn": "1",
+                "acpl_bsop_date": "20260102",
+                "acpl_date": "20260102",
+                "acpl_hour": "1000",
+                "korea_date": "20260102",
+                "korea_hour": "100000",
+                "oprc": "100.0000",
+                "hprc": "100.0000",
+                "lprc": "100.0000",
+                "prpr": "100.0000",
+                "vrss_sign": "2",
+                "prdy_vrss": "10.0000",
+                "rsfl_rt": "1.00",
+                "bidp": "100.0000",
+                "shnu_aspr_rsqn": "144",
+                "askp": "100.0000",
+                "seln_aspr_rsqn": "100",
+                "cnqn": "28",
+                "acml_vol": "1000000",
+                "acml_tr_pbmn": "100000000",
+                "mkt_cls": "4",
+                "shnu_acml_cnqn": "10000000",
+                "seln_acml_cnqn": "10000000",
+                "rltv": "10.00",
+                "prdy_vrss_oprc_rate": "-0.00",
+                "prdy_vrss_hprc_rate": "0.00",
+                "prdy_vrss_lprc_rate": "-1.00"
+              }
+            }
+          }
+        ]
+      },
+      "ohhts_exst_cntg": {
+        "name": "ohhts_exst_cntg",
+        "title": "(실시간) 해외주식 현재가 (정규장)",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "tr_cd": {
+                  "type": "string",
+                  "title": "거래코드",
+                  "description": "구독 요청에 넣은 tr_cd 가 그대로 옵니다.",
+                  "maxLength": 20
+                },
+                "tr_key": {
+                  "type": "string",
+                  "title": "종목코드",
+                  "description": "구독 요청에 넣은 tr_key 가 그대로 옵니다.",
+                  "maxLength": 19
+                }
+              },
+              "title": "헤더부"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "iscd": {
+                  "type": "string",
+                  "title": "종목코드",
+                  "description": "구독한 종목입니다. 요청한 tr_key 와 같은 <거래소>@<종목> 형태로 옵니다.",
+                  "maxLength": 19
+                },
+                "dely_yn": {
+                  "type": "string",
+                  "title": "지연여부",
+                  "description": "\"1\" 지연 시세 · \"0\" 실시간 시세입니다.",
+                  "maxLength": 1
+                },
+                "acpl_bsop_date": {
+                  "type": "string",
+                  "title": "현지영업일자",
+                  "description": "현지 영업일입니다. YYYYMMDD 8자리입니다.",
+                  "maxLength": 8
+                },
+                "acpl_date": {
+                  "type": "string",
+                  "title": "현지일자",
+                  "description": "체결이 일어난 현지 일자입니다.",
+                  "maxLength": 8
+                },
+                "acpl_hour": {
+                  "type": "string",
+                  "title": "현지시간",
+                  "description": "체결이 일어난 현지 시각입니다. HHMMSS 6자리입니다.",
+                  "maxLength": 6
+                },
+                "korea_date": {
+                  "type": "string",
+                  "title": "한국일자",
+                  "description": "같은 체결의 한국 기준 일자입니다.",
+                  "maxLength": 8
+                },
+                "korea_hour": {
+                  "type": "string",
+                  "title": "한국시간",
+                  "description": "같은 체결의 한국 기준 시각입니다.",
+                  "maxLength": 6
+                },
+                "oprc": {
+                  "type": "string",
+                  "title": "시가",
+                  "description": "해당 세션의 첫 체결 가격입니다.",
+                  "maxLength": 18
+                },
+                "hprc": {
+                  "type": "string",
+                  "title": "고가",
+                  "description": "해당 세션 중 가장 높았던 체결 가격입니다.",
+                  "maxLength": 18
+                },
+                "lprc": {
+                  "type": "string",
+                  "title": "저가",
+                  "description": "해당 세션 중 가장 낮았던 체결 가격입니다.",
+                  "maxLength": 18
+                },
+                "prpr": {
+                  "type": "string",
+                  "title": "현재가",
+                  "description": "가장 최근 체결된 가격입니다.",
+                  "maxLength": 18
+                },
+                "vrss_sign": {
+                  "type": "string",
+                  "title": "전일대비부호",
+                  "description": "전일 종가 대비 방향입니다.",
+                  "maxLength": 1
+                },
+                "prdy_vrss": {
+                  "type": "string",
+                  "title": "전일대비",
+                  "description": "전일 종가와의 차이입니다. 방향은 vrss_sign 으로 확인합니다.",
+                  "maxLength": 18
+                },
+                "rsfl_rt": {
+                  "type": "string",
+                  "title": "등락률",
+                  "description": "전일 종가 대비 등락률(%)입니다.",
+                  "maxLength": 12
+                },
+                "bidp": {
+                  "type": "string",
+                  "title": "매수호가",
+                  "description": "체결 시점의 최우선 매수호가입니다.",
+                  "maxLength": 18
+                },
+                "shnu_aspr_rsqn": {
+                  "type": "string",
+                  "title": "매수호가잔량",
+                  "description": "최우선 매수호가의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "askp": {
+                  "type": "string",
+                  "title": "매도호가",
+                  "description": "체결 시점의 최우선 매도호가입니다.",
+                  "maxLength": 18
+                },
+                "seln_aspr_rsqn": {
+                  "type": "string",
+                  "title": "매도호가잔량",
+                  "description": "최우선 매도호가의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "cnqn": {
+                  "type": "string",
+                  "title": "체결량",
+                  "description": "이번 체결의 수량입니다.",
+                  "maxLength": 12
+                },
+                "acml_vol": {
+                  "type": "string",
+                  "title": "누적거래량",
+                  "description": "해당 세션의 누적 체결 수량입니다.",
+                  "maxLength": 12
+                },
+                "acml_tr_pbmn": {
+                  "type": "string",
+                  "title": "누적거래대금",
+                  "description": "해당 세션의 누적 체결 금액입니다.",
+                  "maxLength": 18
+                },
+                "mkt_cls": {
+                  "type": "string",
+                  "title": "장구분",
+                  "description": "장 구분입니다.",
+                  "maxLength": 1
+                },
+                "shnu_acml_cnqn": {
+                  "type": "string",
+                  "title": "매수누적체결량",
+                  "description": "누적 매수 체결 수량입니다.",
+                  "maxLength": 12
+                },
+                "seln_acml_cnqn": {
+                  "type": "string",
+                  "title": "매도누적체결량",
+                  "description": "누적 매도 체결 수량입니다.",
+                  "maxLength": 12
+                },
+                "rltv": {
+                  "type": "string",
+                  "title": "체결강도",
+                  "description": "매수 체결량을 매도 체결량으로 나눈 비율(%)입니다.",
+                  "maxLength": 12
+                },
+                "prdy_vrss_oprc_rate": {
+                  "type": "string",
+                  "title": "시가대비율",
+                  "description": "시가 대비 현재가의 등락률(%)입니다.",
+                  "maxLength": 12
+                },
+                "prdy_vrss_hprc_rate": {
+                  "type": "string",
+                  "title": "고가대비율",
+                  "description": "고가 대비 현재가의 등락률(%)입니다.",
+                  "maxLength": 12
+                },
+                "prdy_vrss_lprc_rate": {
+                  "type": "string",
+                  "title": "저가대비율",
+                  "description": "저가 대비 현재가의 등락률(%)입니다.",
+                  "maxLength": 12
+                }
+              },
+              "title": "바디부"
+            }
+          }
+        },
+        "examples": [
+          {
+            "name": "sample",
+            "summary": "수신 예시",
+            "payload": {
+              "header": {
+                "tr_cd": "ohhts_exst_cntg",
+                "tr_key": "sample"
+              },
+              "body": {
+                "iscd": "OQ@NVDA",
+                "dely_yn": "1",
+                "acpl_bsop_date": "20260102",
+                "acpl_date": "20260102",
+                "acpl_hour": "1000",
+                "korea_date": "20260102",
+                "korea_hour": "100000",
+                "oprc": "100.0000",
+                "hprc": "100.0000",
+                "lprc": "100.0000",
+                "prpr": "100.0000",
+                "vrss_sign": "2",
+                "prdy_vrss": "10.0000",
+                "rsfl_rt": "1.00",
+                "bidp": "100.0000",
+                "shnu_aspr_rsqn": "144",
+                "askp": "100.0000",
+                "seln_aspr_rsqn": "100",
+                "cnqn": "28",
+                "acml_vol": "1000000",
+                "acml_tr_pbmn": "100000000",
+                "mkt_cls": "4",
+                "shnu_acml_cnqn": "10000000",
+                "seln_acml_cnqn": "10000000",
+                "rltv": "10.00",
+                "prdy_vrss_oprc_rate": "-0.00",
+                "prdy_vrss_hprc_rate": "0.00",
+                "prdy_vrss_lprc_rate": "-1.00"
+              }
+            }
+          }
+        ]
+      },
+      "ohhts_exst_cnta": {
+        "name": "ohhts_exst_cnta",
+        "title": "(실시간) 해외주식 현재가 (After)",
+        "payload": {
+          "type": "object",
+          "properties": {
+            "header": {
+              "type": "object",
+              "properties": {
+                "tr_cd": {
+                  "type": "string",
+                  "title": "거래코드",
+                  "description": "구독 요청에 넣은 tr_cd 가 그대로 옵니다.",
+                  "maxLength": 20
+                },
+                "tr_key": {
+                  "type": "string",
+                  "title": "종목코드",
+                  "description": "구독 요청에 넣은 tr_key 가 그대로 옵니다.",
+                  "maxLength": 19
+                }
+              },
+              "title": "헤더부"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "iscd": {
+                  "type": "string",
+                  "title": "종목코드",
+                  "description": "구독한 종목입니다. 요청한 tr_key 와 같은 <거래소>@<종목> 형태로 옵니다.",
+                  "maxLength": 19
+                },
+                "dely_yn": {
+                  "type": "string",
+                  "title": "지연여부",
+                  "description": "\"1\" 지연 시세 · \"0\" 실시간 시세입니다.",
+                  "maxLength": 1
+                },
+                "acpl_bsop_date": {
+                  "type": "string",
+                  "title": "현지영업일자",
+                  "description": "현지 영업일입니다. YYYYMMDD 8자리입니다.",
+                  "maxLength": 8
+                },
+                "acpl_date": {
+                  "type": "string",
+                  "title": "현지일자",
+                  "description": "체결이 일어난 현지 일자입니다.",
+                  "maxLength": 8
+                },
+                "acpl_hour": {
+                  "type": "string",
+                  "title": "현지시간",
+                  "description": "체결이 일어난 현지 시각입니다. HHMMSS 6자리입니다.",
+                  "maxLength": 6
+                },
+                "korea_date": {
+                  "type": "string",
+                  "title": "한국일자",
+                  "description": "같은 체결의 한국 기준 일자입니다.",
+                  "maxLength": 8
+                },
+                "korea_hour": {
+                  "type": "string",
+                  "title": "한국시간",
+                  "description": "같은 체결의 한국 기준 시각입니다.",
+                  "maxLength": 6
+                },
+                "oprc": {
+                  "type": "string",
+                  "title": "시가",
+                  "description": "해당 세션의 첫 체결 가격입니다.",
+                  "maxLength": 18
+                },
+                "hprc": {
+                  "type": "string",
+                  "title": "고가",
+                  "description": "해당 세션 중 가장 높았던 체결 가격입니다.",
+                  "maxLength": 18
+                },
+                "lprc": {
+                  "type": "string",
+                  "title": "저가",
+                  "description": "해당 세션 중 가장 낮았던 체결 가격입니다.",
+                  "maxLength": 18
+                },
+                "prpr": {
+                  "type": "string",
+                  "title": "현재가",
+                  "description": "가장 최근 체결된 가격입니다.",
+                  "maxLength": 18
+                },
+                "vrss_sign": {
+                  "type": "string",
+                  "title": "전일대비부호",
+                  "description": "전일 종가 대비 방향입니다.",
+                  "maxLength": 1
+                },
+                "prdy_vrss": {
+                  "type": "string",
+                  "title": "전일대비",
+                  "description": "전일 종가와의 차이입니다. 방향은 vrss_sign 으로 확인합니다.",
+                  "maxLength": 18
+                },
+                "rsfl_rt": {
+                  "type": "string",
+                  "title": "등락률",
+                  "description": "전일 종가 대비 등락률(%)입니다.",
+                  "maxLength": 12
+                },
+                "bidp": {
+                  "type": "string",
+                  "title": "매수호가",
+                  "description": "체결 시점의 최우선 매수호가입니다.",
+                  "maxLength": 18
+                },
+                "shnu_aspr_rsqn": {
+                  "type": "string",
+                  "title": "매수호가잔량",
+                  "description": "최우선 매수호가의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "askp": {
+                  "type": "string",
+                  "title": "매도호가",
+                  "description": "체결 시점의 최우선 매도호가입니다.",
+                  "maxLength": 18
+                },
+                "seln_aspr_rsqn": {
+                  "type": "string",
+                  "title": "매도호가잔량",
+                  "description": "최우선 매도호가의 잔량입니다.",
+                  "maxLength": 12
+                },
+                "cnqn": {
+                  "type": "string",
+                  "title": "체결량",
+                  "description": "이번 체결의 수량입니다.",
+                  "maxLength": 12
+                },
+                "acml_vol": {
+                  "type": "string",
+                  "title": "누적거래량",
+                  "description": "해당 세션의 누적 체결 수량입니다.",
+                  "maxLength": 12
+                },
+                "acml_tr_pbmn": {
+                  "type": "string",
+                  "title": "누적거래대금",
+                  "description": "해당 세션의 누적 체결 금액입니다.",
+                  "maxLength": 18
+                },
+                "mkt_cls": {
+                  "type": "string",
+                  "title": "장구분",
+                  "description": "장 구분입니다.",
+                  "maxLength": 1
+                },
+                "shnu_acml_cnqn": {
+                  "type": "string",
+                  "title": "매수누적체결량",
+                  "description": "누적 매수 체결 수량입니다.",
+                  "maxLength": 12
+                },
+                "seln_acml_cnqn": {
+                  "type": "string",
+                  "title": "매도누적체결량",
+                  "description": "누적 매도 체결 수량입니다.",
+                  "maxLength": 12
+                },
+                "rltv": {
+                  "type": "string",
+                  "title": "체결강도",
+                  "description": "매수 체결량을 매도 체결량으로 나눈 비율(%)입니다.",
+                  "maxLength": 12
+                },
+                "prdy_vrss_oprc_rate": {
+                  "type": "string",
+                  "title": "시가대비율",
+                  "description": "시가 대비 현재가의 등락률(%)입니다.",
+                  "maxLength": 12
+                },
+                "prdy_vrss_hprc_rate": {
+                  "type": "string",
+                  "title": "고가대비율",
+                  "description": "고가 대비 현재가의 등락률(%)입니다.",
+                  "maxLength": 12
+                },
+                "prdy_vrss_lprc_rate": {
+                  "type": "string",
+                  "title": "저가대비율",
+                  "description": "저가 대비 현재가의 등락률(%)입니다.",
+                  "maxLength": 12
+                }
+              },
+              "title": "바디부"
+            }
+          }
+        },
+        "examples": [
+          {
+            "name": "sample",
+            "summary": "수신 예시",
+            "payload": {
+              "header": {
+                "tr_cd": "ohhts_exst_cnta",
+                "tr_key": "sample"
+              },
+              "body": {
+                "iscd": "OQ@NVDA",
+                "dely_yn": "1",
+                "acpl_bsop_date": "20260102",
+                "acpl_date": "20260102",
+                "acpl_hour": "1000",
+                "korea_date": "20260102",
+                "korea_hour": "100000",
+                "oprc": "100.0000",
+                "hprc": "100.0000",
+                "lprc": "100.0000",
+                "prpr": "100.0000",
+                "vrss_sign": "2",
+                "prdy_vrss": "10.0000",
+                "rsfl_rt": "1.00",
+                "bidp": "100.0000",
+                "shnu_aspr_rsqn": "144",
+                "askp": "100.0000",
+                "seln_aspr_rsqn": "100",
+                "cnqn": "28",
+                "acml_vol": "1000000",
+                "acml_tr_pbmn": "100000000",
+                "mkt_cls": "4",
+                "shnu_acml_cnqn": "10000000",
+                "seln_acml_cnqn": "10000000",
+                "rltv": "10.00",
+                "prdy_vrss_oprc_rate": "-0.00",
+                "prdy_vrss_hprc_rate": "0.00",
+                "prdy_vrss_lprc_rate": "-1.00"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

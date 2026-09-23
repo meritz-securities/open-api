@@ -1,0 +1,123 @@
+name: 예제가 동작하지 않습니다
+description: 저장소의 예제 코드를 실행했을 때 생긴 문제를 알려 주십시오.
+labels:
+- bug
+body:
+- type: markdown
+  attributes:
+    value: |
+      ## 붙여넣기 전에 한 번만 확인해 주십시오
+
+      **앱키(App Key)·시크릿(App Secret)·접근토큰·계좌번호를 이 화면에 넣지 마십시오.**
+      이슈는 누구나 볼 수 있고, 지우셔도 수정 이력에 남습니다.
+
+      코드·로그·오류 메시지를 옮기실 때는 아래처럼 가려 주십시오.
+
+      - 앱키·시크릿·접근토큰 → `***`
+      - 계좌번호 → `***`
+      - 잔고·보유종목·주문번호 등 실제 값 → 지우시거나 임의의 값으로 바꿔 주십시오
+
+      이미 노출하셨다면 개발자 포털에서 **즉시 재발급**해 주십시오.
+
+      ---
+
+      주문이 나가지 않았다거나 잔고가 다르게 보이는 등 **계좌·거래에 관한 문의는
+      이곳에서 처리해 드릴 수 없습니다.** 개발자 포털의 문의 채널을 이용해 주십시오.
+- type: textarea
+  id: what-happened
+  attributes:
+    label: 무슨 일이 있었습니까
+    description: 기대하신 동작과 실제로 벌어진 일을 함께 적어 주십시오.
+    placeholder: |
+      04_account.py 를 실행하면 잔고가 나올 줄 알았는데, HTTP 500 과 함께 rsp_cd 가 EGW00201 로 돌아옵니다.
+  validations:
+    required: true
+- type: textarea
+  id: reproduce
+  attributes:
+    label: 재현 방법
+    description: |
+      저희가 그대로 따라 할 수 있도록 순서대로 적어 주십시오. 실행하신 명령과 화면에 나온 오류를 함께 넣어 주시면 좋습니다.
+
+      예를 들면 이런 식입니다 — pip install -e . → MERITZ_BASE_URL 을 지정하지 않고 실행 → python examples/04_account.py → 아래 오류가 납니다 (앱키·계좌번호는 지웠습니다)
+    render: shell
+  validations:
+    required: true
+- type: dropdown
+  id: server
+  attributes:
+    label: 어느 서버였습니까
+    description: '`MERITZ_BASE_URL` 을 지정하지 않으셨다면 운영 서버입니다.'
+    options:
+    - 운영 서버 (기본값)
+    - 다른 서버 (MERITZ_BASE_URL 을 지정)
+    - 잘 모르겠습니다
+  validations:
+    required: true
+- type: input
+  id: api-path
+  attributes:
+    label: 호출한 API 경로
+    description: 문제가 난 요청의 경로를 적어 주십시오. 여러 개면 줄바꿈해 주셔도 됩니다.
+    placeholder: /accounts/v1/me/holdings
+  validations:
+    required: true
+- type: dropdown
+  id: example
+  attributes:
+    label: 어떤 예제였습니까
+    options:
+    - 01_auth.py — 인증
+    - 02_market.py — 국내 시세
+    - 03_overseas_market.py — 해외 시세
+    - 04_account.py — 계좌
+    - 05_order.py — 주문
+    - 06_paging.py — 연속 조회
+    - 07_realtime.py — 실시간
+    - 08_forex.py — 환율·환전
+    - meritz/ 아래 공통 코드
+    - 예제를 고쳐 쓴 코드
+  validations:
+    required: true
+- type: input
+  id: version
+  attributes:
+    label: 저장소 버전
+    description: '`git rev-parse --short HEAD` 결과나 내려받으신 시점을 적어 주십시오.'
+    placeholder: 1a2b3c4
+  validations:
+    required: true
+- type: input
+  id: python-version
+  attributes:
+    label: 파이썬 버전
+    description: '`python --version` 결과입니다.'
+    placeholder: Python 3.11.9
+  validations:
+    required: true
+- type: input
+  id: os
+  attributes:
+    label: 운영체제
+    placeholder: macOS 14.5 / Windows 11 / Ubuntu 22.04
+  validations:
+    required: false
+- type: textarea
+  id: response
+  attributes:
+    label: 응답 코드와 메시지
+    description: '`rsp_cd` 와 메시지를 아시면 적어 주십시오. 자격증명과 계좌 정보는 반드시 지우고 넣어 주십시오.'
+    render: shell
+  validations:
+    required: false
+- type: checkboxes
+  id: checks
+  attributes:
+    label: 확인해 주십시오
+    options:
+    - label: 이 글에 앱키·시크릿·접근토큰·계좌번호를 넣지 않았습니다.
+      required: true
+    - label: 붙여넣은 로그에서 잔고·보유종목·주문번호 등 계좌 정보를 지웠습니다.
+      required: true
+    - label: 계좌·주문·체결에 관한 문의가 아니라, 이 저장소의 코드에 관한 문제입니다.
+      required: true

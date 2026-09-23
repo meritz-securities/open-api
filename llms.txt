@@ -1,0 +1,126 @@
+# 메리츠증권 Open API — Python 예제
+
+> 메리츠증권 Open API를 파이썬에서 어떻게 호출하는지 보여드리는 예제 모음입니다. 인증부터 시세·계좌·주문·실시간까지, 파일 하나에 주제 하나씩 담았습니다.
+
+라이브러리가 아닙니다. 하위 호환을 약속하는 인터페이스가 아니라, 연동 방법을
+보여드리는 예제입니다. 마음에 드는 부분을 복사해 프로젝트에 맞게 고쳐 쓰시면 됩니다.
+
+의존성은 `requests` 와 `websocket-client` 두 개뿐이고, Python 3.11 이상에서 돕니다.
+앱키(App Key)와 시크릿(App Secret)은 개발자 포털에서 발급받으셔야 합니다.
+
+## 시작
+
+- [README.md](README.md): 설치·첫 호출·예제 목록·환경변수
+- [CATALOG.md](CATALOG.md): 카탈로그 파일이 무엇이고 어떻게 갱신하는지
+- [.env.example](.env.example): 환경변수 서식. `.env`로 복사해 쓰셔도 됩니다
+- [DISCLAIMER.md](DISCLAIMER.md): 실제 계좌에 영향을 준다는 점을 포함한 사용 전 안내
+- [SECURITY.md](SECURITY.md): 앱키 취급과 취약점 제보
+
+## 예제
+
+- [examples/01_auth.py](examples/01_auth.py): 접근 토큰 발급과 재사용
+- [examples/02_market.py](examples/02_market.py): 국내 현재가·호가·일봉
+- [examples/03_overseas_market.py](examples/03_overseas_market.py): 해외 현재가
+- [examples/04_account.py](examples/04_account.py): 예수금·평가·보유종목
+- [examples/05_order.py](examples/05_order.py): 주문 — 확인 없이는 전송되지 않는 형태
+- [examples/06_paging.py](examples/06_paging.py): 연속 조회
+- [examples/07_realtime.py](examples/07_realtime.py): 실시간 구독 (WebSocket)
+- [examples/08_forex.py](examples/08_forex.py): 환율 조회
+
+## 공통 코드
+
+- [meritz/core/client.py](meritz/core/client.py): 토큰 관리·요청 전송·응답 판정
+- [meritz/core/catalog.py](meritz/core/catalog.py): API 명세 조회
+- [meritz/core/config.py](meritz/core/config.py): 환경변수 읽기
+- [meritz/core/safety.py](meritz/core/safety.py): 주문·환전 확인 절차
+- [meritz/data/catalog.json](meritz/data/catalog.json): API 명세 (REST 62건·실시간 13건)
+- [openapi.json](openapi.json) · [asyncapi.json](asyncapi.json): 같은 명세의 OpenAPI 3.1 · AsyncAPI 3.0 판 — 도구에 가져다 쓰는 용도
+- [meritz/data/corrections.json](meritz/data/corrections.json): API별 응답 처리 참고자료
+
+## 함께 보실 저장소
+
+- [open-api-studio](https://github.com/meritz-securities/open-api-studio): 터미널에서 쓰는 `meritz` CLI
+- [open-api-mcp](https://github.com/meritz-securities/open-api-mcp): AI 에이전트에 붙이는 MCP 서버
+- [open-api-codegen-mcp](https://github.com/meritz-securities/open-api-codegen-mcp): 호출 코드를 만들어 주는 MCP 서버
+
+## AI Agent Guidance
+
+이 저장소의 코드를 읽거나 고쳐 쓰는 에이전트라면 아래를 먼저 알아 두시기 바랍니다.
+모두 예제 코드에 그대로 반영되어 있습니다.
+
+**계좌 파라미터는 넣지 않습니다.** `acno`·`asno`·`acnt_pwd`는 앱키에 묶여 있어
+게이트웨이가 채웁니다. 요청에 직접 넣으시면 오히려 실패합니다.
+
+**종목코드 표기가 API마다 다릅니다.** 시세 조회는 `005930`, 주문은 `A005930`처럼
+앞에 `A`가 붙습니다. 확실하지 않으면 `meritz/data/catalog.json`의 해당 파라미터
+설명을 확인하시고, 형식을 추측해 채우지 마십시오.
+
+**토큰은 재사용합니다.** `POST /oauth2/token`으로 받아 만료 전까지 씁니다.
+호출마다 새로 받지 마십시오. `meritz/core/client.py`의 `TokenManager`가 이 방식입니다.
+
+**응답은 이 순서로 판정합니다.** HTTP 200이 왔다고 성공이 아닙니다.
+
+```
+1) 본문을 JSON 으로 읽는다 — 오류도 HTTP 500 으로 오므로 상태코드로 가르지 않는다
+2) 주문이라면 warn_cls_code 부터 — 경고면 접수되지 않았습니다
+3) rsp_cd 를 읽을 수 있는가 → 성공 코드면 성공, 아니면 업무 오류
+4) 읽을 수 없다면 알려진 문제인지 확인 (meritz/data/corrections.json)
+```
+
+성공으로 보는 코드는 `0000`·`0001`·`5762`·`5766`·`5820`·`5822`입니다
+(`client.py`의 `OK_CODES`). `5762`는 다음 페이지가 있다는 뜻이라 `tr_cont=1`과
+`tr_cont_key`로 이어서 조회하시면 되고, `5820`·`5822`는 보통 조회 결과가 없다는 뜻입니다.
+셋 다 오류가 아니니 실패로 처리하지 마십시오.
+
+**`5820`으로 자료 유무를 판정하지 마십시오.** 자료를 담은 채로 `5820`이 오는 API가
+있습니다 — 담보 조회(총자산이 들어 있는데 `5820`), 종목별 실현손익(9행을 담고 `5820`),
+해외 실현손익(`data`와 `summary`를 주면서 `5820`). `rsp_cd == "5820"`으로 빈 목록을
+돌려주는 코드를 만들면 이 자료가 통째로 사라집니다. **`data`가 비었는지로 판정하십시오.**
+
+**오류는 종류와 무관하게 HTTP 500으로 옵니다.** 권한 없음(`0760`)도, 필수값 누락
+(`7936`)도, 날짜 역전(`3174`)도 전부 500입니다. 상태코드가 아니라 `rsp_cd`로 가르십시오.
+무엇을 고쳐야 하는지는 `rsp_msg`가 아니라 `rsp_sub_msg`에 담겨 옵니다
+(예: `7936` / "해당데이터가 없습니다." / `rsp_sub_msg`=`조회시작일`).
+코드표는 [docs/errors.md](docs/errors.md)에 있습니다.
+
+**주문은 접수되었다고 끝이 아닙니다.** `rsp_cd`가 `0001`로 와도 `data.warn_cls_code`가
+`0`이 아니면 아직 접수되지 않은 상태입니다. 경고 내용을 확인하고 `warn_cnfr_yn=A`로
+다시 보내야 접수됩니다. 이 검사는 `rsp_cd` 성공 판정보다 **앞에** 두십시오.
+국내와 해외는 코드 체계가 다릅니다 — 재전송으로 풀리는 값이 국내는
+`1`·`3`·`4`·`6`·`7`·`9`·`a`·`c`·`d`·`f`·`g`, 해외는 `1`·`3`뿐입니다
+(`client.py`의 `_RESEND_OK`). 한쪽 목록을 다른 쪽에 그대로 쓰면 해외 `2`(보류)를
+성공으로 오판합니다.
+
+**실시간은 접속점이 하나입니다.** API마다 경로가 나뉘지 않고, 구독 메시지의
+`tr_cd`가 무엇을 받을지 정합니다. 인증도 접속이 아니라 구독 메시지에서 이뤄지고,
+구독 응답(ACK)은 `header.rsp_cd`·`rsp_msg` 로 오고, 관측된 성공 값은 `00000` 입니다.
+자릿수가 REST 의 `0000` 과 늘 다른지는 확인하지 못했으므로 예제는 둘 다 성공으로 받습니다.
+[examples/07_realtime.py](examples/07_realtime.py)를 그대로 따라가시면 됩니다.
+
+**`mac_address` 헤더가 필수입니다.** 빠지면 요청이 거부됩니다.
+`client.py`의 `mac_address()`가 이 값을 만듭니다.
+
+**응답은 API별 규칙에 따라 판정하십시오.** `rsp_cd`만으로 결과를 판단하지
+말고 `data`, `warn_cls_code`, `tr_cont`, `tr_cont_key` 등 해당 API의 응답 필드를
+함께 확인하십시오. API별 응답 처리 참고자료는
+[meritz/data/corrections.json](meritz/data/corrections.json)에 정리되어 있습니다.
+
+**서버는 기본이 운영입니다.** 다른 서버로 옮기실 때는 `MERITZ_BASE_URL`과
+`MERITZ_WS_URL`을 **둘 다** 바꿔야 합니다. 한쪽만 바꾸면 토큰은 옮긴 서버에서 받고
+실시간 구독은 운영으로 나갑니다. **앱키에 연결된 계좌는 실계좌입니다.**
+모의계좌라고 가정하고 주문 코드를 실행하지 마십시오.
+
+**앱키는 발급받은 서버에서만 통합니다.** 다른 서버의 앱키를 바꿔 쓰면
+`EGW00103`("유효하지 않은 client_id")이 옵니다. 또 앱키마다 쓸 수 있는 API가 달라서,
+권한이 없는 API를 부르면 HTTP 500과 함께 `rsp_cd` `0760`("권한이 없습니다")이 옵니다.
+`0760`은 재시도나 토큰 재발급으로 풀리지 않으니 반복 호출하지 마시고, 포털에서
+권한을 신청하도록 안내하십시오.
+
+**초당 호출 한도는 API마다 10건입니다.** 넘기면 HTTP 500과 함께 `rsp_cd`가
+`EGW00200`으로 옵니다. `meritz.client()`가 API별 호출 간격을 자동으로 지키므로
+반복 호출 코드에 간격을 따로 얹지 않으셔도 됩니다. 커넥션 재사용(스레드마다 세션
+하나)과 `meritz` 로거를 통한 호출 로깅도 들어 있습니다.
+
+다만 한도를 넘겨 `EGW00200`을 받으면 응답에 `retryable`만 표시하고 다시 보내지는
+않습니다. 자동 재시도·백오프와 웹소켓 재연결은 예제 범위 밖이니, 언제 다시 보낼지는
+호출하시는 쪽에서 정하셔야 합니다.
