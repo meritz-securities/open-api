@@ -1,0 +1,6 @@
+# GitHub Actions 버전만 월 1회 확인합니다. 파이썬 의존성은 uv.lock 으로 사람이 관리합니다.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: monthly }

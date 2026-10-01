@@ -1,0 +1,29 @@
+[project]
+name = "meritz-open-api-examples"
+version = "0.2.0"
+description = "메리츠증권 Open API — Python 실행 예제"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Meritz Securities Co., Ltd." }]
+dependencies = [
+    "requests>=2.31.0",
+    "websocket-client>=1.7.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["meritz"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]   # 줄 길이는 line-length 로 본다
