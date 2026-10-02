@@ -1,0 +1,30 @@
+# 푸시·PR 마다 테스트를 돌립니다. 카탈로그 동봉본이 낡았거나 예제가 명세와 어긋나면 여기서 잡힙니다.
+name: test
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
+        with: { python-version: "${{ matrix.python }}" }
+      - name: 의존성
+        run: uv sync --all-extras --dev
+      - name: 테스트
+        run: uv run pytest -q
