@@ -1,7 +1,5 @@
 # 메리츠증권 Open API — Python 예제
 
-> 현재 베타 서비스 기간입니다.
-
 [개발자 포털](https://openapi.imeritz.com) · [API 신청](https://openapi.imeritz.com/api-apply) · [API 문서](https://openapi.imeritz.com/apiservice) · [문의](https://openapi.imeritz.com/qna)
 
 [![test](https://github.com/meritz-securities/open-api/actions/workflows/test.yml/badge.svg)](https://github.com/meritz-securities/open-api/actions/workflows/test.yml) [![python](https://img.shields.io/badge/python-3.11%2B-3776AB)](https://www.python.org/downloads/) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)
