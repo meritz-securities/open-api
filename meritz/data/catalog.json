@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-22",
+ "generated": "2026-10-28",
  "source": "메리츠증권 개발자 포털 등록 명세",
  "groups": [
   "OAuth 인증",
@@ -5034,7 +5034,7 @@
       "location": "body",
       "depth": 1,
       "child": true,
-      "description": "이 정정·취소 주문이 대상으로 삼은 주문의 번호입니다. 신규 주문은 0 입니다."
+      "description": "정정·취소 주문이 대상으로 삼은 주문의 번호입니다. 신규 주문은 0 입니다.<br/>국내 주문내역에서는 이 값이 최초 신규 주문(rctf_cncl_cls_code \"1\" 인 행)을 가리키며, 여러 번 나누어 정정·취소한 경우에도 중간 정정 행이 아닌 최초 주문을 가리킵니다. 따라서 이 값으로 묶으면 한 주문의 이력이 최초 주문 하나에 모입니다."
      },
      {
       "name": "chan_type_cls_code",
@@ -8049,7 +8049,7 @@
       "location": "query",
       "depth": 0,
       "child": false,
-      "description": "시장 구분입니다.<br/>\"J\": KRX<br/>\"NJ\": 대체거래소(NXT)<br/>\"TJ\": KRX + NXT 통합<br/>\"TJ\" 로 조회해도 \"J\"(KRX)와 같은 자료가 내려옵니다.<br/><b>위 세 값만 넣으십시오.</b> (query string)"
+      "description": "시장 구분입니다.<br/>\"J\": KRX<br/>\"NJ\": 대체거래소(NXT)<br/>\"TJ\": KRX + NXT 통합<br/><br/><b>위 세 값만 넣으십시오.</b> (query string)"
      },
      {
       "name": "iscd",
@@ -8361,7 +8361,7 @@
       "location": "query",
       "depth": 0,
       "child": false,
-      "description": "시장 구분입니다. \"J\"(KRX)를 넣으십시오. (query string)"
+      "description": "\"J\": KRX<br/>\"NJ\": 대체거래소(NXT)<br/>\"TJ\": KRX + NXT 통합 (query string)"
      },
      {
       "name": "iscd",
