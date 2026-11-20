@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "돈치안 20일 돌파 (터틀)",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "field",
+      "field": "close"
+    },
+    "right": {
+      "type": "donchian",
+      "component": "upper",
+      "period": 20
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "field",
+      "field": "close"
+    },
+    "right": {
+      "type": "donchian",
+      "component": "lower",
+      "period": 10
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

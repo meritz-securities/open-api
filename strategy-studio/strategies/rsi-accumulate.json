@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "낮은 RSI에서 매 봉 1주",
+  "entry": {
+    "op": "lt",
+    "left": {
+      "type": "rsi",
+      "period": 14
+    },
+    "right": {
+      "type": "constant",
+      "value": 30
+    }
+  },
+  "exit": {
+    "op": "gt",
+    "left": {
+      "type": "rsi",
+      "period": 14
+    },
+    "right": {
+      "type": "constant",
+      "value": 70
+    }
+  },
+  "quantity": 1,
+  "allowPyramiding": true,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

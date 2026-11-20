@@ -1,0 +1,72 @@
+name: 문서·명세가 실제와 다릅니다
+description: README 나 예제 주석의 설명이 실제 동작과 어긋나는 곳을 알려 주십시오.
+labels:
+- documentation
+body:
+- type: markdown
+  attributes:
+    value: |
+      API 응답 처리나 문서 설명에 보완이 필요한 내용을 알려 주십시오.
+      재현 가능한 요청과 응답을 함께 제공해 주시면 확인에 도움이 됩니다.
+
+      **앱키·시크릿·접근토큰·계좌번호는 넣지 말아 주십시오.**
+- type: dropdown
+  id: kind
+  attributes:
+    label: 어떤 종류의 차이입니까
+    options:
+    - API 응답 처리 설명이 부족하거나 다릅니다
+    - 이 저장소의 설명이 실제 동작과 다릅니다
+    - 설명이 없어서 알기 어려웠습니다
+    - 오탈자·깨진 링크
+  validations:
+    required: true
+- type: input
+  id: location
+  attributes:
+    label: 어디입니까
+    description: 파일 경로나 README 의 절 제목을 적어 주십시오.
+    placeholder: examples/03_overseas_market.py / README.md의 해당 절
+  validations:
+    required: true
+- type: input
+  id: api-path
+  attributes:
+    label: 관련된 API 경로
+    description: 특정 API 에 대한 것이라면 경로를 적어 주십시오.
+    placeholder: /market/v1/overseas/prices
+  validations:
+    required: false
+- type: textarea
+  id: documented
+  attributes:
+    label: 문서에는 이렇게 적혀 있습니다
+  validations:
+    required: true
+- type: textarea
+  id: actual
+  attributes:
+    label: 실제로는 이렇습니다
+    description: 확인하신 방법도 함께 적어 주시면 좋습니다. 응답을 옮기실 때 계좌 정보는 지워 주십시오.
+  validations:
+    required: true
+- type: dropdown
+  id: server
+  attributes:
+    label: 어느 서버에서 확인하셨습니까
+    options:
+    - 운영 서버 (기본값)
+    - 다른 서버 (MERITZ_BASE_URL 을 지정)
+    - 양쪽 모두
+    - 실행하지 않고 문서만 보았습니다
+  validations:
+    required: true
+- type: checkboxes
+  id: checks
+  attributes:
+    label: 확인해 주십시오
+    options:
+    - label: 이 글에 앱키·시크릿·접근토큰·계좌번호를 넣지 않았습니다.
+      required: true
+    - label: 계좌·주문·체결에 관한 문의가 아니라, 이 저장소의 코드나 문서에 관한 것입니다.
+      required: true

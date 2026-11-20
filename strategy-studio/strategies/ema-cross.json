@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "EMA 12/26 교차",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "ema",
+      "period": 12
+    },
+    "right": {
+      "type": "ema",
+      "period": 26
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "ema",
+      "period": 12
+    },
+    "right": {
+      "type": "ema",
+      "period": 26
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

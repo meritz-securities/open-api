@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "MACD 시그널선 교차",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "macd",
+      "component": "macd",
+      "fast": 12,
+      "slow": 26,
+      "signal": 9
+    },
+    "right": {
+      "type": "macd",
+      "component": "signal",
+      "fast": 12,
+      "slow": 26,
+      "signal": 9
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "macd",
+      "component": "macd",
+      "fast": 12,
+      "slow": 26,
+      "signal": 9
+    },
+    "right": {
+      "type": "macd",
+      "component": "signal",
+      "fast": 12,
+      "slow": 26,
+      "signal": 9
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

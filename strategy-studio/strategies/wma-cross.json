@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "WMA 10/30 교차",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "wma",
+      "period": 10
+    },
+    "right": {
+      "type": "wma",
+      "period": 30
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "wma",
+      "period": 10
+    },
+    "right": {
+      "type": "wma",
+      "period": 30
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

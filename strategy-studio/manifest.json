@@ -1,0 +1,176 @@
+{
+  "manifest_version": "0.2",
+  "name": "meritz-open-api",
+  "display_name": "메리츠증권 Open API",
+  "version": "0.5.0b1",
+  "description": "메리츠증권 API 와 로컬 백테스트 도구를 제공합니다. 전략 백테스트 Studio 는 같은 저장소의 베타(소스 제공)입니다.",
+  "long_description": "국내·해외 시세와 계좌를 조회하는 로컬 MCP 서버입니다. 기본 조회 전용이며 실주문·환전에는 별도 설정과 확인 토큰이 필요합니다. 이 소스의 stdio 연결에는 고객 키 시세를 사용하는 백테스트 도구 6개가 포함됩니다. 사용자 Python on_bar(ctx) 실행은 macOS 격리 환경 또는 Windows 동봉 실행기가 있는 번들에서만 됩니다. 기존 단일 파일·자동 설치본은 고객 코드 실행을 지원하지 않습니다. 가상 체결 결과는 실제 투자 성과를 보증하지 않습니다.",
+  "author": {
+    "name": "메리츠증권"
+  },
+  "homepage": "https://github.com/meritz-securities/open-api-mcp",
+  "documentation": "https://github.com/meritz-securities/open-api-mcp#readme",
+  "license": "MIT",
+  "privacy_policies": [
+    "https://github.com/meritz-securities/open-api-mcp/blob/main/DISCLAIMER.md"
+  ],
+  "keywords": [
+    "meritz",
+    "open-api",
+    "trading",
+    "stock",
+    "korea"
+  ],
+  "server": {
+    "type": "python",
+    "entry_point": "meritz/server.py",
+    "mcp_config": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "${__dirname}",
+        "meritz-mcp"
+      ],
+      "env": {
+        "MERITZ_LABEL": "${user_config.label}",
+        "MERITZ_APP_KEY": "${user_config.app_key}",
+        "MERITZ_APP_SECRET": "${user_config.app_secret}",
+        "MERITZ_LABEL_2": "${user_config.label_2}",
+        "MERITZ_APP_KEY_2": "${user_config.app_key_2}",
+        "MERITZ_APP_SECRET_2": "${user_config.app_secret_2}",
+        "MERITZ_LABEL_3": "${user_config.label_3}",
+        "MERITZ_APP_KEY_3": "${user_config.app_key_3}",
+        "MERITZ_APP_SECRET_3": "${user_config.app_secret_3}",
+        "MERITZ_READ_ONLY": "${user_config.read_only}"
+      }
+    }
+  },
+  "user_config": {
+    "label": {
+      "type": "string",
+      "title": "1️⃣ 계좌 1 — 이름",
+      "description": "이 계좌(계좌 1)를 구분해서 부를 이름입니다 (예: 단기투자, 장기투자, 비밀용). 대화에서 이 이름으로 계좌를 고릅니다. 비우면 '1번계좌'가 됩니다.",
+      "required": false
+    },
+    "app_key": {
+      "type": "string",
+      "title": "1️⃣ 계좌 1 — App Key",
+      "description": "계좌 1 의 앱키입니다. 개발자 포털(https://openapi.imeritz.com)에서 **이 계좌를 선택해** 발급받은 값이어야 합니다.",
+      "required": true,
+      "sensitive": true
+    },
+    "app_secret": {
+      "type": "string",
+      "title": "1️⃣ 계좌 1 — App Secret",
+      "description": "계좌 1 의 시크릿입니다. **바로 위 App Key 와 같은 계좌의 것**이어야 합니다. 서로 다른 계좌의 키와 시크릿을 섞으면 인증이 거절됩니다.",
+      "required": true,
+      "sensitive": true
+    },
+    "label_2": {
+      "type": "string",
+      "title": "2️⃣ 계좌 2 — 이름",
+      "description": "이 계좌(계좌 2)를 구분해서 부를 이름입니다 (예: 단기투자, 장기투자, 비밀용). 대화에서 이 이름으로 계좌를 고릅니다. 비우면 '2번계좌'가 됩니다.",
+      "required": false
+    },
+    "app_key_2": {
+      "type": "string",
+      "title": "2️⃣ 계좌 2 — App Key",
+      "description": "계좌 2 의 앱키입니다. 개발자 포털(https://openapi.imeritz.com)에서 **이 계좌를 선택해** 발급받은 값이어야 합니다. 계좌가 2개 미만이면 비워 두십시오.",
+      "required": false,
+      "sensitive": true
+    },
+    "app_secret_2": {
+      "type": "string",
+      "title": "2️⃣ 계좌 2 — App Secret",
+      "description": "계좌 2 의 시크릿입니다. **바로 위 App Key 와 같은 계좌의 것**이어야 합니다. 서로 다른 계좌의 키와 시크릿을 섞으면 인증이 거절됩니다.",
+      "required": false,
+      "sensitive": true
+    },
+    "label_3": {
+      "type": "string",
+      "title": "3️⃣ 계좌 3 — 이름",
+      "description": "이 계좌(계좌 3)를 구분해서 부를 이름입니다 (예: 단기투자, 장기투자, 비밀용). 대화에서 이 이름으로 계좌를 고릅니다. 비우면 '3번계좌'가 됩니다.",
+      "required": false
+    },
+    "app_key_3": {
+      "type": "string",
+      "title": "3️⃣ 계좌 3 — App Key",
+      "description": "계좌 3 의 앱키입니다. 개발자 포털(https://openapi.imeritz.com)에서 **이 계좌를 선택해** 발급받은 값이어야 합니다. 계좌가 3개 미만이면 비워 두십시오.",
+      "required": false,
+      "sensitive": true
+    },
+    "app_secret_3": {
+      "type": "string",
+      "title": "3️⃣ 계좌 3 — App Secret",
+      "description": "계좌 3 의 시크릿입니다. **바로 위 App Key 와 같은 계좌의 것**이어야 합니다. 서로 다른 계좌의 키와 시크릿을 섞으면 인증이 거절됩니다.",
+      "required": false,
+      "sensitive": true
+    },
+    "read_only": {
+      "type": "boolean",
+      "title": "🔒 조회 전용으로 사용 (전체 계좌)",
+      "description": "켜 두면 주문과 환전이 전송되지 않습니다. 위 계좌 전부에 적용됩니다. 조회만 하실 때는 켜 두시길 권합니다.",
+      "required": false,
+      "default": true
+    }
+  },
+  "tools": [
+    {
+      "name": "meritz_account",
+      "description": "잔고·예수금·평가·거래내역·손익"
+    },
+    {
+      "name": "meritz_market",
+      "description": "국내주식·국내 지수 시세·호가·체결·투자자별 매매·순위·재무·시장정보"
+    },
+    {
+      "name": "meritz_overseas_market",
+      "description": "해외주식·해외 지수·원자재·환율 시세·호가·체결·순위·조건검색"
+    },
+    {
+      "name": "meritz_trading",
+      "description": "주문·정정·취소·주문내역·예약주문"
+    },
+    {
+      "name": "meritz_forex",
+      "description": "환율·환전"
+    },
+    {
+      "name": "meritz_reference",
+      "description": "거래일·장 운영시간·거래소 등 참조 정보"
+    },
+    {
+      "name": "meritz_info",
+      "description": "서버 설정과 카탈로그 요약"
+    },
+    {
+      "name": "meritz_backtest_demo",
+      "description": "합성 시세 백테스트 시연"
+    },
+    {
+      "name": "meritz_backtest_run",
+      "description": "고객 키의 국내 일봉으로 고정 SMA 예제 백테스트"
+    },
+    {
+      "name": "meritz_backtest_compare",
+      "description": "동일 시세에서 SMA 조건 비교(사용자 코드 비교 미지원)"
+    },
+    {
+      "name": "meritz_backtest_trade",
+      "description": "가상 체결 근거 조회"
+    },
+    {
+      "name": "meritz_backtest_validate",
+      "description": "사용자 Python 전략의 문법·진입점 검사(실행·보안 인증 아님)"
+    },
+    {
+      "name": "meritz_backtest_code",
+      "description": "macOS 격리 환경 또는 실행기가 동봉된 Windows 번들에서 사용자 Python 전략 백테스트"
+    }
+  ],
+  "compatibility": {
+    "runtimes": {
+      "python": ">=3.11"
+    }
+  }
+}

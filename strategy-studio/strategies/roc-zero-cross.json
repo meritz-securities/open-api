@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "ROC 0선 상향 돌파",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "roc",
+      "period": 12
+    },
+    "right": {
+      "type": "constant",
+      "value": 0
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "roc",
+      "period": 12
+    },
+    "right": {
+      "type": "constant",
+      "value": 0
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

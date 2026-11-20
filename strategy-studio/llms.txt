@@ -1,0 +1,157 @@
+# 메리츠증권 Open API MCP 서버
+
+> Claude 같은 AI 에이전트에 붙여, 메리츠증권 Open API의 시세·잔고·주문을 대화로 다루실 수 있게 해 주는 MCP 서버입니다.
+
+내 PC에서 도는 로컬 MCP 서버입니다. 앱키(App Key)와 시크릿(App Secret)이 필요합니다.
+기존 API용 배포본은 단일 실행 파일로 제공되어 Python·uv 없이 동작하며(릴리스의 meritz-mcp-<플랫폼>), Claude Desktop 은
+OS 별 설치 파일(.mcpb)을 더블클릭하면 됩니다. 전략 백테스트 Studio 는 같은 저장소의 베타(소스 제공)이며 README 의 "Meritz Strategy Studio — 베타" 절을 따릅니다. 기본값은 **조회 전용**입니다.
+
+주문과 환전은 첫 호출에서 전송하지 않고 보낼 내용과 `confirm_token`만 돌려드립니다.
+에이전트가 그 내용을 사람에게 보여 드리고 동의를 받은 뒤 토큰을 넣어 다시 호출해야
+실제로 나갑니다. 토큰은 한 번만 쓸 수 있고 180초 뒤 만료되며, 보낼 내용·대상 서버·
+앱키(=계좌) 중 하나라도 바뀌면 무효가 됩니다. 이 확인 절차는 `ApiClient.call()` 에
+걸려 있어, 도구 호출과 파이썬 직접 호출 양쪽에 똑같이 적용됩니다.
+
+## 시작
+
+- [README.md](README.md): 설치·도구 목록·환경변수·주문 확인 절차
+- [docs/install.md](docs/install.md): 설치 자세히 — OS 보안 경고, 기동 대기 시간, 체크섬 확인, Claude 웹·ChatGPT 웹용 터널 연결
+- [docs/connect.html](docs/connect.html): 앱키·실행 파일 경로를 넣으면 도구별 명령·버튼·JSON 을 만들어 주는 연결 도우미 (브라우저 안에서만 동작)
+- [build_binary.sh](build_binary.sh) · [make_bundle.py](make_bundle.py): 단일 실행 파일과 플랫폼별 설치 파일 빌드
+- MCP 서버 릴리스 파일(세 플랫폼)은 [open-api-mcp](https://github.com/meritz-securities/open-api-mcp) 저장소에서 빌드·배포합니다. 이 폴더에는 릴리스 자동화가 없습니다
+- [.env.example](.env.example): 환경변수 서식
+- [manifest.json](manifest.json): uvx 로 돌리는 개발용 .mcpb 정의. 배포하는 설치 파일은 [make_bundle.py](make_bundle.py) 가 이 파일의 `server` 를 단일 실행 파일(`type: "binary"`)로 다시 써서 만듭니다
+- [DISCLAIMER.md](DISCLAIMER.md): 확인 절차의 한계를 포함한 사용 전 안내
+- [SECURITY.md](SECURITY.md): 앱키 취급과 취약점 제보
+
+## 도구
+
+기존 API 도구는 분류별 여섯 개와 서버 정보를 돌려주는 `meritz_info`까지 일곱 개이고,
+`api_type`으로 부를 API를 고릅니다. REST 109건 중 107건이 도구로 노출됩니다
+(토큰 발급·폐기 2건은 서버가 내부에서 처리합니다).
+
+- `meritz_account`: 잔고·예수금·평가·거래내역·손익 (12건)
+- `meritz_market`: 국내주식·국내 지수 시세·호가·체결·투자자별 매매·순위·재무·시장정보 (41건)
+- `meritz_overseas_market`: 해외주식·해외 지수·원자재·환율 시세·호가·체결·순위·조건검색 (21건)
+- `meritz_trading`: 주문·정정·취소·주문내역·예약주문 (24건)
+- `meritz_forex`: 환율·환전 (4건)
+- `meritz_reference`: 거래일·장 운영시간·거래소 등 참조 정보 (5건)
+- `meritz_info`: 서버 설정과 카탈로그 요약
+
+국내 시세와 해외 시세는 종목코드·거래소 코드 체계가 달라 도구를 나눠 두었습니다.
+해외 조회에 국내 파라미터를 그대로 넣지 마십시오.
+
+## 소스
+
+- [meritz/tools.py](meritz/tools.py): 도구 등록과 `api_type` 라우팅
+- [meritz/client.py](meritz/client.py): 토큰 관리·요청 전송·응답 판정
+- [meritz/safety.py](meritz/safety.py): 상태변경 판별과 확인 절차
+- [meritz/config.py](meritz/config.py): 환경변수 읽기
+- [meritz/data/catalog.json](meritz/data/catalog.json): API 명세 (REST 109건·실시간 14건)
+- [meritz/data/corrections.json](meritz/data/corrections.json): API별 응답 처리 참고자료
+
+## 함께 보실 저장소
+
+- [open-api](https://github.com/meritz-securities/open-api): 파이썬 실행 예제
+- [open-api-studio](https://github.com/meritz-securities/open-api-studio): 터미널에서 쓰는 `meritz` CLI
+- [open-api-codegen-mcp](https://github.com/meritz-securities/open-api-codegen-mcp): 호출 코드를 만들어 주는 MCP 서버
+
+## AI Agent Guidance
+
+이 서버를 도구로 쓰는 에이전트가 알아 두셔야 할 것들입니다.
+
+**`MERITZ_READ_ONLY`의 기본값은 `1`(조회 전용)입니다.** 이 상태에서는 주문과 환전이
+막혀 있습니다. 사람이 지켜보지 않는 환경이라면 기본값 그대로 두시고, 주문은 사람이
+직접 하는 경로로 분리해 주십시오. 주문·환전까지 쓰셔야 한다면 `0`으로 두셔야 합니다.
+자주 쓰는 환경변수로는 `MERITZ_APP_KEY`·`MERITZ_APP_SECRET`, 호출 대상 서버를 직접
+지정하는 `MERITZ_BASE_URL`(기본은 운영 도메인), 요청 제한시간 `MERITZ_TIMEOUT`
+(기본 15초)이 있습니다.
+
+**주문·환전은 두 번 호출해야 나갑니다.** 첫 호출은 미리보기이고, 그때 받은
+`confirm_token`을 사람에게 확인받은 뒤 넣어 다시 부르셔야 전송됩니다.
+확인 절차는 실수를 막기 위한 것이지 사람이 내용을 확인했다는 증거가 아닙니다.
+미리보기를 받아 그 자리에서 곧바로 다시 호출하는 것은 확인이 아닙니다.
+
+**파라미터를 추측하지 마십시오.** 어떤 도구든 `api_type='describe'`로 부르면
+파라미터와 응답 필드 설명을 돌려드립니다. 필수 항목과 코드값을 먼저 확인하신 뒤
+호출해 주십시오.
+
+**계좌 파라미터는 넣지 않습니다.** `acno`·`asno`·`acnt_pwd`는 앱키에 묶여 있어
+게이트웨이가 채웁니다. 사용자에게 계좌번호나 비밀번호를 묻지 마시고, 파라미터에도
+넣지 마십시오. 넣으면 오히려 실패합니다.
+
+**종목코드 표기가 다릅니다.** 시세 조회는 `005930`, 주문은 `A005930`처럼 앞에 `A`가
+붙습니다. 사용자가 준 코드를 그대로 옮기지 마시고 `describe`로 확인해 주십시오.
+
+**"잔고"는 한 단어로 여러 가지를 뜻합니다.** 총자산·평가금액인지, 종목별 보유와
+평가손익인지, 현금·출금가능·주문가능인지, 해외 보유나 외화 잔고인지 애매하면
+되물어 주십시오. `meritz_account`의 `api_type`이 각각 나뉘어 있습니다.
+
+**실패에는 두 갈래가 있습니다.** 없는 `api_type`, 필수 파라미터 누락, 조회 전용
+차단, 업무 오류, 네트워크 오류는 MCP 오류(`isError`)로 올라옵니다. 반면 주문
+미리보기와 확인 대기는 실패가 아니라 정상 응답입니다 — 오류로 받아들여 흐름을
+끊지 마십시오.
+
+**응답 판정은 서버가 이 순서로 합니다.** 결과에 실린 판정을 그대로 존중해 주십시오.
+
+```
+1) HTTP 200 인가 — 초당 호출 한도를 넘기면 500 과 함께 EGW00200 이 옵니다
+2) 주문이라면 warn_cls_code 부터 — 경고면 접수되지 않았습니다
+3) rsp_cd 를 읽을 수 있는가 → 성공 코드면 성공, 아니면 업무 오류
+4) 읽을 수 없다면 해당 API의 응답 처리 참고자료와 오류 코드표를 확인
+```
+
+성공으로 보는 코드는 `0000`·`0001`·`5620`·`5762`·`5766`·`5820`·`5822`입니다.
+`5762`는 다음 페이지가 있다는 뜻이고, `5820`·`5822`는 보통 조회 결과가 없다는 뜻입니다.
+자료 없음을 오류로 보고하지 마십시오. **다만 `5820`을 "자료 없음"으로 단정하지
+마십시오** — 담보 조회·종목별 실현손익·해외 실현손익은 자료를 담은 채로도 `5820`을
+보냅니다. 결과에 `data`가 들어 있으면 응답코드와 무관하게 그 자료를 전하십시오.
+오류는 종류와 무관하게 HTTP 500으로 오며, 조치 정보는 `rsp_msg`가 아니라
+`rsp_sub_msg`에 담깁니다. 코드표는 open-api 저장소의
+[docs/errors.md](https://github.com/meritz-securities/open-api/blob/main/docs/errors.md)에
+있습니다. 4번에서 알려진 문제로 통과한 응답은
+"검증되지 않음"이 표시되니, 그 표시를 지우고 단정해 전하지 마십시오.
+주문·환전은 이 경로로 통과시키지 않습니다.
+
+**주문이 성공으로 와도 접수가 아닐 수 있습니다.** `rsp_cd`가 `0001`이라도
+`data.warn_cls_code`가 `0`이 아니면 아직 접수되지 않은 상태이고, 이 서버는 이 경우를
+**실패로 처리**합니다. 경고 내용을 사람에게 전하고 `warn_cnfr_yn`을 채워(값은 해당 API 명세와 정정 안내를 따릅니다) 다시 보낼지
+확인을 받아 주십시오. 국내와 해외는 경고 코드 체계가 다르므로 한쪽 목록을 다른 쪽에
+그대로 적용하지 마십시오. 접수에 성공하더라도 그것은 접수일 뿐 체결이 아니니,
+최종 상태는 주문내역 조회로 확인해 주십시오.
+
+**실시간(웹소켓)은 이 서버에서 다루지 않습니다.** MCP는 요청·응답 모델이라 구독
+스트림과 맞지 않습니다. 실시간 코드가 필요하시면
+[open-api-codegen-mcp](https://github.com/meritz-securities/open-api-codegen-mcp)로
+넘겨 주십시오.
+
+**앱키에 연결된 계좌는 실계좌입니다.** 모의계좌라고 가정하고 주문을 시험하지
+마십시오.
+
+## MCP 백테스트 도구 (호환 경로)
+
+이 저장소의 로컬 stdio 연결에는 백테스트 도구 **6개**가 추가되어 기존 도구와 합계 **13개**입니다.
+HTTP/SSE에서는 백테스트 도구를 등록하지 않습니다.
+
+| 도구 | 역할 |
+|---|---|
+| `meritz_backtest_validate` | 단일 Python 파일의 문법과 `on_bar(ctx)` 진입점 확인. 코드를 실행하지 않음 |
+| `meritz_backtest_code` | 사용자 Python 전략을 macOS 격리 환경 또는 실행기가 동봉된 Windows 번들의 제한된 작업 프로세스에서 실행. 시세 출처를 반드시 명시하고 실제 시세의 종목·기간도 지정 |
+| `meritz_backtest_demo` | 고정 SMA 전략을 합성 시세로 시연 |
+| `meritz_backtest_run` | 고객 키의 국내 일봉으로 고정 SMA 예제 실행 |
+| `meritz_backtest_compare` | SMA 결과의 동일 시세·비용에서 이동평균 조건 비교. 사용자 코드 결과에는 적용하지 않음 |
+| `meritz_backtest_trade` | 신호일·가상 체결·기록된 설명 조회. 고객 코드의 설명은 독립 검증하지 않음 |
+
+**사용자 코드 실행은 macOS 격리 환경 또는 실행기가 동봉된 Windows 번들에서 됩니다.** 격리를 사용할 수 없으면 실행을 거부합니다.
+기존 릴리스의 단일 실행 파일·자동 설치·`.mcpb`를 설치했다고 이 기능이 추가되는 것은 아닙니다.
+`build_strategy_lab.sh` 로 만드는 폴더형 번들은 macOS 전용이며, 베타에서는 릴리스 자산으로 배포하지 않습니다.
+개발자는 `bash build_strategy_lab.sh`로 만들고, 고객 실행 경로는 `local-bundle/meritz-strategy-lab/Start.command`입니다.
+폴더 전체를 유지해야 합니다. 합성 시세의 네이티브 실행과 제한 동작을 확인했으며 상세 범위는 백테스트 안내에 있습니다.
+
+고객이 이미 등록한 MCP 계좌의 키로 시세를 조회하고, 키·토큰은 전략 작업 프로세스에 전달하지 않습니다.
+MCP Apps 화면은 차트·거래 상세를 제공합니다. 표시 방식은 연결한 AI 호스트의 MCP Apps 지원에 따릅니다.
+로컬 브라우저에서 같은 도구를 사용하는 검토 화면도 제공합니다.
+전략 코드와 보고서는 연결한 AI 서비스에 전달될 수 있습니다.
+
+사용 방법과 한계는 [백테스트 안내](docs/backtest.md), 코드 규격은 [전략 계약](docs/strategy-contract.md),
+예제는 [examples/strategies](examples/strategies)를 참고하십시오.

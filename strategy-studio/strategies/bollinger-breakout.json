@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "볼린저 상단 돌파",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "field",
+      "field": "close"
+    },
+    "right": {
+      "type": "bollinger",
+      "component": "upper",
+      "period": 20,
+      "num_std": 2
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "field",
+      "field": "close"
+    },
+    "right": {
+      "type": "bollinger",
+      "component": "mid",
+      "period": 20,
+      "num_std": 2
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

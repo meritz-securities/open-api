@@ -1,0 +1,60 @@
+# 푸시·PR 마다 테스트를 돌립니다. 카탈로그 동봉본이 낡았거나 예제가 명세와 어긋나면 여기서 잡힙니다.
+# strategy-studio/ 는 별도 프로젝트라 자체 의존성으로 pytest 와 Studio 프런트엔드 빌드를 따로 확인합니다.
+name: test
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
+        with: { python-version: "${{ matrix.python }}" }
+      - name: 의존성
+        run: uv sync --all-extras --dev
+      - name: 테스트
+        run: uv run pytest -q
+
+  strategy-studio:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: strategy-studio/studio/package-lock.json
+      - name: Studio 빌드 (tsc + vite) — studio/dist 를 읽는 테스트가 있어 먼저 돈다
+        working-directory: strategy-studio/studio
+        run: |
+          npm ci
+          npm run build
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
+        with: { python-version: "${{ matrix.python }}" }
+      - name: 의존성
+        working-directory: strategy-studio
+        run: uv sync --all-extras --dev
+      - name: 테스트
+        working-directory: strategy-studio
+        env:
+          MERITZ_NO_ENV_FILE: "1"
+        run: uv run pytest -q -p no:cacheprovider

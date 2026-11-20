@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "SMA 교차 + RSI 확인",
+  "entry": {
+    "op": "all",
+    "conditions": [
+      {
+        "op": "cross_above",
+        "left": {
+          "type": "sma",
+          "period": 5
+        },
+        "right": {
+          "type": "sma",
+          "period": 20
+        }
+      },
+      {
+        "op": "gt",
+        "left": {
+          "type": "rsi",
+          "period": 14
+        },
+        "right": {
+          "type": "constant",
+          "value": 50
+        }
+      }
+    ]
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "sma",
+      "period": 5
+    },
+    "right": {
+      "type": "sma",
+      "period": 20
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

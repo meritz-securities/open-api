@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "볼린저 하단 반등",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "field",
+      "field": "close"
+    },
+    "right": {
+      "type": "bollinger",
+      "component": "lower",
+      "period": 20,
+      "num_std": 2
+    }
+  },
+  "exit": {
+    "op": "cross_above",
+    "left": {
+      "type": "field",
+      "field": "close"
+    },
+    "right": {
+      "type": "bollinger",
+      "component": "mid",
+      "period": 20,
+      "num_std": 2
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

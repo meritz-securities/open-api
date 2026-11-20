@@ -1,0 +1,111 @@
+/* Consistent controls and balanced columns across the embedded desktop window. */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  min-height: 40px;
+  padding-right: 38px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='m3 5 4 4 4-4' fill='none' stroke='%236d7785' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select {
+  min-height: 40px;
+}
+
+.workspace-layout {
+  grid-template-columns: minmax(0, 1fr) clamp(340px, 25vw, 420px);
+}
+
+.market-data-panel {
+  margin-top: 16px;
+}
+
+button.data-refresh {
+  margin-top: 8px;
+}
+
+.studio > main {
+  max-width: 1760px;
+  margin-inline: auto;
+}
+
+.tree-viewport {
+  height: calc(var(--canvas-content-height, 480px) + 24px);
+  min-height: min(360px, 55dvh);
+  max-height: min(72dvh, 720px);
+  overflow: auto;
+}
+
+.tree-pan-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  padding: 4px 0;
+  background: var(--surface);
+  width: calc(100% - 202px);
+}
+
+@media (max-width: 760px) {
+  .tree-pan-controls {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1400px) and (min-width: 761px) {
+  .workspace-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .execution-column {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    align-items: start;
+  }
+}
+
+@media (max-width: 760px) {
+  .workspace-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .execution-column {
+    display: block;
+  }
+
+  .tree-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tree-inspector {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 12px 0 0;
+  }
+}
+
+@media (min-width: 761px) {
+  .tree-inspector {
+    position: sticky;
+    top: 70px;
+    align-self: start;
+    max-height: calc(100dvh - 88px);
+    overflow: auto;
+  }
+}
+
+
+
+.field-with-help {
+  min-width: 0;
+}
+
+.field-with-help > .micro {
+  display: block;
+  margin: 0;
+  font-size: 10px;
+}

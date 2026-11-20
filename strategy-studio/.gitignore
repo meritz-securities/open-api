@@ -1,0 +1,22 @@
+.venv/
+node_modules/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env*
+!.env.example
+local-bundle/
+build/
+dist/
+*.spec
+studio/dist/
+ui/backtest/dist/
+**/test-results/
+**/playwright-report/
+*.sqlite*
+*.db
+
+# 내부 전용 — 공개 스냅숏에 넣지 않는다
+.review-guidance/
+output/
+tmp/
