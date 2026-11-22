@@ -1,0 +1,9 @@
+.parameter-grid .field-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; align-items: start; margin-bottom: 12px; }
+.parameter-grid .field-grid label { min-width: 0; }
+.parameter-grid .field-grid button { margin-top: 24px; }
+.parameter-grid .field-grid small { display: block; line-height: 1.5; margin-top: 4px; }
+.parameter-grid > section { margin-top: 20px; }
+@media (max-width: 600px) {
+ .parameter-grid .field-grid { grid-template-columns: minmax(0, 1fr); padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+ .parameter-grid .field-grid button { margin-top: 0; justify-self: start; }
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "ZLEMA 10/30 교차",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "zlema",
+      "period": 10
+    },
+    "right": {
+      "type": "zlema",
+      "period": 30
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "zlema",
+      "period": 10
+    },
+    "right": {
+      "type": "zlema",
+      "period": 30
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

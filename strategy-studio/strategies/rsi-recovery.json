@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "RSI 30 회복 · 70 이탈",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "rsi",
+      "period": 14
+    },
+    "right": {
+      "type": "constant",
+      "value": 30
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "rsi",
+      "period": 14
+    },
+    "right": {
+      "type": "constant",
+      "value": 70
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

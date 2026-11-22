@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "StochRSI 과매도 탈출",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "stochrsi",
+      "component": "k"
+    },
+    "right": {
+      "type": "constant",
+      "value": 20
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "stochrsi",
+      "component": "k"
+    },
+    "right": {
+      "type": "constant",
+      "value": 80
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

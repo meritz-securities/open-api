@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "CCI 과매도 반전",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "cci",
+      "period": 20
+    },
+    "right": {
+      "type": "constant",
+      "value": -100
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "cci",
+      "period": 20
+    },
+    "right": {
+      "type": "constant",
+      "value": 100
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

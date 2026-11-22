@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "장기 추세 + MACD 모멘텀",
+  "entry": {
+    "op": "all",
+    "conditions": [
+      {
+        "op": "gt",
+        "left": {
+          "type": "field",
+          "field": "close"
+        },
+        "right": {
+          "type": "sma",
+          "period": 60
+        }
+      },
+      {
+        "op": "cross_above",
+        "left": {
+          "type": "macd",
+          "component": "macd",
+          "fast": 12,
+          "slow": 26,
+          "signal": 9
+        },
+        "right": {
+          "type": "macd",
+          "component": "signal",
+          "fast": 12,
+          "slow": 26,
+          "signal": 9
+        }
+      }
+    ]
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "macd",
+      "component": "macd",
+      "fast": 12,
+      "slow": 26,
+      "signal": 9
+    },
+    "right": {
+      "type": "macd",
+      "component": "signal",
+      "fast": 12,
+      "slow": 26,
+      "signal": 9
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

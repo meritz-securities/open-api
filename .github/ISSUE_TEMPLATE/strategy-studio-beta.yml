@@ -1,0 +1,73 @@
+name: Strategy Studio 베타 의견
+description: 베타 Strategy Studio(strategy-studio/) 를 써 보시고 불편한 점·안 되는 점·바라는 점을 알려 주십시오.
+labels:
+- strategy-studio
+- beta-feedback
+body:
+- type: markdown
+  attributes:
+    value: |
+      **앱키(App Key)·시크릿(App Secret)·계좌번호·잔고를 이 화면에 넣지 마십시오.** 이슈는 누구나 볼 수 있고
+      지우셔도 수정 이력에 남습니다. 백테스트 결과를 붙이실 때는 종목·기간·지표만 남기고 계좌 정보는 지워 주십시오.
+
+      베타는 응답 기한을 약속하지 않습니다. 계좌·주문·앱키 발급 문의는 개발자 포털 문의 채널을 이용해 주십시오.
+      파이썬 예제(루트 `examples/`)의 문제는 "예제가 동작하지 않습니다" 양식을 써 주십시오.
+- type: dropdown
+  id: os
+  attributes:
+    label: 운영체제
+    options:
+    - macOS (Apple 칩)
+    - macOS (Intel)
+    - Windows 11
+    - Windows 10
+    - 기타
+  validations:
+    required: true
+- type: dropdown
+  id: mode
+  attributes:
+    label: 실행 방식
+    options:
+    - 기본 브라우저 (옵션 없음 또는 --browser)
+    - 자체 창 (--window)
+    - MCP (--mcp)
+    - CLI (--cli)
+  validations:
+    required: true
+- type: dropdown
+  id: tool
+  attributes:
+    label: 관련 MCP 도구 (MCP 로 쓰셨다면)
+    options:
+    - 해당 없음 — 화면(Studio)·CLI 문제
+    - meritz_account — 잔고·예수금·평가·거래내역
+    - meritz_market — 국내주식 시세·호가·체결
+    - meritz_overseas_market — 해외주식·해외 지수·원자재·환율 시세·호가·체결
+    - meritz_trading — 주문·정정·취소·주문내역
+    - meritz_forex — 환율·환전
+    - meritz_reference — 참조 정보
+    - meritz_info — 서버·설정 정보
+    - meritz_backtest_demo — 합성 시세 백테스트 시연
+    - meritz_backtest_run — 고객 키의 국내 일봉으로 백테스트
+    - meritz_backtest_compare — 동일 시세에서 전략 조건 비교
+    - meritz_backtest_trade — 가상 체결 근거 조회
+    - meritz_backtest_validate — 고객 전략 문법 검사
+    - meritz_backtest_code — 고객 전략 코드 백테스트
+- type: textarea
+  id: what
+  attributes:
+    label: 무엇을 하려 했고, 무엇이 달랐습니까
+    description: 예제 전략 이름, 데이터 종류(합성·CSV·메리츠 시세), 누른 버튼 순서를 적어 주시면 재현이 빨라집니다.
+  validations:
+    required: true
+- type: textarea
+  id: expected
+  attributes:
+    label: 바라는 동작
+- type: textarea
+  id: log
+  attributes:
+    label: 화면의 오류 문구나 터미널 출력
+    description: 앱키·계좌번호가 섞여 있으면 `***` 로 바꿔 주십시오.
+    render: text

@@ -1,0 +1,786 @@
+# User-facing descriptions. No executable strategy fields are added.
+
+[[templates]]
+name = "SMA 5/20 교차"
+summary = "SMA(최근 종가의 단순 평균)로 짧은 흐름과 긴 흐름의 교차를 비교합니다."
+buyRule = "최근 5개 가격 기록의 평균이 최근 20개 가격 기록의 평균 이하에 있다가 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "최근 5개 가격 기록의 평균이 최근 20개 가격 기록의 평균 이상에 있다가 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["기간은 가격 기록 수입니다. 일봉에서는 기록 하나가 하루에 해당합니다.", "단순히 최근 5개 가격 기록의 평균이 더 높다는 이유만으로 매수하지 않습니다. 준비 기간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수: 짧은 평균 기간"
+value = 5
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수: 긴 평균 기간"
+value = 20
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도: 짧은 평균 기간"
+value = 5
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도: 긴 평균 기간"
+value = 20
+
+[[templates]]
+name = "EMA 12/26 교차"
+summary = "EMA(최근 종가에 더 큰 비중을 둔 평균) 두 개의 교차를 비교합니다."
+buyRule = "최근 12개 가격 기록의 EMA가 최근 26개 가격 기록의 EMA 이하에 있다가 위로 올라설 때 매수를 결정합니다."
+sellRule = "최근 12개 가격 기록의 EMA가 최근 26개 가격 기록의 EMA 이상에 있다가 아래로 내려설 때 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["기간은 가격 기록 수입니다. 일봉에서는 기록 하나가 하루에 해당합니다.", "초기 평균을 계산할 만큼 데이터가 쌓인 뒤 이전 봉과 현재 봉을 비교합니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수: 짧은 평균 기간"
+value = 12
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수: 긴 평균 기간"
+value = 26
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도: 짧은 평균 기간"
+value = 12
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도: 긴 평균 기간"
+value = 26
+
+[[templates]]
+name = "RSI 30 회복 · 70 이탈"
+summary = "RSI(최근 상승·하락 폭의 비율을 0~100으로 나타낸 값)의 기준선 통과를 확인합니다."
+buyRule = "최근 14개 가격 기록의 RSI가 30 이하에 있다가 30보다 높아질 때 매수를 결정합니다."
+sellRule = "최근 14개 가격 기록의 RSI가 70 이상에 있다가 70보다 낮아질 때 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["기간은 가격 기록 수입니다. 일봉에서는 기록 하나가 하루에 해당합니다.", "RSI가 낮다는 이유만으로 매수하지 않습니다. 70을 넘는 순간에도 매도하지 않습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수 RSI 기간"
+value = 14
+[[templates.parameters]]
+path = "entry.right.value"
+label = "매수 회복 기준"
+value = 30
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도 RSI 기간"
+value = 14
+[[templates.parameters]]
+path = "exit.right.value"
+label = "매도 이탈 기준"
+value = 70
+
+[[templates]]
+name = "종가와 20일 평균 교차"
+summary = "현재 종가와 SMA(최근 종가의 단순 평균)를 비교합니다."
+buyRule = "종가가 최근 20개 가격 기록의 평균 이하에 있다가 그 평균 위로 올라설 때 매수를 결정합니다."
+sellRule = "종가가 최근 20개 가격 기록의 평균 이상에 있다가 그 평균 아래로 내려설 때 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["기간은 가격 기록 수입니다. 일봉에서는 기록 하나가 하루에 해당합니다.", "평균에는 현재 봉의 종가도 포함됩니다. 최근 최고가 돌파 전략이 아닙니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수 평균 기간"
+value = 20
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도 평균 기간"
+value = 20
+
+[[templates]]
+name = "SMA 20/60 교차"
+summary = "SMA(최근 종가의 단순 평균)를 최근 20개와 60개 가격 기록으로 계산하는 예시입니다."
+buyRule = "최근 20개 가격 기록의 평균이 최근 60개 가격 기록의 평균 이하에 있다가 위로 올라설 때 매수를 결정합니다."
+sellRule = "최근 20개 가격 기록의 평균이 최근 60개 가격 기록의 평균 이상에 있다가 아래로 내려설 때 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["기간은 가격 기록 수입니다. 일봉에서는 기록 하나가 하루에 해당합니다.", "비교할 과거 데이터가 부족한 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수: 짧은 평균 기간"
+value = 20
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수: 긴 평균 기간"
+value = 60
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도: 짧은 평균 기간"
+value = 20
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도: 긴 평균 기간"
+value = 60
+
+[[templates]]
+name = "SMA 교차 + RSI 확인"
+summary = "SMA(최근 종가의 단순 평균) 교차와 RSI(최근 상승·하락 폭의 비율) 조건을 함께 확인합니다."
+buyRule = "같은 봉에서 최근 5개 가격 기록의 평균이 최근 20개 가격 기록의 평균을 위로 통과하고 최근 14개 가격 기록의 RSI가 50보다 높을 때만 매수를 결정합니다."
+sellRule = "최근 5개 가격 기록의 평균이 최근 20개 가격 기록의 평균을 아래로 통과하면 RSI와 관계없이 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["기간은 가격 기록 수입니다. 일봉에서는 기록 하나가 하루에 해당합니다.", "교차한 봉에서 RSI 조건이 맞지 않으면 이후 RSI만 상승해도 매수하지 않습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.conditions.0.left.period"
+label = "매수: 짧은 평균 기간"
+value = 5
+[[templates.parameters]]
+path = "entry.conditions.0.right.period"
+label = "매수: 긴 평균 기간"
+value = 20
+[[templates.parameters]]
+path = "entry.conditions.1.left.period"
+label = "RSI 기간"
+value = 14
+[[templates.parameters]]
+path = "entry.conditions.1.right.value"
+label = "RSI 확인 기준"
+value = 50
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도: 짧은 평균 기간"
+value = 5
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도: 긴 평균 기간"
+value = 20
+
+[[templates]]
+name = "낮은 RSI에서 매 봉 1주"
+summary = "RSI(최근 상승·하락 폭의 비율)가 낮게 유지되는 동안 조금씩 매수하는 예시입니다."
+buyRule = "최근 14개 가격 기록의 RSI가 30보다 낮은 모든 봉에서 1주 매수를 결정합니다. 이미 보유 중이어도 반복합니다."
+sellRule = "최근 14개 가격 기록의 RSI가 70보다 높은 모든 봉에서 보유분 중 1주 매도를 결정합니다."
+sizing = "매수·매도 모두 한 번에 1주입니다. 보유 중 추가 매수를 허용합니다. 남은 현금이나 보유 수량을 넘겨 체결하지 않습니다."
+cautions = ["기간은 가격 기록 수입니다. 일봉에서는 기록 하나가 하루에 해당합니다.", "정기 적립이 아닙니다. 조건이 이어지면 매 봉 주문이 발생하며 현금이 부족한 주문은 거절됩니다.", "매도도 한 번에 1주입니다. 조건이 끝나면 일부 주식을 계속 보유할 수 있습니다. 손절·익절을 추가해도 매도 수량은 한 번에 1주입니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수 RSI 기간"
+value = 14
+[[templates.parameters]]
+path = "entry.right.value"
+label = "매수 기준"
+value = 30
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도 RSI 기간"
+value = 14
+[[templates.parameters]]
+path = "exit.right.value"
+label = "매도 기준"
+value = 70
+[[templates.parameters]]
+path = "quantity"
+label = "한 번에 사고파는 주식 수"
+value = 1
+
+[[templates]]
+name = "한 번 매수하고 보유"
+summary = "처음 매수한 뒤 매도하지 않고 보유한 결과를 비교하는 단순 예시입니다."
+buyRule = "첫 봉의 종가가 양수이면 매수를 결정하고 다음 봉에서 가능한 수량을 삽니다."
+sellRule = "자동 매도 조건이 없습니다. 마지막 보유분은 마지막 종가로 평가합니다."
+sizing = "남은 현금으로 살 수 있는 최대 정수 주식 수를 삽니다. 보유 중에는 추가 매수하지 않습니다."
+cautions = ["기간은 가격 기록 수입니다. 일봉에서는 기록 하나가 하루에 해당합니다.", "첫 봉 시가에 바로 사는 비교선과 매수 시점이 다릅니다.", "매수되지 않으면 다음 봉에서도 다시 시도할 수 있습니다. 손절·익절을 따로 설정하면 매도 후 재매수할 수 있습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+parameters = []
+
+[[templates]]
+name = "WMA 10/30 교차"
+summary = "WMA(최근 가격에 선형 가중을 준 평균) 두 개의 교차로 추세 전환을 봅니다."
+buyRule = "최근 10개 가격 기록의 WMA가 최근 30개 가격 기록의 WMA 이하에 있다가 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "최근 10개 가격 기록의 WMA가 최근 30개 가격 기록의 WMA 이상에 있다가 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["WMA는 단순 평균보다 최근 가격에 더 민감해 신호가 자주 나올 수 있습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수: 짧은 평균 기간"
+value = 10
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수: 긴 평균 기간"
+value = 30
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도: 짧은 평균 기간"
+value = 10
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도: 긴 평균 기간"
+value = 30
+
+[[templates]]
+name = "HMA 9/21 교차"
+summary = "HMA(지연을 줄인 헐 이동평균) 두 개의 교차로 빠른 추세 전환을 봅니다."
+buyRule = "최근 9개 가격 기록의 HMA가 최근 21개 가격 기록의 HMA 이하에 있다가 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "최근 9개 가격 기록의 HMA가 최근 21개 가격 기록의 HMA 이상에 있다가 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["HMA는 반응이 매우 빨라 추세가 없는 구간에서는 잦은 교차로 손실이 쌓일 수 있습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수: 짧은 평균 기간"
+value = 9
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수: 긴 평균 기간"
+value = 21
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도: 짧은 평균 기간"
+value = 9
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도: 긴 평균 기간"
+value = 21
+
+[[templates]]
+name = "DEMA 10/30 교차"
+summary = "DEMA(이중 지수평활로 지연을 줄인 평균) 두 개의 교차를 봅니다."
+buyRule = "최근 10개 가격 기록의 DEMA가 최근 30개 가격 기록의 DEMA 이하에 있다가 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "최근 10개 가격 기록의 DEMA가 최근 30개 가격 기록의 DEMA 이상에 있다가 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["DEMA는 EMA보다 지연이 작은 대신 변동성이 큰 구간에서 신호가 민감합니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수: 짧은 평균 기간"
+value = 10
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수: 긴 평균 기간"
+value = 30
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도: 짧은 평균 기간"
+value = 10
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도: 긴 평균 기간"
+value = 30
+
+[[templates]]
+name = "TEMA 10/30 교차"
+summary = "TEMA(삼중 지수평활로 지연을 더 줄인 평균) 두 개의 교차를 봅니다."
+buyRule = "최근 10개 가격 기록의 TEMA가 최근 30개 가격 기록의 TEMA 이하에 있다가 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "최근 10개 가격 기록의 TEMA가 최근 30개 가격 기록의 TEMA 이상에 있다가 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["지연이 작을수록 거짓 신호도 빨라질 수 있습니다. 추세가 분명한 구간에 어울립니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수: 짧은 평균 기간"
+value = 10
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수: 긴 평균 기간"
+value = 30
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도: 짧은 평균 기간"
+value = 10
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도: 긴 평균 기간"
+value = 30
+
+[[templates]]
+name = "ZLEMA 10/30 교차"
+summary = "ZLEMA(지연을 보정한 지수평활 평균) 두 개의 교차를 봅니다."
+buyRule = "최근 10개 가격 기록의 ZLEMA가 최근 30개 가격 기록의 ZLEMA 이하에 있다가 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "최근 10개 가격 기록의 ZLEMA가 최근 30개 가격 기록의 ZLEMA 이상에 있다가 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["지연 보정으로 전환을 빨리 잡지만 횡보 구간에서는 신호가 자주 뒤집힐 수 있습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수: 짧은 평균 기간"
+value = 10
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수: 긴 평균 기간"
+value = 30
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도: 짧은 평균 기간"
+value = 10
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도: 긴 평균 기간"
+value = 30
+
+[[templates]]
+name = "가격·KAMA 적응형 추세"
+summary = "KAMA(추세 강도에 따라 민감도가 변하는 적응형 평균)와 종가를 비교합니다."
+buyRule = "종가가 KAMA 이하에 있다가 그 위로 올라선 봉에서 매수를 결정합니다. 추세가 강할수록 KAMA가 가격을 빠르게 따라옵니다."
+sellRule = "종가가 KAMA 이상에 있다가 그 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["KAMA는 횡보에서는 거의 평평해져 신호를 억제하고 추세에서는 빠르게 반응합니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수 KAMA 효율 기간"
+value = 10
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도 KAMA 효율 기간"
+value = 10
+
+[[templates]]
+name = "MACD 시그널선 교차"
+summary = "MACD선(단기·장기 EMA의 차이)과 그 시그널선의 교차로 모멘텀 전환을 봅니다."
+buyRule = "MACD선이 시그널선 이하에 있다가 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "MACD선이 시그널선 이상에 있다가 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["MACD 교차는 가격이 아니라 두 평균의 차이를 비교합니다. 추세 초기에 신호가 늦을 수 있습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.fast"
+label = "매수 MACD 단기 기간"
+value = 12
+[[templates.parameters]]
+path = "entry.left.slow"
+label = "매수 MACD 장기 기간"
+value = 26
+[[templates.parameters]]
+path = "entry.left.signal"
+label = "매수 시그널 기간"
+value = 9
+[[templates.parameters]]
+path = "exit.left.fast"
+label = "매도 MACD 단기 기간"
+value = 12
+[[templates.parameters]]
+path = "exit.left.slow"
+label = "매도 MACD 장기 기간"
+value = 26
+
+[[templates]]
+name = "PPO 0선 교차"
+summary = "PPO(MACD를 백분율로 바꾼 지표)가 0선을 지나는 순간으로 추세 방향을 봅니다."
+buyRule = "PPO가 0 이하에 있다가 0 위로 올라선 봉에서 매수를 결정합니다. 단기 평균이 장기 평균을 추월했다는 뜻입니다."
+sellRule = "PPO가 0 이상에 있다가 0 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["PPO는 백분율이라 가격대가 다른 종목끼리 비교하기 좋습니다. 횡보에서는 0선을 자주 넘나듭니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.fast"
+label = "매수 PPO 단기 기간"
+value = 12
+[[templates.parameters]]
+path = "entry.left.slow"
+label = "매수 PPO 장기 기간"
+value = 26
+[[templates.parameters]]
+path = "exit.left.fast"
+label = "매도 PPO 단기 기간"
+value = 12
+[[templates.parameters]]
+path = "exit.left.slow"
+label = "매도 PPO 장기 기간"
+value = 26
+
+[[templates]]
+name = "CCI 과매도 반전"
+summary = "CCI(전형가격이 평균에서 벗어난 정도)가 과매도 구간에서 돌아설 때를 봅니다."
+buyRule = "최근 20개 가격 기록의 CCI가 -100 이하에 있다가 -100 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "CCI가 +100 이상에 있다가 +100 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["CCI는 상·하한이 없는 지표입니다. 강한 추세에서는 -100을 넘어도 하락이 이어질 수 있습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수 CCI 기간"
+value = 20
+[[templates.parameters]]
+path = "entry.right.value"
+label = "매수 과매도 기준"
+value = -100
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도 CCI 기간"
+value = 20
+[[templates.parameters]]
+path = "exit.right.value"
+label = "매도 과매수 기준"
+value = 100
+
+[[templates]]
+name = "윌리엄스 %R 반등"
+summary = "윌리엄스 %R(기간 고저 범위에서 종가의 위치, -100~0)이 과매도에서 올라설 때를 봅니다."
+buyRule = "최근 14개 가격 기록의 %R이 -80 이하에 있다가 -80 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "%R이 -20 이상에 있다가 -20 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["%R은 0에 가까울수록 과매수, -100에 가까울수록 과매도입니다. 강세장에서는 과매수가 오래갑니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수 %R 기간"
+value = 14
+[[templates.parameters]]
+path = "entry.right.value"
+label = "매수 과매도 기준"
+value = -80
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도 %R 기간"
+value = 14
+[[templates.parameters]]
+path = "exit.right.value"
+label = "매도 과매수 기준"
+value = -20
+
+[[templates]]
+name = "ROC 0선 상향 돌파"
+summary = "ROC(일정 기간 전 대비 가격 변화율)가 0선을 지나는 순간으로 모멘텀 방향을 봅니다."
+buyRule = "최근 12개 가격 기록 전과 비교한 변화율이 0 이하에 있다가 0 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "변화율이 0 이상에 있다가 0 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["ROC는 추세의 세기를 재는 지표입니다. 0 부근에서 자주 오가면 신호가 빈번해집니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수 ROC 기간"
+value = 12
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도 ROC 기간"
+value = 12
+
+[[templates]]
+name = "StochRSI 과매도 탈출"
+summary = "StochRSI(RSI를 다시 스토캐스틱화한 0~100 지표)의 %K선이 과매도에서 올라설 때를 봅니다."
+buyRule = "StochRSI의 %K가 20 이하에 있다가 20 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "StochRSI의 %K가 80 이상에 있다가 80 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["StochRSI는 RSI보다 더 민감해 과매도·과매수 사이를 빠르게 오갑니다. 거짓 신호가 늘 수 있습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.right.value"
+label = "매수 과매도 기준"
+value = 20
+[[templates.parameters]]
+path = "exit.right.value"
+label = "매도 과매수 기준"
+value = 80
+
+[[templates]]
+name = "TRIX 0선 교차"
+summary = "TRIX(삼중 평활 종가의 변화율)가 0선을 지나는 순간으로 추세 방향을 봅니다."
+buyRule = "최근 15개 기간으로 평활한 TRIX가 0 이하에 있다가 0 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "TRIX가 0 이상에 있다가 0 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["세 번 평활해 잡음을 줄인 대신 신호가 느립니다. 짧은 등락은 걸러집니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수 TRIX 기간"
+value = 15
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도 TRIX 기간"
+value = 15
+
+[[templates]]
+name = "어썸 오실레이터 0선 교차"
+summary = "어썸 오실레이터(중간값의 단기·장기 단순평균 차이)가 0선을 지나는 순간을 봅니다."
+buyRule = "어썸 오실레이터가 0 이하에 있다가 0 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "어썸 오실레이터가 0 이상에 있다가 0 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["중간값(고+저)/2를 쓰므로 종가만 보는 지표와 신호 시점이 다를 수 있습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.fast"
+label = "매수 단기 기간"
+value = 5
+[[templates.parameters]]
+path = "entry.left.slow"
+label = "매수 장기 기간"
+value = 34
+[[templates.parameters]]
+path = "exit.left.fast"
+label = "매도 단기 기간"
+value = 5
+[[templates.parameters]]
+path = "exit.left.slow"
+label = "매도 장기 기간"
+value = 34
+
+[[templates]]
+name = "CMO 모멘텀 반전"
+summary = "CMO(기간 내 상승폭과 하락폭의 비율, -100~100)가 과매도에서 돌아설 때를 봅니다."
+buyRule = "최근 14개 가격 기록의 CMO가 -50 이하에 있다가 -50 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "CMO가 +50 이상에 있다가 +50 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["CMO는 RSI와 비슷하지만 0을 중심으로 대칭입니다. 추세가 강하면 극단값이 오래 유지됩니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수 CMO 기간"
+value = 14
+[[templates.parameters]]
+path = "entry.right.value"
+label = "매수 과매도 기준"
+value = -50
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도 CMO 기간"
+value = 14
+[[templates.parameters]]
+path = "exit.right.value"
+label = "매도 과매수 기준"
+value = 50
+
+[[templates]]
+name = "볼린저 하단 반등"
+summary = "볼린저밴드 하단(평균 − 표준편차×배수)을 종가가 되밟고 올라설 때를 보는 평균회귀 예시입니다."
+buyRule = "종가가 하단 밴드 이하에 있다가 하단 밴드 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "종가가 중심선(평균) 아래에 있다가 중심선 위로 올라선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["평균회귀는 추세장에서 위험합니다. 하단을 뚫고 하락이 이어지면 반등이 오지 않을 수 있습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수 밴드 기간"
+value = 20
+[[templates.parameters]]
+path = "entry.right.num_std"
+label = "매수 표준편차 배수"
+value = 2
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도 밴드 기간"
+value = 20
+
+[[templates]]
+name = "볼린저 상단 돌파"
+summary = "볼린저밴드 상단(평균 + 표준편차×배수)을 종가가 돌파할 때 추세를 따라붙는 예시입니다."
+buyRule = "종가가 상단 밴드 이하에 있다가 상단 밴드 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "종가가 중심선(평균) 위에 있다가 중심선 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["변동성이 커지면 밴드가 벌어집니다. 돌파 직후 되돌림에 휩쓸릴 수 있습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수 밴드 기간"
+value = 20
+[[templates.parameters]]
+path = "entry.right.num_std"
+label = "매수 표준편차 배수"
+value = 2
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도 밴드 기간"
+value = 20
+
+[[templates]]
+name = "켈트너 채널 상단 돌파"
+summary = "켈트너 채널 상단(EMA + ATR×배수)을 종가가 돌파할 때 추세를 따라붙는 예시입니다."
+buyRule = "종가가 상단 채널 이하에 있다가 상단 채널 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "종가가 중심선(EMA) 위에 있다가 중심선 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["변동성 폭을 표준편차가 아닌 ATR로 잡습니다. 갭이 큰 종목에서는 밴드가 빠르게 넓어집니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수 중심선 기간"
+value = 20
+[[templates.parameters]]
+path = "entry.right.atr_period"
+label = "매수 ATR 기간"
+value = 10
+[[templates.parameters]]
+path = "entry.right.mult"
+label = "매수 ATR 배수"
+value = 2
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도 중심선 기간"
+value = 20
+
+[[templates]]
+name = "돈치안 20일 돌파 (터틀)"
+summary = "직전 20봉 최고가를 종가가 돌파하면 사고, 직전 10봉 최저가를 깨면 파는 고전 터틀식 예시입니다."
+buyRule = "종가가 직전 20봉의 최고가 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "종가가 직전 10봉의 최저가 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["채널은 당일을 뺀 직전 봉들로 계산합니다. 추세 추종 전략이라 횡보장에서 반복 손실이 날 수 있습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수 돌파 기간"
+value = 20
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도 이탈 기간"
+value = 10
+
+[[templates]]
+name = "ADX 추세 확인 + SMA 교차"
+summary = "SMA 교차 신호를 ADX(추세의 세기)가 일정 수준 이상일 때만 받아들이는 추세 필터 예시입니다."
+buyRule = "같은 봉에서 최근 5개 평균이 최근 20개 평균을 위로 통과하고 ADX가 20보다 클 때만 매수를 결정합니다."
+sellRule = "최근 5개 평균이 최근 20개 평균을 아래로 통과하면 ADX와 관계없이 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["ADX는 방향이 아니라 추세의 세기만 나타냅니다. 값이 낮으면 교차가 생겨도 매수하지 않습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.conditions.0.left.period"
+label = "매수: 짧은 평균 기간"
+value = 5
+[[templates.parameters]]
+path = "entry.conditions.0.right.period"
+label = "매수: 긴 평균 기간"
+value = 20
+[[templates.parameters]]
+path = "entry.conditions.1.left.period"
+label = "ADX 기간"
+value = 14
+[[templates.parameters]]
+path = "entry.conditions.1.right.value"
+label = "ADX 추세 확인 기준"
+value = 20
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도: 짧은 평균 기간"
+value = 5
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도: 긴 평균 기간"
+value = 20
+
+[[templates]]
+name = "아룬 상·하향선 교차"
+summary = "아룬 Up선(신고가의 최근성)과 Down선(신저가의 최근성)의 교차로 추세 전환을 봅니다."
+buyRule = "아룬 Up이 Down 이하에 있다가 위로 올라선 봉에서 매수를 결정합니다. 신고가가 더 최근이라는 뜻입니다."
+sellRule = "아룬 Up이 Down 이상에 있다가 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["아룬은 가격이 아니라 고점·저점이 언제 나왔는지를 봅니다. 신고·신저가 없으면 선이 평평합니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수 아룬 기간"
+value = 25
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수 아룬 기간(Down)"
+value = 25
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도 아룬 기간"
+value = 25
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도 아룬 기간(Down)"
+value = 25
+
+[[templates]]
+name = "볼텍스 VI 교차"
+summary = "볼텍스 지표 VI+(상승 움직임)와 VI-(하락 움직임)의 교차로 추세 방향을 봅니다."
+buyRule = "VI+가 VI- 이하에 있다가 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "VI+가 VI- 이상에 있다가 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["VI+와 VI-는 트루레인지로 정규화한 추세 지표입니다. 두 선이 붙은 횡보에서는 교차가 잦습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수 볼텍스 기간"
+value = 14
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수 볼텍스 기간(VI-)"
+value = 14
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도 볼텍스 기간"
+value = 14
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도 볼텍스 기간(VI-)"
+value = 14
+
+[[templates]]
+name = "스토캐스틱 %K·%D 교차"
+summary = "스토캐스틱 %K선과 %D선(그 평활선)의 교차로 단기 모멘텀 전환을 봅니다."
+buyRule = "%K가 %D 이하에 있다가 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "%K가 %D 이상에 있다가 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["%K는 기간 고저 범위에서 종가의 위치입니다. 횡보 구간에서는 교차가 매우 잦습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수 스토캐스틱 기간"
+value = 14
+[[templates.parameters]]
+path = "entry.right.period"
+label = "매수 스토캐스틱 기간(%D)"
+value = 14
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도 스토캐스틱 기간"
+value = 14
+[[templates.parameters]]
+path = "exit.right.period"
+label = "매도 스토캐스틱 기간(%D)"
+value = 14
+
+[[templates]]
+name = "얼티밋 오실레이터 반전"
+summary = "얼티밋 오실레이터(세 기간 매수압력을 가중합한 0~100 지표)의 기준선 통과를 봅니다."
+buyRule = "얼티밋 오실레이터가 40 이하에 있다가 40 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "얼티밋 오실레이터가 60 이상에 있다가 60 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["서로 다른 세 기간을 섞어 잡음을 줄인 지표입니다. 기준선 40·60은 예시값이며 종목에 따라 조정이 필요합니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.right.value"
+label = "매수 반등 기준"
+value = 40
+[[templates.parameters]]
+path = "exit.right.value"
+label = "매도 기준"
+value = 60
+
+[[templates]]
+name = "피셔 트랜스폼 0선 교차"
+summary = "피셔 변환(가격 위치를 뾰족하게 바꿔 전환점을 강조한 지표)이 0선을 지나는 순간을 봅니다."
+buyRule = "피셔 변환값이 0 이하에 있다가 0 위로 올라선 봉에서 매수를 결정합니다."
+sellRule = "피셔 변환값이 0 이상에 있다가 0 아래로 내려선 봉에서 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["피셔 변환은 전환점을 과장해 보여줍니다. 극단값이 곧 되돌림을 보장하지는 않습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.left.period"
+label = "매수 피셔 기간"
+value = 10
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도 피셔 기간"
+value = 10
+
+[[templates]]
+name = "장기 추세 + MACD 모멘텀"
+summary = "종가가 장기 평균 위에 있는 상승 국면에서만 MACD 매수 신호를 받아들이는 추세·모멘텀 결합 예시입니다."
+buyRule = "종가가 최근 60개 평균보다 높고, 같은 봉에서 MACD선이 시그널선을 위로 통과할 때만 매수를 결정합니다."
+sellRule = "MACD선이 시그널선을 아래로 통과하면 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["장기 평균 아래의 하락 국면에서는 MACD가 올라서도 매수하지 않습니다. 준비 구간이 60봉 이상 필요합니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.conditions.0.right.period"
+label = "장기 추세 평균 기간"
+value = 60
+[[templates.parameters]]
+path = "entry.conditions.1.left.fast"
+label = "매수 MACD 단기 기간"
+value = 12
+[[templates.parameters]]
+path = "entry.conditions.1.left.slow"
+label = "매수 MACD 장기 기간"
+value = 26
+[[templates.parameters]]
+path = "exit.left.fast"
+label = "매도 MACD 단기 기간"
+value = 12
+[[templates.parameters]]
+path = "exit.left.slow"
+label = "매도 MACD 장기 기간"
+value = 26
+
+[[templates]]
+name = "상승추세 눌림목 + 스토캐스틱"
+summary = "종가가 상승 평균 위에 있는 국면에서 스토캐스틱이 과매도에서 올라서는 눌림목을 잡는 결합 예시입니다."
+buyRule = "종가가 최근 50개 평균보다 높고, 같은 봉에서 %K가 20 위로 올라설 때만 매수를 결정합니다."
+sellRule = "%K가 80 아래로 내려서면 전량 매도를 결정합니다."
+sizing = "매수 때 남은 현금으로 살 수 있는 최대 정수 주식 수를 사고, 매도 때 보유 주식 전부를 팝니다. 보유 중 추가 매수하지 않습니다."
+cautions = ["상승 추세 안의 짧은 조정을 노립니다. 추세가 꺾이면 과매도 반등이 나오지 않을 수 있습니다.", "지표를 계산할 만큼 데이터가 충분히 쌓이기 전 준비 구간에는 신호가 없습니다.", "종가로 조건을 확인하고 다음 봉의 시가에 비용을 반영해 가상 체결합니다. 마지막 봉의 신호는 체결되지 않습니다.", "예시 조건과 숫자이며 투자 추천이나 수익 보장이 아닙니다. 데이터·비용·손실 가능성을 직접 확인하세요."]
+[[templates.parameters]]
+path = "entry.conditions.0.right.period"
+label = "상승 추세 평균 기간"
+value = 50
+[[templates.parameters]]
+path = "entry.conditions.1.left.period"
+label = "스토캐스틱 기간"
+value = 14
+[[templates.parameters]]
+path = "entry.conditions.1.right.value"
+label = "매수 과매도 기준"
+value = 20
+[[templates.parameters]]
+path = "exit.left.period"
+label = "매도 스토캐스틱 기간"
+value = 14
+[[templates.parameters]]
+path = "exit.right.value"
+label = "매도 과매수 기준"
+value = 80

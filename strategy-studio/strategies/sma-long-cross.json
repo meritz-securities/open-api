@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "SMA 20/60 교차",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "sma",
+      "period": 20
+    },
+    "right": {
+      "type": "sma",
+      "period": 60
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "sma",
+      "period": 20
+    },
+    "right": {
+      "type": "sma",
+      "period": 60
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

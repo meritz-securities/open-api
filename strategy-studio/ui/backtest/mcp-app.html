@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>메리츠 전략 검증</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <div id="preview-notice" class="preview-notice" hidden>브라우저 미리보기 · Claude 연결 아님</div>
+      <header class="topbar"><div class="brand"><span class="brand-mark" aria-hidden="true">m</span><div><span class="eyebrow">MERITZ SECURITIES</span><h1>전략 리서치</h1></div></div><div class="header-meta"><span class="eyebrow">BACKTEST REPORT</span><span id="version-badge" class="version-badge">MCP APP</span></div></header>
+      <aside class="data-notice"><strong id="source-title">시세 출처를 확인하고 있습니다</strong><span id="source-description">실주문 없이 과거 시세로 가상 체결을 계산합니다.</span></aside>
+      <details id="code-workspace" class="panel code-workspace" open><summary><span><span class="eyebrow">STRATEGY WORKSPACE</span><strong>전략 코드 · 실행 조건</strong></span><span class="editor-summary-action">편집 및 재실행 <span aria-hidden="true">↗</span></span></summary><div class="editor-content">
+        <div class="section-heading"><div><span class="eyebrow">YOUR CODE · YOUR STRATEGY</span><h2 id="code-title">내 Python 전략을 실행하세요</h2><p class="muted">코드를 붙여넣거나 .py 파일을 선택하세요. 예시 코드는 편집을 위한 출발점입니다.</p></div><label class="file-button">.py 파일 선택<input id="code-file" type="file" accept=".py,text/x-python" /></label></div>
+        <div class="editor-toolbar"><label for="code-template">시작 템플릿</label><select id="code-template"><option value="mean-reversion">평균 회귀 예시</option><option value="empty">빈 전략</option></select><span id="file-status" class="muted">파일을 읽을 때는 선택한 코드 내용만 가져옵니다.</span></div>
+        <label class="sr-only" for="strategy-code">Python 전략 코드</label><textarea id="strategy-code" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="code-contract"></textarea>
+        <p id="code-contract" class="footnote"><code>on_bar(ctx)</code>에서 <code>action</code>(buy / sell / hold), 선택적 <code>quantity</code>·<code>reason</code>을 반환합니다. 신호는 다음 봉 시가에 가상 체결합니다. 최대 64KB이며, 번들에 포함된 표준 라이브러리만 지원합니다. 외부 패키지는 포함하지 않습니다.</p>
+        <div class="execution-fields">
+          <label>시세 출처<select id="data-source"><option value="meritz">내 키로 조회한 메리츠 시세</option><option value="demo">합성 시세로 코드 시험</option></select></label>
+          <label>종목 코드<input id="symbol" value="005930" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" /></label>
+          <label>시작일<input id="start-date" type="date" /></label>
+          <label>종료일<input id="end-date" type="date" /></label>
+          <label>등록 계정 이름 <span class="optional">선택</span><input id="account" placeholder="기본 계정" maxlength="80" autocomplete="off" /></label>
+        </div>
+        <div class="execution-footer"><p id="execution-help" class="muted">등록된 고객 API 키를 시세 조회에 사용합니다. 이 화면에 키를 입력하지 않습니다.</p><div class="actions"><button id="validate-code" type="button" disabled>코드 검증</button><button id="execute-code" class="primary" type="button" disabled>내 코드 실행</button></div></div>
+        <div id="validation-result" class="validation-result" role="status" aria-live="polite" hidden></div>
+      </div></details>
+      <div class="toolbar"><div class="strategy-heading"><span class="eyebrow">STRATEGY PERFORMANCE</span><h2 id="strategy-title">결과를 기다리고 있습니다</h2><span id="run-meta" class="muted">Claude에서 백테스트 도구를 실행해 주세요.</span></div><div class="actions"><button id="run-button" type="button" disabled>합성 데모 실행</button><button id="compare-button" class="primary" type="button" disabled>다른 조건과 비교</button></div></div>
+      <div id="status" role="status" aria-live="polite">MCP 연결 중…</div>
+      <div id="error" class="error-notice" role="alert" hidden></div>
+      <section id="report" aria-label="백테스트 결과" hidden>
+        <div class="report-view-bar"><div><span class="eyebrow">REPORT VIEW</span><p id="view-description">핵심 성과부터 살펴보세요.</p></div><div class="report-view-options" role="group" aria-label="리포트 보기 선택"><button type="button" data-report-view="summary" aria-pressed="true">요약</button><button type="button" data-report-view="analysis" aria-pressed="false">차트 분석</button><button type="button" data-report-view="audit" aria-pressed="false">거래 검증</button></div></div>
+        <div id="report-facts" class="report-facts"></div>
+        <div id="metrics" class="metric-grid"></div>
+        <section id="performance-panel" class="panel chart-panel"><div class="section-heading"><div><span class="eyebrow">01 / PERFORMANCE</span><h2>자산 성장과 손실 구간</h2></div><div class="legend"><span class="legend-item"><i class="strategy-line"></i>현재 전략</span><span id="comparison-legend" class="legend-item" hidden><i class="comparison-line"></i>기본 전략</span><span class="legend-item"><i class="benchmark-line"></i>단순 보유</span></div></div><div id="chart" class="chart"></div><div id="chart-caption" class="chart-caption"></div><div class="drawdown-heading"><span>고점 대비 낙폭</span><strong id="drawdown-summary"></strong></div><div id="drawdown-chart" class="drawdown-chart"></div><div class="chart-inspector"><label for="chart-position">일자별 상세</label><input id="chart-position" type="range" min="0" max="0" value="0" /><output id="chart-point" for="chart-position"></output></div></section>
+        <section id="comparison" class="panel" hidden><div class="section-heading"><div><span class="eyebrow">SAME DATA · DIFFERENT RULES</span><h2>조건을 바꾸면 무엇이 달라질까요?</h2></div></div><div id="comparison-content"></div><p class="footnote">같은 시세와 비용 조건으로 계산했습니다. 한 구간의 개선이 다른 기간의 성과를 보장하지 않습니다.</p></section>
+        <div id="transactions-panel" class="detail-layout"><section class="panel"><div class="section-heading"><div><span class="eyebrow">02 / TRANSACTIONS</span><h2>체결 내역과 전략의 근거</h2></div><span id="trade-count" class="count"></span></div><p class="muted">거래를 선택하면 신호일과 체결 근거가 표시됩니다.</p><div class="table-scroll"><table><caption class="sr-only">가상 체결 내역</caption><thead><tr><th>체결일</th><th>구분</th><th class="numeric">수량</th><th class="numeric">가격</th><th>상세</th></tr></thead><tbody id="trades"></tbody></table></div></section><aside class="panel trade-detail"><span class="eyebrow">WHY THIS TRADE?</span><h2>거래 상세</h2><div id="trade-detail" aria-live="polite"><p class="empty-state">왼쪽에서 거래를 선택해 주세요.<br />엔진이 기록한 조건과 체결 내역을 확인할 수 있습니다.</p></div></aside></div>
+        <section id="methodology-panel" class="panel assumptions-panel"><div><span class="eyebrow">03 / METHODOLOGY</span><h2>실행 조건과 해석의 범위</h2></div><dl id="assumptions" class="assumption-grid"></dl><ul id="warnings" class="warnings"></ul></section>
+      </section>
+      <footer><span class="footer-brand">MERITZ · STRATEGY RESEARCH</span><span>과거 데이터에 대한 가상 체결 결과 · 실제 수익을 보장하지 않습니다.</span></footer>
+    </main>
+    <script type="module" src="/src/app.ts"></script>
+  </body>
+</html>

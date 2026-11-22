@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "아룬 상·하향선 교차",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "aroon",
+      "component": "up",
+      "period": 25
+    },
+    "right": {
+      "type": "aroon",
+      "component": "down",
+      "period": 25
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "aroon",
+      "component": "up",
+      "period": 25
+    },
+    "right": {
+      "type": "aroon",
+      "component": "down",
+      "period": 25
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "윌리엄스 %R 반등",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "williams_r",
+      "period": 14
+    },
+    "right": {
+      "type": "constant",
+      "value": -80
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "williams_r",
+      "period": 14
+    },
+    "right": {
+      "type": "constant",
+      "value": -20
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

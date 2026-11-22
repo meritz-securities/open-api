@@ -1,0 +1,207 @@
+# Strategy Studio 베타 실행 파일을 만들어 릴리스에 올립니다.
+#
+#   태그 studio-v<버전> 이 밀리면(publish-public.yml 의 studio_version 입력) 두 OS 에서 빌드해
+#   사전 릴리스(prerelease)로 올립니다. pull_request·workflow_dispatch 에서는 빌드와 자동 검사만
+#   하고 산출물은 Actions 아티팩트로만 남깁니다.
+#
+# 산출물 (서명·공증하지 않은 베타 빌드)
+#   Meritz-Strategy-Studio-macOS-arm64-beta.dmg     Apple 칩 Mac — .app 과 Claude Code 연결 스크립트
+#   Meritz-Strategy-Studio-macOS-x64-beta.dmg       Intel Mac
+#   Meritz-Strategy-Studio-windows-x64-beta.zip     Windows x64 — 폴더형 실행 파일(Start.cmd)
+#   SHA256SUMS.txt
+#
+# 빌드는 strategy-studio/packaging/build_native.py 가 정본이다. Apple 칩은 packaging/macos-arm64-build-requirements.txt
+# 핀 환경과 정확히 같아야 빌드가 진행되고, Intel Mac 과 Windows 는 uv.lock 환경(PyInstaller·pywebview 포함)으로 빌드한다.
+# Windows 는 WebAssembly Python 실행기를 내려받아 동봉한다.
+name: release-studio
+on:
+  push:
+    tags: ["studio-v*"]
+  pull_request:
+    paths:
+      - ".github/workflows/release-studio.yml"
+      - "strategy-studio/packaging/**"
+      - "strategy-studio/platform_entry.py"
+      - "strategy-studio/pyproject.toml"
+      - "strategy-studio/uv.lock"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  PYTHONUTF8: "1"
+  PYTHONIOENCODING: utf-8
+  # 러너의 시스템 Python(프레임워크 빌드)이 아니라 uv 가 내려받는 python-build-standalone 을 쓴다.
+  # 로컬 검증 빌드와 같은 레이아웃(_internal/libpython3.11.dylib)이 나와야 wrap_macos.py 의 전제가 맞는다.
+  UV_MANAGED_PYTHON: "1"
+
+jobs:
+  macos:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: macos-15,       arch: arm64, pinned: true }
+          - { os: macos-15-intel, arch: x64,   pinned: false }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: strategy-studio/studio/package-lock.json
+      - name: Studio 프런트엔드 빌드
+        working-directory: strategy-studio/studio
+        run: npm ci && npm run build
+
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
+      - name: 핀 빌드 환경 (Apple 칩 — build_native.py 가 핀과 정확히 같은지 검사한다)
+        if: ${{ matrix.pinned }}
+        working-directory: strategy-studio
+        run: |
+          uv venv --python 3.11 "$RUNNER_TEMP/build-env"
+          uv pip install --python "$RUNNER_TEMP/build-env/bin/python" -r packaging/macos-arm64-build-requirements.txt
+          "$RUNNER_TEMP/build-env/bin/python" packaging/export_macos_pins.py --check
+      - name: uv.lock 빌드 환경 (Intel — 핀 파일이 arm64 전용이라 lock 해상으로 빌드한다)
+        if: ${{ !matrix.pinned }}
+        working-directory: strategy-studio
+        run: |
+          uv venv --python 3.11 "$RUNNER_TEMP/build-env"
+          UV_PROJECT_ENVIRONMENT="$RUNNER_TEMP/build-env" uv sync --all-extras --dev
+
+      - name: 폴더형 빌드 (build_native.py)
+        working-directory: strategy-studio
+        run: |
+          "$RUNNER_TEMP/build-env/bin/python" packaging/build_native.py --source-root "$PWD" --output-root "$RUNNER_TEMP/onedir"
+          file "$RUNNER_TEMP/onedir/dist/meritz-strategy-platform/meritz-strategy-platform" | grep -qE '${{ matrix.arch == 'arm64' && 'arm64' || 'x86_64' }}'
+
+      - name: 앱·DMG 로 감싸기 (wrap_macos.py)
+        working-directory: strategy-studio
+        run: |
+          "$RUNNER_TEMP/build-env/bin/python" packaging/wrap_macos.py \
+            --bundle "$RUNNER_TEMP/onedir/dist/meritz-strategy-platform" --output "$RUNNER_TEMP/app"
+          mkdir -p "$RUNNER_TEMP/dist" && cp "$RUNNER_TEMP/app"/*.dmg "$RUNNER_TEMP/dist/"
+
+      - name: 자동 검사 — 감싼 앱 경로에서 CLI·서버 기동
+        working-directory: strategy-studio
+        run: |
+          set -euo pipefail
+          APP=$(find "$RUNNER_TEMP/app/review" -maxdepth 1 -name '*.app' | head -1)
+          RUNTIME="$APP/Contents/MacOS/runtime/meritz-strategy-platform"
+          ROOT=$(mktemp -d)
+          # 템플릿이 번들에 들어 있어야 한다(빈 목록이면 실패).
+          env -i HOME="$HOME" PATH=/usr/bin:/bin MERITZ_NO_ENV_FILE=1 "$RUNTIME" --cli templates --root "$ROOT" \
+            | python3 -c 'import json,sys; n=len(json.load(sys.stdin)["result"]["templates"]); assert n>=35, n; print("templates", n)'
+          # 로컬 서버가 뜨고 Studio 페이지를 돌려줘야 한다.
+          LOG=$(mktemp)
+          env -i HOME="$HOME" PATH=/usr/bin:/bin MERITZ_NO_ENV_FILE=1 MERITZ_STRATEGY_HOME="$ROOT/home" "$RUNTIME" --no-browser >"$LOG" 2>&1 &
+          PID=$!
+          for _ in $(seq 1 60); do grep -q 'http://127.0.0.1' "$LOG" && break; sleep 0.5; done
+          URL=$(grep -oE 'http://127.0.0.1:[0-9]+/' "$LOG" | head -1)
+          test -n "$URL"
+          CODE=$(curl -s -o /dev/null -w '%{http_code}' "$URL")
+          kill "$PID"
+          test "$CODE" = "200"
+          echo "서버 기동 OK: $URL"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-${{ matrix.arch }}
+          path: ${{ runner.temp }}/dist/*.dmg
+          if-no-files-found: error
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: strategy-studio/studio/package-lock.json
+      - name: Studio 프런트엔드 빌드
+        working-directory: strategy-studio/studio
+        shell: bash
+        run: npm ci && npm run build
+
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
+        with:
+          python-version: "3.11"
+      - name: 빌드 환경 (uv.lock — PyInstaller·pywebview 포함)
+        working-directory: strategy-studio
+        shell: bash
+        run: uv sync --all-extras --dev
+
+      - name: 폴더형 빌드 (build_native.py — WebAssembly 실행기 동봉)
+        working-directory: strategy-studio
+        shell: bash
+        run: uv run --no-sync python packaging/build_native.py --source-root "$PWD" --output-root "$RUNNER_TEMP/onedir"
+
+      - name: 자동 검사 — CLI·MCP·HTTP·격리 워커 (verify_native.py)
+        working-directory: strategy-studio
+        shell: bash
+        run: |
+          uv run --no-sync python packaging/windows/verify_native.py \
+            --manifest "$RUNNER_TEMP/onedir/build-manifest.json" \
+            --bundle "$RUNNER_TEMP/onedir/dist/meritz-strategy-platform" \
+            --output "$RUNNER_TEMP/verify-windows.json" --require-python
+          python -c "import json,sys; d=json.load(open(sys.argv[1], encoding='utf-8')); print(json.dumps(d, ensure_ascii=False)[:800])" "$RUNNER_TEMP/verify-windows.json"
+
+      - name: zip 으로 묶기
+        working-directory: strategy-studio
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/dist"
+          cd "$RUNNER_TEMP/onedir/dist"
+          7z a -tzip -mx=5 "$RUNNER_TEMP/dist/Meritz-Strategy-Studio-windows-x64-beta.zip" meritz-strategy-platform >/dev/null
+          ls -la "$RUNNER_TEMP/dist"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-x64
+          path: ${{ runner.temp }}/dist/*.zip
+          if-no-files-found: error
+
+  release:
+    needs: [macos, windows]
+    runs-on: ubuntu-latest
+    # 태그 push 에서만 게시한다. 태그 ref 로 workflow_dispatch 를 돌려도 아티팩트만 남는다.
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/studio-v')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { path: out, merge-multiple: true }
+      - name: 체크섬
+        run: cd out && sha256sum * > SHA256SUMS.txt && cat SHA256SUMS.txt
+      - name: 릴리스 본문
+        run: |
+          cat > body.md <<'EOF'
+          Strategy Studio **베타** 실행 파일입니다. 코드 서명·공증을 하지 않은 빌드이며, 처음 열 때 OS 보안 경고가 한 번 나옵니다.
+          기능·화면·저장 형식은 베타 기간에 바뀔 수 있습니다. 자세한 범위는 `strategy-studio/docs/customer-readiness.md` 를 보십시오.
+
+          | 파일 | 대상 | 처음 열기 |
+          |---|---|---|
+          | `Meritz-Strategy-Studio-macOS-arm64-beta.dmg` | macOS 13 이상, Apple 칩 | DMG 를 열고 앱을 응용 프로그램 폴더로 복사한 뒤 더블클릭합니다. "열 수 없습니다" 가 뜨면 **시스템 설정 → 개인정보 보호 및 보안** 아래쪽의 **그래도 열기** 를 한 번 누릅니다. |
+          | `Meritz-Strategy-Studio-macOS-x64-beta.dmg` | macOS 13 이상, Intel | 같습니다. |
+          | `Meritz-Strategy-Studio-windows-x64-beta.zip` | Windows 10/11 x64 | 압축을 풀고 `Start.cmd` 를 더블클릭합니다. SmartScreen 창이 뜨면 **추가 정보 → 실행** 을 한 번 누릅니다. 폴더 전체를 함께 두십시오. |
+
+          실행하면 기본 브라우저에 Studio 가 열립니다. 메리츠 시세 조회에는 운영 Open API 앱키가 필요하고, 앱키는 실행 중 메모리에만 둡니다.
+          실주문은 내지 않습니다.
+          Windows 빌드는 러너의 자동 검사(CLI·MCP·HTTP·격리 워커)만 통과했으며 화면 동작은 베타 의견으로 받습니다.
+          체크섬은 `SHA256SUMS.txt` 와 대조하십시오.
+          EOF
+      - uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
+        with:
+          name: Strategy Studio ${{ github.ref_name }} (베타)
+          prerelease: true
+          body_path: body.md
+          files: out/*

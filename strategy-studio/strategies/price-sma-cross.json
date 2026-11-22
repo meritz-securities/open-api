@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "종가와 20일 평균 교차",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "field",
+      "field": "close"
+    },
+    "right": {
+      "type": "sma",
+      "period": 20
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "field",
+      "field": "close"
+    },
+    "right": {
+      "type": "sma",
+      "period": 20
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

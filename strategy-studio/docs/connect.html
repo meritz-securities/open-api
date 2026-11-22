@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>메리츠 Open API MCP 연결 도우미</title>
+<style>
+  :root{color-scheme:light dark;--bg:#f7f8fa;--paper:#fff;--ink:#15181d;--mute:#5b6670;--line:#d8dee4;--acc:#2b4b7c;--acc-bg:#eaf0f8;--ok:#2a6b4d;--ok-bg:#e6f2ec;--warn:#8a6212;--warn-bg:#faf1de;--danger:#a3271f;--danger-bg:#fbeceb}
+  @media (prefers-color-scheme:dark){:root{--bg:#0f1318;--paper:#161b22;--ink:#e6e9ee;--mute:#8d97a3;--line:#2b333d;--acc:#8fb0e0;--acc-bg:#1c2a40;--ok:#7fcba3;--ok-bg:#15301f;--warn:#e2b85b;--warn-bg:#3a2d10;--danger:#f08a80;--danger-bg:#3a1613}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif}
+  .page{max-width:900px;margin:0 auto;padding:36px 24px 80px}
+  h1{font-size:30px;margin:0 0 6px}
+  h2{font-size:20px;margin:36px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--acc)}
+  h3{font-size:16px;color:var(--acc);margin:22px 0 6px}
+  p{margin:0 0 10px;max-width:72ch}
+  .sub{color:var(--mute);margin-bottom:20px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:12px 0}
+  label{display:block;font-size:13px;color:var(--mute);margin:10px 0 4px}
+  input[type=text],input[type=password],select{width:100%;font:15px Menlo,monospace;padding:9px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+  .row{display:flex;gap:14px;flex-wrap:wrap}.row>div{flex:1 1 260px}
+  .chk{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px}
+  pre{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px 12px;font:13px/1.5 Menlo,monospace;overflow-x:auto;white-space:pre-wrap;word-break:break-all;margin:6px 0 4px}
+  .tools{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+  button,.btn{font:14px inherit;padding:7px 14px;border-radius:6px;border:1px solid var(--acc);background:var(--acc);color:#fff;cursor:pointer;text-decoration:none;display:inline-block}
+  button.ghost{background:transparent;color:var(--acc)}
+  .note{font-size:13px;color:var(--mute)}
+  .ok{background:var(--ok-bg);color:var(--ok);padding:10px 14px;border-radius:6px;font-size:14px}
+  .warn{background:var(--warn-bg);color:var(--warn);padding:10px 14px;border-radius:6px;font-size:14px}
+  .danger{background:var(--danger-bg);color:var(--danger);border:1px solid var(--danger);padding:12px 16px;border-radius:6px;font-size:14px;line-height:1.65}
+  .danger b{color:var(--danger)}
+  .muted{opacity:.55}
+  code{font:13px Menlo,monospace;background:var(--bg);padding:1px 5px;border-radius:3px}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>메리츠 Open API MCP 연결 도우미</h1>
+  <p class="sub">앱키와 실행 파일 위치를 넣으면 쓰는 도구에 맞는 명령·버튼·설정을 만듭니다.
+  이 페이지는 정적 HTML 하나이며 네트워크 요청을 보내지 않고, 입력값을 쿠키나 브라우저 저장소에 남기지 않습니다.
+  <b>입력한 값은 이 페이지 밖으로 나가지 않습니다.</b></p>
+
+  <div class="card">
+    <div class="row">
+      <div><label>앱키 (App Key)</label><input type="text" id="key" placeholder="개발자 포털에서 발급" autocomplete="off"></div>
+      <div><label>시크릿 (App Secret)</label><input type="password" id="secret" placeholder="앱키와 함께 발급" autocomplete="off"></div>
+    </div>
+    <div class="row">
+      <div><label>실행 파일 전체 경로 <span class="note">— 내려받아 둔 위치. Mac 예: /Users/이름/meritz/meritz-mcp · Windows 예: C:\meritz\meritz-mcp.exe</span></label>
+        <input type="text" id="bin" placeholder="/Users/이름/meritz/meritz-mcp" autocomplete="off"></div>
+    </div>
+    <label class="chk"><input type="checkbox" id="ro" checked> 조회 전용으로 사용 (주문·환전 차단) — 서버 기본값은 켜짐입니다</label>
+    <p class="note" style="margin-top:10px">실행 파일이 아직 없으면 <a href="https://github.com/meritz-securities/open-api-mcp/releases/latest">릴리스 페이지</a>에서 OS에 맞는 것을 받으십시오.
+    경로를 비워 두면 uv 로 실행하는 방식(<code>uvx --from git+…</code>)으로 만들어 드립니다. 그 경우 uv 와 Python 3.11 이상이 필요합니다.</p>
+  </div>
+
+  <h2>Claude Desktop</h2>
+  <div class="card">
+    <p>설치 파일을 더블클릭하면 됩니다. 앱키는 설치 화면에서 묻습니다. 이 페이지의 입력값은 필요 없습니다.</p>
+    <div class="tools">
+      <a class="btn" href="https://github.com/meritz-securities/open-api-mcp/releases/latest/download/meritz-open-api-darwin-arm64.mcpb">Mac · Apple 칩</a>
+      <a class="btn" href="https://github.com/meritz-securities/open-api-mcp/releases/latest/download/meritz-open-api-darwin-x64.mcpb">Mac · Intel 칩</a>
+      <a class="btn" href="https://github.com/meritz-securities/open-api-mcp/releases/latest/download/meritz-open-api-win32-x64.mcpb">Windows</a>
+    </div>
+    <p class="note">Mac에서 "확인되지 않은 개발자" 경고가 뜨면, 릴리스의 SHA256SUMS.txt 와 대조한 뒤 시스템 설정 → 개인정보 보호 및 보안 → 그래도 열기로 진행하십시오.</p>
+  </div>
+
+  <h2>Claude Code · Codex CLI · Gemini CLI — 터미널에 한 줄</h2>
+  <div class="card">
+    <div class="warn">이 명령들은 앱키를 명령줄에 둡니다. 붙여 넣으면 셸 기록 파일에 남습니다. 기록을 남기지 않으려면
+    저장소에서 <code>python3 install.py --register claude-code</code> 를 쓰십시오 — 앱키를 화면에 찍지 않고 받아 등록합니다.</div>
+    <h3>Claude Code</h3><div class="tools"><button data-copy="cc">복사</button></div><pre id="cc"></pre>
+    <h3>Codex CLI</h3><div class="tools"><button data-copy="cx">복사</button></div><pre id="cx"></pre>
+    <h3>Gemini CLI</h3><div class="tools"><button data-copy="gm">복사</button></div><pre id="gm"></pre>
+  </div>
+
+  <h2>Cursor · VS Code — 버튼 한 번</h2>
+  <div class="card">
+    <p>버튼을 누르면 해당 앱이 열리고 승인 창이 뜹니다. 확인하면 설정 파일에 앱키가 평문으로 기록됩니다.</p>
+    <div class="tools"><a class="btn" id="cursor" href="#">Add to Cursor</a><a class="btn" id="vscode" href="#">Install in VS Code</a></div>
+    <p class="note" id="deeplink-note"></p>
+  </div>
+
+  <h2>그 밖의 도구 — JSON 설정</h2>
+  <div class="card">
+    <p>Claude Desktop 설정 파일, Cursor <code>mcp.json</code>, Gemini CLI <code>settings.json</code> 등이 이 형식을 받습니다.
+    앱키가 평문으로 들어가므로 파일 권한과 백업·동기화 대상 여부를 확인하십시오.</p>
+    <div class="tools"><button data-copy="json">복사</button></div><pre id="json"></pre>
+  </div>
+
+  <h2>Claude 웹·모바일, ChatGPT 웹 — 조회 전용 터널</h2>
+  <div class="card">
+    <div class="danger"><b>이 구성은 조회 전용으로만 쓰십시오.</b> 두 서비스 모두 커스텀 커넥터의 인증 옵션이
+    OAuth 아니면 없음뿐이라, 주소의 난수 경로가 사실상 유일한 접근 통제입니다. 그 주소는 연결한 AI 서비스 쪽에
+    커넥터 설정으로 저장되며 이용자가 지우기 전까지 남습니다. 주소를 알게 된 사람은 그 계좌의 잔고·보유종목을
+    조회할 수 있습니다.<br>
+    <b>주문·환전을 쓰시려면 터널이 아니라 위의 실행 파일 등록 방식을 쓰십시오.</b> 아래 명령은 주문·환전을
+    막은 상태로 고정되어 있습니다.</div>
+    <p class="note" style="margin-top:12px">ChatGPT 데스크톱 앱은 터널이 필요 없습니다. 위의 실행 파일 등록 방식을 쓰십시오.
+    PC를 켜 두어야 하고, 무료 터널은 주소가 매번 바뀝니다. 아래 명령은 bash·zsh 기준입니다.</p>
+
+    <h3>1. 앱키를 파일에 둡니다</h3>
+    <p class="note">명령줄에 두면 셸 기록 파일과 프로세스 목록에 남습니다. 아래 내용을 편집기로
+    <code>~/meritz/.env</code> 에 저장한 뒤 권한을 좁히십시오.</p>
+    <div class="tools"><button data-copy="envfile">복사</button></div><pre id="envfile"></pre>
+    <div class="tools"><button data-copy="chmod">복사</button></div><pre id="chmod">mkdir -p ~/meritz &amp;&amp; chmod 600 ~/meritz/.env</pre>
+
+    <h3>2. 서버를 조회 전용 HTTP 모드로 실행</h3>
+    <div class="tools"><button data-copy="http">복사</button><button class="ghost" id="renew">난수 다시 만들기</button></div><pre id="http"></pre>
+    <p class="note">서버는 <code>127.0.0.1</code> 에만 바인딩합니다. 포트를 공유기에서 직접 열어 주지 마십시오.
+    페이지를 새로 열 때마다 난수가 바뀝니다.</p>
+
+    <h3>3. 터널 열기 (둘 중 하나)</h3><div class="tools"><button data-copy="tun">복사</button></div><pre id="tun">cloudflared tunnel --url http://127.0.0.1:8765     # 계정 없이 임시 주소
+ngrok http 8765                                     # ngrok 계정 필요</pre>
+
+    <h3>4. 커넥터에 넣을 주소</h3><div class="tools"><button data-copy="url">복사</button></div><pre id="url"></pre>
+    <p class="note">Claude: 설정 → 커넥터 → 커스텀 커넥터 추가 → 주소 입력, 인증은 비워 둠 (전 요금제. 휴대폰 앱·음성 모드에서도 같은 연결을 씁니다).<br>
+    ChatGPT: 설정 → 커넥터 → 고급 → 개발자 모드 → 만들기 → 주소 입력, 인증 없음 (유료 요금제, 웹에서 설정. 음성 모드에서는 도구가 호출되지 않습니다).<br>
+    쓰고 나면 터널과 서버를 닫고, 커넥터 설정에서 그 주소를 지우십시오.</p>
+  </div>
+
+  <p class="note" style="margin-top:30px">이 페이지는 정적 HTML 하나이며 서버와 통신하지 않습니다. 소스: <code>docs/connect.html</code></p>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const rand=()=>{const a=new Uint8Array(18);crypto.getRandomValues(a);return btoa(String.fromCharCode(...a)).replace(/[+/=]/g,'').slice(0,24)};
+  let token=rand();
+  const q=s=>/[\s"'\\$]/.test(s)?'"'+s.replace(/(["\\$])/g,'\\$1')+'"':s;
+  function state(){
+    const key=$('key').value.trim()||'발급받은_앱키', secret=$('secret').value.trim()||'발급받은_시크릿';
+    const bin=$('bin').value.trim(), ro=$('ro').checked?'1':'0';
+    const envs={MERITZ_APP_KEY:key,MERITZ_APP_SECRET:secret,MERITZ_READ_ONLY:ro};
+    const cmd = bin ? {command:bin,args:[]} : {command:'uvx',args:['--from','git+https://github.com/meritz-securities/open-api-mcp','meritz-mcp']};
+    return {key,secret,bin,ro,envs,cmd};
+  }
+  function render(){
+    const s=state();
+    const envFlags=Object.entries(s.envs).map(([k,v])=>`--env ${k}=${q(v)}`).join(' ');
+    const envFlagsG=Object.entries(s.envs).map(([k,v])=>`-e ${k}=${q(v)}`).join(' ');
+    const exe=[s.cmd.command,...s.cmd.args].map(q).join(' ');
+    $('cc').textContent=`claude mcp add meritz ${envFlags} -- ${exe}`;
+    $('cx').textContent=`codex mcp add meritz ${envFlags} -- ${exe}`;
+    $('gm').textContent=`gemini mcp add ${envFlagsG} meritz ${exe}`;
+    const cfg={command:s.cmd.command,args:s.cmd.args,env:s.envs};
+    const b64=btoa(unescape(encodeURIComponent(JSON.stringify(cfg))));
+    $('cursor').href=`cursor://anysphere.cursor-deeplink/mcp/install?name=meritz&config=${b64}`;
+    $('vscode').href=`vscode:mcp/install?${encodeURIComponent(JSON.stringify(Object.assign({name:'meritz'},cfg)))}`;
+    $('deeplink-note').textContent = s.bin ? `실행 파일 ${s.bin} 을 등록합니다.` : '실행 파일 경로가 비어 있어 uv 실행 방식으로 등록합니다.';
+    $('json').textContent=JSON.stringify({mcpServers:{meritz:cfg}},null,2);
+    // 터널 구성은 조회 전용으로 고정한다. 앱키는 명령줄이 아니라 .env 파일에서 읽힌다.
+    const runExe = s.bin ? q(s.bin) : 'uvx --from git+https://github.com/meritz-securities/open-api-mcp meritz-mcp';
+    $('envfile').textContent=`MERITZ_APP_KEY=${s.key}\nMERITZ_APP_SECRET=${s.secret}`;
+    $('http').textContent=`set -a; . ~/meritz/.env; set +a\nMERITZ_READ_ONLY=1 MCP_TYPE=streamable-http MCP_PORT=8765 MCP_PATH=/mcp/${token} ${runExe}`;
+    $('url').textContent=`https://<터널 주소>/mcp/${token}`;
+  }
+  ['key','secret','bin','ro'].forEach(id=>$(id).addEventListener('input',render));
+  $('ro').addEventListener('change',render);
+  $('renew').addEventListener('click',()=>{token=rand();render();});
+  document.querySelectorAll('button[data-copy]').forEach(b=>b.addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText($(b.dataset.copy).textContent);b.textContent='복사됨';setTimeout(()=>b.textContent='복사',1200);}catch(e){b.textContent='선택해서 복사하세요';}
+  }));
+  render();
+})();
+</script>
+</body>
+</html>
