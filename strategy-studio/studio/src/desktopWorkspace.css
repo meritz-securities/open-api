@@ -1,0 +1,47 @@
+/* Desktop work surface: existing actions and real local state, no new runtime. */
+.studio{grid-template-columns:248px minmax(0,1fr)}
+.sidebar{padding:12px 10px;gap:12px;align-self:start;position:sticky;top:0;height:calc(100dvh - 38px);overflow:auto;border-bottom:1px solid var(--line)}
+.sidebar nav{border-bottom:1px solid var(--line);padding-bottom:10px;gap:2px}
+.sidebar nav button{min-height:32px;padding:6px 8px;font-size:12px}
+.sidebar-bottom{display:none}
+.workspace-explorer{min-width:0;font-size:12px}
+.workspace-explorer>summary{font-size:12px;font-weight:650;padding:6px 0}
+.explorer-toolbar{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:7px 0;color:var(--muted);font-size:10px}
+.explorer-toolbar button{font-size:10px;padding:3px 6px}
+.workspace-explorer h3,.explorer-templates>summary{display:flex;justify-content:space-between;gap:6px;padding:10px 0 6px;font-size:11px;font-weight:650}
+.workspace-explorer h3 small,.explorer-templates small{font-size:10px;color:var(--muted);font-weight:400}
+.explorer-item{display:flex;flex-direction:column;gap:3px;width:100%;text-align:left;border:0;border-left:2px solid transparent;border-radius:0;padding:7px 6px;background:transparent;font-size:11px;line-height:1.45}
+.explorer-item span,.explorer-item small{overflow-wrap:anywhere;min-width:0}
+.explorer-item small{font-size:10px;color:var(--muted)}
+.explorer-item[aria-current=true]{background:var(--field);border-left-color:var(--brand)}
+.explorer-empty,.explorer-limit{font-size:10px;color:var(--muted);padding:6px;line-height:1.6}
+.explorer-limit{border-top:1px solid var(--line);margin-top:8px}
+.studio>main{padding:0 18px 48px;max-width:none}
+.topbar{position:sticky;top:0;z-index:20;background:var(--bg);min-height:58px;gap:12px;flex-wrap:wrap;padding:8px 0}
+.work-context{min-width:0;flex:1;display:flex;flex-direction:column;gap:3px}
+.work-context .topbar-name{font-size:10px;color:var(--muted)}
+.work-context strong{font-size:13px;font-weight:600;overflow-wrap:anywhere}
+.workspace-commandbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.workspace-commandbar .editor-actions{display:flex;gap:6px;padding:0;margin:0;border:0}
+.workspace-commandbar button{font-size:12px;min-height:34px;padding:6px 10px}
+.workspace-commandbar .run-button{width:auto;margin:0}
+.workspace-commandbar .run-button span{display:none}
+.status-row{position:fixed;bottom:0;left:0;right:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);padding:7px 12px;min-height:38px;gap:8px;font-size:11px;box-shadow:none}
+.status-row>span[role=status]{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.status-row .local-state-label{white-space:nowrap;color:var(--ink);font-size:10px}
+.status-row button{padding:3px 7px;font-size:10px}
+.workspace-toolbar{padding:10px 0 0}
+.card{border-radius:2px}
+.home-grid .card,.home>section.card{border:0;border-top:1px solid var(--line);padding:12px 0;background:transparent}
+.studio>main>footer{padding:8px 0 12px}
+@media(min-width:1100px){.workspace-layout{grid-template-columns:minmax(0,1fr) 300px}}
+@media(max-width:1100px) and (min-width:761px){.studio{grid-template-columns:210px minmax(0,1fr)}.workspace-layout{grid-template-columns:1fr}}
+@media(max-width:760px){.studio{display:block}.sidebar{position:static;height:auto;max-height:none;padding:8px 12px;overflow:visible;gap:6px}.sidebar nav{padding-bottom:4px}.sidebar nav button{min-height:40px}.workspace-explorer{border-top:1px solid var(--line)}.workspace-explorer>summary{padding:9px 0}.workspace-explorer[open]{max-height:45dvh;overflow:auto}.studio>main{padding:0 12px 58px}.topbar{position:static;gap:8px}.work-context{flex:1 1 65%}.workspace-commandbar{flex:1 1 100%;gap:5px}.workspace-commandbar button{min-height:40px;padding:7px 9px}.status-row{min-height:42px;gap:4px;padding:6px 8px}.status-row .local-state-label{display:none}.status-row>span[role=status]{font-size:10px}.card{padding:12px}.workspace-layout{grid-template-columns:1fr}}
+@media print{.workspace-explorer,.workspace-commandbar,.status-row{display:none!important}.studio>main{padding:0}}
+
+[role=dialog]{scroll-margin-top:76px}.topbar .work-context{max-width:100%}
+.workspace-explorer{margin:0;padding:0;border:0}
+.explorer-templates{margin-top:8px;padding-top:0}
+@media(max-width:760px){.topbar .work-context{order:1}.topbar>button{order:2}.workspace-commandbar{order:3}.workspace-explorer{border-top:1px solid var(--line)}}
+
+.status-row .simulation-label{white-space:nowrap;flex-shrink:0;color:var(--ink);font-size:10px}

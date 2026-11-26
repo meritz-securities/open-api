@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "가격·KAMA 적응형 추세",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "field",
+      "field": "close"
+    },
+    "right": {
+      "type": "kama",
+      "period": 10
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "field",
+      "field": "close"
+    },
+    "right": {
+      "type": "kama",
+      "period": 10
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

@@ -1,0 +1,11 @@
+.ai-requests .library-item>span,
+.ai-requests .ai-request-detail>p,
+.ai-requests .ai-request-detail>code {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.ai-connection-toolbar {display:flex;flex-wrap:wrap;align-items:center;gap:6px;}
+.ai-connection-toolbar span {flex:1 1 220px;overflow-wrap:anywhere;}
+.ai-requests select {max-width:100%;}

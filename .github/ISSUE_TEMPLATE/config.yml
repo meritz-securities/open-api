@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 계좌·주문·거래 문의 (개발자 포털)
+    url: https://openapi.imeritz.com
+    about: "주문이 나가지 않았다, 잔고나 수익률이 다르게 보인다, 체결 내역을 확인하고 싶다 — 이런 문의는 이곳에서 처리해 드릴 수 없습니다. 개발자 포털의 문의 채널을 이용해 주십시오. 이 저장소는 예제 코드만 다루며, 계좌를 조회하거나 주문 상태를 확인할 권한이 없습니다."
+  - name: 앱키 발급·계좌 연결·이용 신청 (개발자 포털)
+    url: https://openapi.imeritz.com
+    about: "앱키와 시크릿 발급, 사용하실 계좌 연결, 이용 신청은 개발자 포털에서 진행해 주십시오."
+  - name: API 명세 자체에 대한 문의 (개발자 포털)
+    url: https://openapi.imeritz.com
+    about: "API 의 파라미터·응답 규격·업무 규칙에 대한 문의는 개발자 포털로 보내 주십시오. 다만 이 저장소의 예제가 포털 명세와 다르게 동작한다면, 아래 문서 이슈로 알려 주시면 도움이 됩니다."
+  - name: 보안 취약점 신고
+    url: https://github.com/meritz-securities/open-api/blob/main/SECURITY.md
+    about: "인증 우회·자격증명 노출·권한 상승과 관련된 내용은 공개 이슈로 올리지 마시고, SECURITY.md 에 적힌 절차를 따라 주십시오."

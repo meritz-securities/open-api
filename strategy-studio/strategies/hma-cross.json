@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "HMA 9/21 교차",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "hma",
+      "period": 9
+    },
+    "right": {
+      "type": "hma",
+      "period": 21
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "hma",
+      "period": 9
+    },
+    "right": {
+      "type": "hma",
+      "period": 21
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

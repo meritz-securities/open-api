@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "피셔 트랜스폼 0선 교차",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "fisher_transform",
+      "period": 10
+    },
+    "right": {
+      "type": "constant",
+      "value": 0
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "fisher_transform",
+      "period": 10
+    },
+    "right": {
+      "type": "constant",
+      "value": 0
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "상승추세 눌림목 + 스토캐스틱",
+  "entry": {
+    "op": "all",
+    "conditions": [
+      {
+        "op": "gt",
+        "left": {
+          "type": "field",
+          "field": "close"
+        },
+        "right": {
+          "type": "ema",
+          "period": 50
+        }
+      },
+      {
+        "op": "cross_above",
+        "left": {
+          "type": "stochastic",
+          "component": "k",
+          "period": 14
+        },
+        "right": {
+          "type": "constant",
+          "value": 20
+        }
+      }
+    ]
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "stochastic",
+      "component": "k",
+      "period": 14
+    },
+    "right": {
+      "type": "constant",
+      "value": 80
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

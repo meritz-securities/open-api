@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "얼티밋 오실레이터 반전",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "ultimate_oscillator"
+    },
+    "right": {
+      "type": "constant",
+      "value": 40
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "ultimate_oscillator"
+    },
+    "right": {
+      "type": "constant",
+      "value": 60
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "dsl",
+  "name": "CMO 모멘텀 반전",
+  "entry": {
+    "op": "cross_above",
+    "left": {
+      "type": "cmo",
+      "period": 14
+    },
+    "right": {
+      "type": "constant",
+      "value": -50
+    }
+  },
+  "exit": {
+    "op": "cross_below",
+    "left": {
+      "type": "cmo",
+      "period": 14
+    },
+    "right": {
+      "type": "constant",
+      "value": 50
+    }
+  },
+  "quantity": null,
+  "allowPyramiding": false,
+  "risk": {
+    "stopLossPct": null,
+    "takeProfitPct": null
+  }
+}

@@ -1,0 +1,1 @@
+{"schemaVersion":1,"kind":"dsl","name":"SMA 5/20 교차","entry":{"op":"cross_above","left":{"type":"sma","period":5},"right":{"type":"sma","period":20}},"exit":{"op":"cross_below","left":{"type":"sma","period":5},"right":{"type":"sma","period":20}},"quantity":null,"allowPyramiding":false,"risk":{"stopLossPct":null,"takeProfitPct":null}}
